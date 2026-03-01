@@ -1,0 +1,27 @@
+{
+  "report_metadata": {
+    "reporting_period": "Monthly",
+    "campus": "Lower Kabete",
+    "functional_area": "CCSE"
+  },
+  "metrics": [
+    {
+      "id": 1,
+      "service_commitment": "Processing of training certificates",
+      "standard": "Within 5 working days",
+      "achievement": null,
+      "compliance_percent": null,
+      "variance_cause": null,
+      "corrective_action": null
+    },
+    {
+      "id": 2,
+      "service_commitment": "Response to consultancy enquiries",
+      "standard": "Within 48 hours",
+      "achievement": null,
+      "compliance_percent": null,
+      "variance_cause": null,
+      "corrective_action": null
+    }
+  ]
+}
