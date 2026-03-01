@@ -1,0 +1,18 @@
+{
+  "strategic_issue": "Improve service delivery and brand equity",
+  "key_result_area": "Institutional Transformation and Strategic Positioning",
+  "objectives": [
+    {
+      "objective_id": "SO_9",
+      "description": "Digitalize systems and processes",
+      "target_output": "Automated reporting system deployed",
+      "owner": "Head of Centre"
+    },
+    {
+      "objective_id": "SO_6",
+      "description": "Strengthen Financial Sustainability",
+      "target_output": "Revenue raised (KES 50,000,000)",
+      "owner": "Head of Centre"
+    }
+  ]
+}
