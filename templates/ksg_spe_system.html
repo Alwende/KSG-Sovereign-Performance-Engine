@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KSG Sovereign Performance Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .ksg-maroon { background-color: #800000; }
+        .ksg-text-maroon { color: #800000; }
+        .ksg-border-maroon { border-color: #800000; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <header class="ksg-maroon text-white p-6 shadow-xl border-b-4 border-yellow-600">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tighter">KENYA SCHOOL OF GOVERNMENT</h1>
+                <p class="text-sm opacity-90 uppercase tracking-widest">Sovereign Performance Engine | CCSE MVP</p>
+            </div>
+            <div class="text-right">
+                <p class="font-bold">Dan Alwende, PMP</p>
+                <p class="text-xs uppercase">Principal Architect</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-6 rounded shadow border-t-4 ksg-border-maroon">
+                <p class="text-gray-500 text-xs uppercase font-bold">School Compliance</p>
+                <h2 class="text-3xl font-black ksg-text-maroon">92.4%</h2>
+            </div>
+            <div class="bg-white p-6 rounded shadow border-t-4 border-yellow-600">
+                <p class="text-gray-500 text-xs uppercase font-bold">Center (CCSE) Rank</p>
+                <h2 class="text-3xl font-black text-yellow-600">#1 of 12</h2>
+            </div>
+            <div class="bg-white p-6 rounded shadow border-t-4 ksg-border-maroon">
+                <p class="text-gray-500 text-xs uppercase font-bold">A.W.P Achievement</p>
+                <h2 class="text-3xl font-black ksg-text-maroon">78%</h2>
+            </div>
+            <div class="bg-white p-6 rounded shadow border-t-4 border-gray-400">
+                <p class="text-gray-500 text-xs uppercase font-bold">Pending Actions</p>
+                <h2 class="text-3xl font-black text-gray-700">05</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-bold mb-4 border-b pb-2 ksg-text-maroon uppercase">Institutional Rankings</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">1. CCSE (Lower Kabete)</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">98.2%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">2. Baringo Campus</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">94.5%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">3. Embu Campus</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded font-bold">88.1%</span>
+                        </div>
+                        <div class="flex justify-between items-center opacity-50">
+                            <span class="text-sm font-medium">4. Matuga Campus</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded font-bold">72.4%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-bold mb-4 border-b pb-2 ksg-text-maroon uppercase">Employee Performance</h3>
+                    <table class="w-full text-xs">
+                        <tr class="text-gray-400 uppercase">
+                            <th class="text-left pb-2">Name</th>
+                            <th class="text-right pb-2">PC Score</th>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Officer S. Chesang</td>
+                            <td class="text-right font-bold text-green-600">4.9/5.0</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Officer J. Mwanzia</td>
+                            <td class="text-right font-bold text-green-600">4.7/5.0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded shadow overflow-hidden">
+                <div class="ksg-maroon text-white p-4 flex justify-between items-center">
+                    <h3 class="font-bold uppercase text-sm">Service Delivery Charter Compliance</h3>
+                    <button class="bg-yellow-600 hover:bg-yellow-700 text-white text-xs px-3 py-1 rounded">Generate DG Report</button>
+                </div>
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-gray-50 text-[10px] uppercase text-gray-500 border-b">
+                        <tr>
+                            <th class="p-3">Service Commitment</th>
+                            <th class="p-3">Standard</th>
+                            <th class="p-3">Actual</th>
+                            <th class="p-3">% Comp</th>
+                            <th class="p-3">AI Variance & Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xs">
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-3 font-semibold">Training Certificates</td>
+                            <td class="p-3">5 Days</td>
+                            <td class="p-3 text-red-600 font-bold">8 Days</td>
+                            <td class="p-3 bg-red-50 text-red-700 font-bold">62.5%</td>
+                            <td class="p-3">
+                                <div class="bg-gray-100 p-2 rounded border-l-2 border-red-500">
+                                    <p class="font-bold text-[9px] uppercase">Vertex AI Analysis:</p>
+                                    <p class="italic text-gray-600">"Manual approval bottlenecks detected. Recommendation: Activate digital signatures as per Productivity Strategy Sec 4.1."</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-3 font-semibold">Consultancy Enquiries</td>
+                            <td class="p-3">48 Hours</td>
+                            <td class="p-3">24 Hours</td>
+                            <td class="p-3 bg-green-50 text-green-700 font-bold">100%</td>
+                            <td class="p-3 text-gray-400">Target exceeded. Standard maintained.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

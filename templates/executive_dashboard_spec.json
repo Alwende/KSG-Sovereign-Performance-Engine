@@ -1,0 +1,16 @@
+{
+  "dashboard_title": "KSG CCSE Performance War Room",
+  "primary_kpis": [
+    {"label": "Overall Service Charter Compliance", "target": "100%", "current": "87.5%"},
+    {"label": "Revenue Mobilization (AWP SO_6)", "target": "50M", "current": "12.4M"},
+    {"label": "Digitalization Progress (AWP SO_9)", "target": "100%", "current": "45%"}
+  ],
+  "variance_alerts": [
+    {
+      "indicator": "Processing of training certificates",
+      "status": "CRITICAL",
+      "variance": "-2 days",
+      "ai_recommendation": "Pending review of approval workflows"
+    }
+  ]
+}

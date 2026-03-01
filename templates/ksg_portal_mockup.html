@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSG Sovereign Performance Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <nav class="bg-red-800 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold uppercase tracking-widest">KSG | CCSE Performance Portal</h1>
+            <span class="text-sm italic">Logged in: Dan Alwende, PMP</span>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-8 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm">Overall Compliance</p>
+                <h2 class="text-3xl font-bold">87.5%</h2>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500">
+                <p class="text-gray-500 text-sm">Active Variances</p>
+                <h2 class="text-3xl font-bold text-yellow-600">02 Items</h2>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-red-500">
+                <p class="text-gray-500 text-sm">Revenue Target</p>
+                <h2 class="text-3xl font-bold">KES 12.4M / 50M</h2>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="p-4 bg-gray-100 border-b flex justify-between items-center">
+                <h3 class="font-bold">Citizen Service Delivery Charter Reporting</h3>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded text-sm">+ Add New Entry</button>
+            </div>
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 text-xs uppercase text-gray-600">
+                    <tr>
+                        <th class="p-4">Service</th>
+                        <th class="p-4">Standard</th>
+                        <th class="p-4">Achievement</th>
+                        <th class="p-4">% Comp</th>
+                        <th class="p-4">AI Recommendations</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm divide-y">
+                    <tr>
+                        <td class="p-4 font-medium">Processing Training Certificates</td>
+                        <td class="p-4">5 Days</td>
+                        <td class="p-4 text-red-600 font-bold">7 Days</td>
+                        <td class="p-4">80%</td>
+                        <td class="p-4 italic text-gray-500">"Workflow optimization required as per Productivity Strategy Sec 3.2"</td>
+                    </tr>
+                    <tr class="bg-green-50">
+                        <td class="p-4 font-medium">Consultancy Enquiries</td>
+                        <td class="p-4">48 Hours</td>
+                        <td class="p-4">24 Hours</td>
+                        <td class="p-4 text-green-700 font-bold">100%</td>
+                        <td class="p-4 text-green-700">Service standard exceeded.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-8 flex justify-end gap-4">
+            <button class="bg-gray-800 text-white px-6 py-3 rounded-lg font-bold shadow hover:bg-black">Generate Official PC Report (DOCX)</button>
+        </div>
+    </main>
+</body>
+</html>
