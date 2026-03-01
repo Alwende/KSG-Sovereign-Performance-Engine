@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Unified Sovereign Engine</title>
+    <title>KSG SPE | National Digital Benchmark</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
-        .transition-all { transition: all 0.4s ease-in-out; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-12">
@@ -26,12 +25,13 @@
             </div>
             <div class="text-right border-l pl-4 border-red-900">
                 <p class="text-xs font-bold uppercase">SUSAN CHESANG | DAN ALWENDE</p>
-                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase"></p>
+                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">SYSTEM TIME: LOADING...</p>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto py-6 px-4">
+        
         <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
                 <p class="text-[9px] text-slate-400 font-black uppercase">KRA 1: Training (Sherry)</p>
@@ -57,9 +57,38 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
-                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
-                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1: Learner Enrollment</div>
-                    <div class="p-5 space-y-3">
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-600 overflow-hidden">
+                    <div class="bg-slate-50 p-3 flex justify-between items-center border-b">
+                        <h3 class="font-black text-[10px] uppercase tracking-widest ksg-text-maroon">Cloud Program Schedule</h3>
+                        <span class="text-[8px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">LIVE</span>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex items-center gap-3 border-l-4 ksg-border-maroon pl-3 bg-slate-50 p-2">
+                            <span class="text-[10px] font-black w-20">08:00 - 10:30</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-700">Morning Session</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-l-4 border-slate-300 pl-3 p-1">
+                            <span class="text-[10px] font-black w-20 text-slate-400">10:30 - 11:00</span>
+                            <span class="text-[9px] italic text-slate-400">Breakfast Break</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-l-4 ksg-border-maroon pl-3 bg-slate-50 p-2">
+                            <span class="text-[10px] font-black w-20">11:00 - 13:00</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-700">Mid-Morning Session</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-l-4 border-slate-300 pl-3 p-1">
+                            <span class="text-[10px] font-black w-20 text-slate-400">13:00 - 14:00</span>
+                            <span class="text-[9px] italic text-slate-400">Lunch Break</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-l-4 ksg-border-maroon pl-3 bg-slate-50 p-2">
+                            <span class="text-[10px] font-black w-20">14:00 - 16:00</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-700">Afternoon Session</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded shadow-md border overflow-hidden">
+                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1: Enrollment</div>
+                    <div class="p-5 space-y-2">
                         <select id="regCourse" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold">
                             <option value="Senior Managers">Senior Managers (127k)</option>
                             <option value="Frontline">Frontline Officers (127k)</option>
@@ -67,93 +96,72 @@
                             <option value="Assessors">Assessors (255k)</option>
                             <option value="Technical">Technical Officers (296k)</option>
                         </select>
-                        <input id="regName" type="text" placeholder="Learner Full Name" class="w-full border p-2 text-xs rounded">
-                        <input id="regStation" type="text" placeholder="Work Station / Employer" class="w-full border p-2 text-xs rounded">
-                        <input id="regPhone" type="tel" placeholder="Telephone Number" class="w-full border p-2 text-xs rounded">
-                        <input id="regEmail" type="email" placeholder="Email Address" class="w-full border p-2 text-xs rounded">
-                        <button onclick="enroll()" class="w-full ksg-maroon text-white py-2 rounded font-black text-xs uppercase shadow hover:bg-black transition">Submit & Clock-In</button>
+                        <input id="regName" type="text" placeholder="Full Name" class="w-full border p-2 text-xs rounded">
+                        <input id="regStation" type="text" placeholder="Employer/Station" class="w-full border p-2 text-xs rounded">
+                        <button onclick="enroll()" class="w-full ksg-maroon text-white py-2 rounded font-black text-xs uppercase shadow">Enroll Learner</button>
                     </div>
-                </div>
-
-                <div class="bg-slate-800 rounded shadow-lg overflow-hidden border">
-                    <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900 border-b border-slate-700">
-                        <span>PA Portal: Interactive Roll Call</span>
-                        <span id="windowStatus" class="font-bold">CHECKING...</span>
-                    </div>
-                    <div id="paRoster" class="p-4 space-y-2 max-h-60 overflow-y-auto">
-                        </div>
                 </div>
             </div>
 
             <div class="lg:col-span-8 space-y-6">
-                <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-600 p-5">
-                    <h3 class="font-black text-[10px] uppercase mb-4 ksg-text-maroon border-b pb-2">Integrated Lecturer Appraisal (Learner Feedback)</h3>
-                    <div class="flex flex-wrap gap-4">
-                        <select id="rateStaff" class="flex-1 border p-2 text-xs rounded bg-slate-50 font-bold">
-                            <option value="Dan">Dan Alwende</option>
-                            <option value="Sherry">Sherry Bartuin</option>
-                            <option value="Jerry">Jerry Okumu</option>
-                        </select>
-                        <div class="flex items-center gap-2">
-                            <label class="text-[9px] font-bold uppercase text-slate-400">Score (1-5):</label>
-                            <input id="rateVal" type="number" min="1" max="5" value="5" class="w-12 border p-1 text-center font-bold">
-                        </div>
-                        <button onclick="submitAppraisal()" class="bg-yellow-600 text-white font-bold px-4 py-1 rounded text-[10px] uppercase">Submit Rating</button>
+                <div class="bg-slate-800 rounded shadow-lg overflow-hidden border">
+                    <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900 border-b border-slate-700">
+                        <span>PA Portal: Fraud-Proof Attendance</span>
+                        <span id="windowStatus" class="text-yellow-500 font-bold uppercase">CHECKING...</span>
                     </div>
-                    <div id="ratingsGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                    <div id="paRoster" class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto bg-slate-900">
                         </div>
                 </div>
 
-                <div class="bg-white rounded shadow border overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
-                        <span>100% Digitized CSE Work Plan Ledger</span>
-                        <button onclick="resetSystem()" class="text-[8px] border px-2 py-1 rounded font-normal">Reset System</button>
+                <div class="bg-white rounded-xl shadow border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center font-black text-[10px] uppercase ksg-text-maroon">
+                        <span>Session Appraisal (External & Internal Pool)</span>
+                        <span class="text-slate-400">Live Feedback</span>
                     </div>
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-100 text-slate-400 font-bold uppercase border-b text-[9px]">
-                            <tr><th class="p-4">Owner</th><th class="p-4">Annual Work Plan Activity</th><th class="p-4 text-center">Achieve %</th><th class="p-4">AI Variance Insight</th></tr>
-                        </thead>
-                        <tbody id="ledgerRows" class="divide-y font-medium text-slate-700">
-                            </tbody>
-                    </table>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <select id="rateStaff" class="w-full border-2 p-2 rounded text-xs font-bold bg-slate-50">
+                                <option value="Dan">Dan Alwende (KSG)</option>
+                                <option value="Jerry">Jerry Okumu (KSG)</option>
+                                <option value="Sherry">Sherry Bartuin (KSG)</option>
+                                <option value="Huduma">Huduma Secretariat (External)</option>
+                            </select>
+                            <div class="flex items-center gap-4">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase">Rate Delivery:</label>
+                                <input id="rateVal" type="number" min="1" max="5" value="5" class="w-14 border-2 p-1 text-center font-black">
+                                <button onclick="submitRating()" class="flex-1 bg-yellow-600 text-white font-black py-2 rounded text-[10px] uppercase shadow">Submit Rating</button>
+                            </div>
+                        </div>
+                        <div id="ratingsUI" class="grid grid-cols-2 gap-2">
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // CORE DATA PERSISTENCE
+        // SOVEREIGN DATA STATE
         let state = JSON.parse(localStorage.getItem('ksg_sovereign_final')) || {
-            learners: [],
-            revenue: 0,
+            learners: [], revenue: 0, 
             kra1: 0, kra2: 0, kra3: 0,
-            ratings: { Dan: 5.0, Sherry: 5.0, Jerry: 5.0, Susan: 5.0, counts: { Dan: 1, Sherry: 1, Jerry: 1, Susan: 1 } }
+            ratings: { Dan: 5.0, Sherry: 5.0, Jerry: 5.0, Huduma: 5.0, counts: { Dan: 1, Sherry: 1, Jerry: 1, Huduma: 1 } }
         };
 
         const rates = { "Senior Managers": 127000, "Frontline": 127000, "Executives": 87000, "Assessors": 255000, "Technical": 296000 };
-        const targets = { kra1: 10, kra2: 3, kra3: 1, revenue: 50000000 };
 
         function enroll() {
             const name = document.getElementById('regName').value;
-            const station = document.getElementById('regStation').value;
             const course = document.getElementById('regCourse').value;
-            if(!name || !station) return alert("Learner Name and Work Station required.");
-
-            state.learners.unshift({ 
-                id: Date.now(), 
-                name, 
-                station, 
-                course, 
-                attendance: ["Present"] // Day 1
-            });
+            if(!name) return;
+            state.learners.unshift({ id: Date.now(), name, course, station: document.getElementById('regStation').value, attendance: ["Present"] });
             state.revenue += rates[course];
             state.kra1 = Number((state.learners.length * 0.1).toFixed(1));
-            
             saveAndRender();
-            ['regName','regStation','regPhone','regEmail'].forEach(id => document.getElementById(id).value = '');
+            ['regName','regStation'].forEach(id => document.getElementById(id).value = '');
         }
 
-        function submitAppraisal() {
+        function submitRating() {
             const s = document.getElementById('rateStaff').value;
             const v = parseFloat(document.getElementById('rateVal').value);
             state.ratings[s] = ((state.ratings[s] * state.ratings.counts[s]) + v) / (state.ratings.counts[s] + 1);
@@ -161,8 +169,8 @@
             saveAndRender();
         }
 
-        function markAttendance(id) {
-            if(!isWindowOpen()) return alert("COMPLIANCE ALERT: PA Portal is locked. Register is only open 08:00 - 16:00 (Mon-Fri).");
+        function markAtt(id) {
+            if(!isWindowOpen()) return alert("REGISTER LOCKED: Roll call permitted only 08:00 - 16:00 (Mon-Fri).");
             state.learners.find(x => x.id === id).attendance.push("Present");
             saveAndRender();
         }
@@ -186,7 +194,7 @@
             document.getElementById('windowStatus').className = open ? "text-green-500 font-bold" : "text-red-500 font-bold";
             document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
 
-            // Stats Update
+            // Scoreboard
             document.getElementById('ui-kra1').innerText = state.kra1 + ' / 10';
             document.getElementById('bar-kra1').style.width = (state.kra1/10)*100 + '%';
             document.getElementById('ui-kra2').innerText = state.kra2 + ' / 3';
@@ -196,33 +204,26 @@
             document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
             document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
 
-            // PA Roster Update
+            // PA Roster
             document.getElementById('paRoster').innerHTML = state.learners.map(l => `
-                <div class="bg-slate-900 p-2 rounded mb-1 border border-slate-700">
-                    <div class="flex justify-between items-center text-[10px]">
-                        <span class="text-white font-black uppercase">${l.name}</span>
-                        <span class="text-yellow-500">${l.attendance.length} Days</span>
+                <div class="bg-slate-800 p-2 rounded border border-slate-700">
+                    <div class="flex justify-between items-center text-[10px] mb-2">
+                        <span class="text-white font-black uppercase tracking-tighter">${l.name}</span>
+                        <span class="text-yellow-500 font-bold">${l.attendance.length} Days</span>
                     </div>
-                    <button onclick="markAttendance(${l.id})" ${!open ? 'disabled' : ''} class="w-full mt-1 ${!open ? 'bg-slate-700' : 'bg-green-600'} text-white text-[9px] py-1 rounded font-bold uppercase">
-                        ${!open ? 'LOCKED' : 'Mark Day ' + (l.attendance.length+1)}
+                    <button onclick="markAtt(${l.id})" ${!open ? 'disabled' : ''} class="w-full ${!open ? 'bg-slate-700' : 'bg-green-600'} text-white text-[9px] py-1 rounded font-black uppercase">
+                        ${!open ? 'LOCKED' : 'Clock Day ' + (l.attendance.length+1)}
                     </button>
                 </div>
-            `).join('') || '<p class="text-[9px] text-center text-slate-500">No active sessions.</p>';
+            `).join('') || '<p class="text-[9px] text-center text-slate-500 w-full py-4">No learners registered.</p>';
 
-            // Ratings Grid Update
-            document.getElementById('ratingsGrid').innerHTML = ['Dan','Sherry','Jerry','Susan'].map(s => `
+            // Ratings UI
+            document.getElementById('ratingsUI').innerHTML = ['Dan','Sherry','Jerry','Huduma'].map(s => `
                 <div class="text-center p-2 bg-slate-50 rounded border">
                     <p class="text-[8px] font-bold text-slate-400 uppercase">${s}</p>
                     <h4 class="text-lg font-black ksg-text-maroon">${state.ratings[s].toFixed(1)}</h4>
                 </div>
             `).join('');
-
-            // Ledger Update
-            document.getElementById('ledgerRows').innerHTML = `
-                <tr><td class="p-4 font-bold uppercase">Sherry Bartuin</td><td class="p-4">KRA 1: Training Delivery (10 Programs)</td><td class="p-4 text-center font-black">${((state.kra1/10)*100).toFixed(1)}%</td><td class="p-4 italic text-slate-400">Live Intake tracking</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Dan Alwende</td><td class="p-4">KRA 2: Consultancy Pilots (3 Orgs)</td><td class="p-4 text-center font-black">${((state.kra2/3)*100).toFixed(1)}%</td><td class="p-4 italic text-slate-400">Targeting State Corps</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Susan Chesang</td><td class="p-4">KRA 4: Revenue Growth (50M)</td><td class="p-4 text-center font-black text-red-600">${((state.revenue/50000000)*100).toFixed(1)}%</td><td class="p-4 font-bold text-red-600 bg-red-50 italic">Variance: Strategy Sec 5.1</td></tr>
-            `;
         }
         render();
     </script>
