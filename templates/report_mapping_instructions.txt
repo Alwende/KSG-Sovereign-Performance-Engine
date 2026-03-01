@@ -1,0 +1,7 @@
+MAP_COLUMN_1: S/No. -> metrics.id
+MAP_COLUMN_2: Service/Commitment -> metrics.service_commitment
+MAP_COLUMN_3: Target/Service Standards -> metrics.standard
+MAP_COLUMN_4: Achievement -> metrics.achievement
+MAP_COLUMN_5: % Compliance -> metrics.compliance_percent
+MAP_COLUMN_6: Cause(s) for Variance -> AI_GENERATED (ai_agents/reporting_analyst_prompt.txt)
+MAP_COLUMN_7: Preventive Corrective Action -> AI_GENERATED (ai_agents/reporting_analyst_prompt.txt)
