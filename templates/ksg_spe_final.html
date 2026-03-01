@@ -3,214 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | National Benchmark Portal</title>
+    <title>KSG Sovereign Performance Engine | Production MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
-        .gold-bg { background-color: #D4AF37; }
-        .transition-all { transition: all 0.4s ease-in-out; }
+        .gold-accent { border-color: #D4AF37; }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-900">
+<body class="bg-slate-100 font-sans text-slate-900">
 
-    <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 border-yellow-600 sticky top-0 z-50">
+    <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold leading-tight">KENYA SCHOOL OF GOVERNMENT</h1>
-                    <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
+                    <h1 class="text-lg font-bold leading-none uppercase">Kenya School of Government</h1>
+                    <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
-            <div class="hidden md:flex gap-4 items-center">
-                <div class="text-right border-r pr-4 border-red-900">
-                    <p class="text-xs font-black uppercase">Ms. Susan Chesang</p>
-                    <p class="text-[9px] opacity-70">Head of Centre (HOC)</p>
+            <div class="flex gap-4 items-center">
+                <button onclick="resetSystem()" class="text-[9px] border border-red-400 px-2 py-1 rounded hover:bg-red-900 transition">Reset System</button>
+                <div class="text-right border-l pl-4 border-red-900">
+                    <p class="text-xs font-bold uppercase">SUSAN CHESANG | DAN ALWENDE</p>
+                    <p class="text-[9px] opacity-70 italic">Centre Leadership</p>
                 </div>
-                <button class="bg-yellow-600 hover:bg-yellow-700 text-white text-[10px] font-bold py-2 px-4 rounded uppercase transition shadow-md">System Admin</button>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto py-8 px-4">
+    <main class="container mx-auto py-6 px-4">
         
-        <h2 class="text-xs font-black ksg-text-maroon uppercase mb-4 tracking-widest border-l-4 ksg-border-maroon pl-2">FY 2025/2026 Work Plan Scoreboard</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-[9px] text-slate-400 font-bold uppercase mb-2">KRA 1: Competency</p>
-                <div class="flex justify-between items-end">
-                    <h3 id="kra1Text" class="text-2xl font-black">4/10 <span class="text-[10px] text-slate-400 font-normal">Trainings</span></h3>
-                    <span class="text-green-600 text-[10px] font-bold">40%</span>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 mt-3 rounded-full"><div id="kra1Bar" class="ksg-maroon h-full transition-all" style="width: 40%"></div></div>
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 1: Training (Sherry)</p>
+                <h3 id="ui-kra1" class="text-xl font-black">0/10</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-[9px] text-slate-400 font-bold uppercase mb-2">KRA 2: Consultancy</p>
-                <div class="flex justify-between items-end">
-                    <h3 id="kra2Text" class="text-2xl font-black">1/3 <span class="text-[10px] text-slate-400 font-normal">Pilots</span></h3>
-                    <span class="text-yellow-600 text-[10px] font-bold">33%</span>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 mt-3 rounded-full"><div id="kra2Bar" class="bg-yellow-600 h-full transition-all" style="width: 33%"></div></div>
+            <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 2: Consultancy (Dan)</p>
+                <h3 id="ui-kra2" class="text-xl font-black">0/3</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-[9px] text-slate-400 font-bold uppercase mb-2">KRA 4: Revenue (SO_6)</p>
-                <div class="flex justify-between items-end">
-                    <h3 id="revText" class="text-2xl font-black">12.4M <span class="text-[10px] text-slate-400 font-normal">/ 50M</span></h3>
-                    <span class="text-red-600 text-[10px] font-bold">24.8%</span>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 mt-3 rounded-full"><div id="revBar" class="bg-red-700 h-full transition-all" style="width: 24.8%"></div></div>
+            <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 3: Research (Jerry)</p>
+                <h3 id="ui-kra3" class="text-xl font-black">0/1</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
-                <p class="text-[9px] text-slate-400 font-bold uppercase mb-2">Service Charter</p>
-                <div class="flex justify-between items-end">
-                    <h3 class="text-2xl font-black">88% <span class="text-[10px] text-slate-400 font-normal">Compliance</span></h3>
-                    <span class="text-red-600 text-[10px] font-bold">Alert</span>
-                </div>
-                <div class="w-full bg-slate-100 h-1.5 mt-3 rounded-full"><div class="bg-red-500 h-full" style="width: 88%"></div></div>
+            <div class="bg-white p-4 rounded shadow-sm border-b-4 border-yellow-600">
+                <p class="text-[9px] text-slate-400 font-bold uppercase">Revenue (SO_6)</p>
+                <h3 id="ui-rev" class="text-xl font-black">0M / 50M</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
-        </div>
+        </section>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <div class="lg:col-span-4 space-y-6">
-                <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                    <div class="ksg-maroon p-4 text-white flex justify-between items-center">
-                        <h3 class="font-bold text-[10px] uppercase tracking-widest">Performance Appraisal Entry</h3>
-                        <span class="text-[8px] bg-yellow-600 px-2 py-0.5 rounded">LIVE</span>
+                <div class="bg-white rounded shadow-lg border overflow-hidden">
+                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase">Staff Achievement Entry</div>
+                    <div class="p-5 space-y-3">
+                        <select id="staffName" class="w-full border p-2 text-sm rounded bg-slate-50 font-bold">
+                            <option value="Sherry">Sherry Bartuin (KRA 1)</option>
+                            <option value="Dan" selected>Dan Alwende (KRA 2)</option>
+                            <option value="Jerry">Jerry Okumu (KRA 3)</option>
+                            <option value="Susan">Susan Chesang (Revenue)</option>
+                        </select>
+                        <input id="staffValue" type="number" placeholder="Enter Achievement Value" class="w-full border p-2 rounded text-sm outline-none focus:ring-2 ksg-border-maroon">
+                        <button onclick="updatePerformance()" class="w-full ksg-maroon text-white py-2 rounded font-bold text-xs uppercase shadow hover:bg-black transition">Submit Achievement</button>
                     </div>
-                    <form class="p-6 space-y-4">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Staff Member</label>
-                            <select id="staffSelect" class="w-full border-slate-200 border rounded p-2 text-sm bg-slate-50 font-bold focus:ring-2 ksg-border-maroon outline-none">
-                                <option value="Sherry">Sherry Bartuin (KRA 1)</option>
-                                <option value="Dan">Dan Alwende (KRA 2)</option>
-                                <option value="Jerry">Jerry Okumu (KRA 3)</option>
-                                <option value="Susan">Ms. Susan Chesang (KRA 4)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Activity Category</label>
-                            <select id="kraSelect" class="w-full border-slate-200 border rounded p-2 text-sm bg-slate-50">
-                                <option value="1">KRA 1: Training Programs</option>
-                                <option value="2">KRA 2: Consultancy Pilots</option>
-                                <option value="4">KRA 4: Revenue Mobilization</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Achievement Value</label>
-                            <input id="achValue" type="number" placeholder="Enter number..." class="w-full border-slate-200 border rounded p-2 text-sm focus:ring-2 ksg-border-maroon outline-none">
-                        </div>
-                        <button type="button" onclick="updateAppraisal()" class="w-full ksg-maroon text-white font-bold py-3 rounded-lg uppercase text-xs hover:opacity-90 shadow-lg transition">Submit Achievement</button>
-                    </form>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                    <h3 class="font-black text-[10px] uppercase mb-4 ksg-text-maroon border-b pb-2">Top Performers (Monthly)</h3>
-                    <div class="space-y-4" id="staffRanking">
-                        </div>
+                <div class="bg-white rounded shadow border overflow-hidden">
+                    <div class="bg-slate-800 p-3 text-white text-[10px] font-bold uppercase tracking-widest">Digital Attendance Register</div>
+                    <div class="p-5 space-y-2">
+                        <input id="learnerInput" type="text" placeholder="Learner Full Name" class="w-full border p-2 text-sm rounded outline-none">
+                        <button onclick="addAttendance()" class="w-full bg-slate-700 text-white py-2 rounded font-bold text-[10px] uppercase">Clock In Learner</button>
+                        <div id="attendanceScroll" class="mt-4 max-h-40 overflow-y-auto space-y-1 text-[10px]">
+                            </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-8 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
-                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon tracking-tighter">Institutional Work Plan Tracking Ledger</h3>
-                    <button class="text-[9px] font-bold bg-slate-200 px-3 py-1 rounded text-slate-600 uppercase">Export to PC Template</button>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-100 text-[9px] uppercase font-bold text-slate-400 border-b">
+            <div class="lg:col-span-8 space-y-6">
+                <div class="bg-white rounded shadow border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
+                        <h3 class="font-black text-[10px] uppercase ksg-text-maroon">Digitized AWP Ledger</h3>
+                        <button class="bg-slate-200 px-3 py-1 rounded text-[9px] font-black text-slate-600 uppercase">Export Report</button>
+                    </div>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-100 text-[9px] uppercase text-slate-400 font-bold">
                             <tr>
-                                <th class="p-4">Objective / Output</th>
-                                <th class="p-4">Owner</th>
+                                <th class="p-4">Staff Owner</th>
+                                <th class="p-4">Objective</th>
                                 <th class="p-4 text-center">Achievement</th>
-                                <th class="p-4 text-center">Status</th>
                                 <th class="p-4">AI Variance Insight</th>
                             </tr>
                         </thead>
-                        <tbody class="text-xs divide-y" id="ledgerBody">
+                        <tbody id="ledgerRows" class="divide-y">
                             </tbody>
                     </table>
+                </div>
+
+                <div class="bg-white rounded shadow border p-6">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2">
+                        <h3 class="font-black text-[10px] uppercase ksg-text-maroon">Lecturer Ratings (Real-Time)</h3>
+                        <span class="text-[9px] text-slate-400">Replaces Manual Google Forms</span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-3 bg-slate-50 rounded">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Dan A.</p>
+                            <h4 class="text-xl font-black ksg-text-maroon">4.9</h4>
+                        </div>
+                        <div class="text-center p-3 bg-slate-50 rounded">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Jerry O.</p>
+                            <h4 class="text-xl font-black ksg-text-maroon">4.7</h4>
+                        </div>
+                        <div class="text-center p-3 bg-slate-50 rounded">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Sherry B.</p>
+                            <h4 class="text-xl font-black ksg-text-maroon">4.8</h4>
+                        </div>
+                        <div class="text-center p-3 bg-slate-50 rounded">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Susan C.</p>
+                            <h4 class="text-xl font-black ksg-text-maroon">5.0</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // State management for the Work Plan
-        const ksgData = {
-            kra1: { current: 4, target: 10, name: "Training Programs", owner: "Sherry Bartuin" },
-            kra2: { current: 1, target: 3, name: "Consultancy Pilots", owner: "Dan Alwende" },
-            kra4: { current: 12400000, target: 50000000, name: "Revenue (KES)", owner: "Susan Chesang" }
+        // PERSISTENCE LOGIC
+        let ksgData = JSON.parse(localStorage.getItem('ksg_sovereign_v3')) || {
+            Sherry: 0, Dan: 0, Jerry: 0, Susan: 0, attendance: []
         };
 
-        function updateAppraisal() {
-            const kra = document.getElementById('kraSelect').value;
-            const val = parseInt(document.getElementById('achValue').value);
+        const targets = { Sherry: 10, Dan: 3, Jerry: 1, Susan: 50000000 };
+
+        function updatePerformance() {
+            const staff = document.getElementById('staffName').value;
+            const val = parseInt(document.getElementById('staffValue').value);
             if(!val) return;
 
-            if(kra === "4") {
-                ksgData.kra4.current += val;
-            } else if (kra === "1") {
-                ksgData.kra1.current += val;
-            } else if (kra === "2") {
-                ksgData.kra2.current += val;
-            }
-
-            renderUI();
-            document.getElementById('achValue').value = '';
+            ksgData[staff] += val;
+            saveAndRender();
+            document.getElementById('staffValue').value = '';
         }
 
-        function renderUI() {
-            // Update Progress Bars & Text
-            const k1Pct = (ksgData.kra1.current / ksgData.kra1.target) * 100;
-            document.getElementById('kra1Bar').style.width = k1Pct + '%';
-            document.getElementById('kra1Text').innerHTML = ksgData.kra1.current + '/10 <span class="text-[10px] text-slate-400 font-normal">Trainings</span>';
+        function addAttendance() {
+            const name = document.getElementById('learnerInput').value;
+            if(!name) return;
+            ksgData.attendance.unshift({ name, time: new Date().toLocaleTimeString() });
+            saveAndRender();
+            document.getElementById('learnerInput').value = '';
+        }
 
-            const k2Pct = (ksgData.kra2.current / ksgData.kra2.target) * 100;
-            document.getElementById('kra2Bar').style.width = k2Pct + '%';
-            document.getElementById('kra2Text').innerHTML = ksgData.kra2.current + '/3 <span class="text-[10px] text-slate-400 font-normal">Pilots</span>';
+        function saveAndRender() {
+            localStorage.setItem('ksg_sovereign_v3', JSON.stringify(ksgData));
+            render();
+        }
 
-            const revPct = (ksgData.kra4.current / ksgData.kra4.target) * 100;
-            document.getElementById('revBar').style.width = revPct + '%';
-            document.getElementById('revText').innerHTML = (ksgData.kra4.current/1000000).toFixed(1) + 'M <span class="text-[10px] text-slate-400 font-normal">/ 50M</span>';
+        function resetSystem() {
+            localStorage.removeItem('ksg_sovereign_v3');
+            location.reload();
+        }
 
-            // Render Ledger
-            const ledger = document.getElementById('ledgerBody');
+        function render() {
+            // Update Bars & Text
+            document.getElementById('ui-kra1').innerText = ksgData.Sherry + ' / 10';
+            document.getElementById('bar-kra1').style.width = (ksgData.Sherry/10)*100 + '%';
+
+            document.getElementById('ui-kra2').innerText = ksgData.Dan + ' / 3';
+            document.getElementById('bar-kra2').style.width = (ksgData.Dan/3)*100 + '%';
+
+            document.getElementById('ui-kra3').innerText = ksgData.Jerry + ' / 1';
+            document.getElementById('bar-kra3').style.width = (ksgData.Jerry/1)*100 + '%';
+
+            document.getElementById('ui-rev').innerText = (ksgData.Susan/1000000).toFixed(1) + 'M / 50M';
+            document.getElementById('bar-rev').style.width = (ksgData.Susan/50000000)*100 + '%';
+
+            // Update Ledger
+            const ledger = document.getElementById('ledgerRows');
             ledger.innerHTML = `
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="p-4 font-bold text-slate-700">Competency Dev: Training MDAs</td>
-                    <td class="p-4 italic">Sherry Bartuin</td>
-                    <td class="p-4 text-center font-black">${ksgData.kra1.current} / 10</td>
-                    <td class="p-4 text-center"><span class="bg-blue-100 text-blue-700 text-[9px] font-bold px-2 py-1 rounded">ACTIVE</span></td>
-                    <td class="p-4"><div class="bg-slate-50 p-2 rounded border-l-2 ksg-border-maroon text-[10px] italic text-slate-500">"Progressing as per Training Calendar."</div></td>
-                </tr>
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="p-4 font-bold text-slate-700">Institutional Transformation: Revenue</td>
-                    <td class="p-4 italic text-slate-600">Susan Chesang</td>
-                    <td class="p-4 text-center font-black">${(ksgData.kra4.current/1000000).toFixed(1)}M</td>
-                    <td class="p-4 text-center"><span class="${revPct < 30 ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'} text-[9px] font-bold px-2 py-1 rounded uppercase">${revPct < 30 ? 'At Risk' : 'In Progress'}</span></td>
-                    <td class="p-4"><div class="bg-red-50 p-2 rounded border-l-2 border-red-500 text-[10px] italic text-red-600">"Variance detected. Execute Resource Strategy Sec 5.1."</div></td>
-                </tr>
+                <tr><td class="p-4 font-bold">Sherry Bartuin</td><td class="p-4">KRA 1: Training</td><td class="p-4 text-center">${((ksgData.Sherry/10)*100).toFixed(1)}%</td><td class="p-4 italic text-[10px] text-slate-500">Analysis Pending...</td></tr>
+                <tr><td class="p-4 font-bold">Dan Alwende</td><td class="p-4">KRA 2: Consultancy</td><td class="p-4 text-center">${((ksgData.Dan/3)*100).toFixed(1)}%</td><td class="p-4 italic text-[10px] text-slate-500">Analysis Pending...</td></tr>
+                <tr><td class="p-4 font-bold">Jerry Okumu</td><td class="p-4">KRA 3: Research</td><td class="p-4 text-center">${((ksgData.Jerry/1)*100).toFixed(1)}%</td><td class="p-4 italic text-[10px] text-slate-500">Analysis Pending...</td></tr>
+                <tr><td class="p-4 font-bold">Susan Chesang</td><td class="p-4">KRA 4: Revenue</td><td class="p-4 text-center">${((ksgData.Susan/50000000)*100).toFixed(1)}%</td><td class="p-4 italic text-[10px] text-slate-500">Analysis Pending...</td></tr>
             `;
 
-            // Render Ranking
-            const ranking = document.getElementById('staffRanking');
-            ranking.innerHTML = `
-                <div class="flex justify-between items-center bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
-                    <span class="text-xs font-bold">1. Sherry Bartuin</span>
-                    <span class="text-[10px] font-black text-green-700">${k1Pct.toFixed(1)}%</span>
+            // Update Attendance
+            document.getElementById('attendanceScroll').innerHTML = ksgData.attendance.map(a => `
+                <div class="flex justify-between bg-slate-50 p-2 rounded border-b">
+                    <span class="font-bold text-slate-700 uppercase">${a.name}</span>
+                    <span class="text-slate-400">${a.time}</span>
                 </div>
-                <div class="flex justify-between items-center p-3">
-                    <span class="text-xs font-medium">2. Dan Alwende</span>
-                    <span class="text-[10px] font-black text-slate-400">${k2Pct.toFixed(1)}%</span>
-                </div>
-            `;
+            `).join('');
         }
 
-        // Initial Load
-        renderUI();
+        render();
     </script>
 </body>
 </html>
