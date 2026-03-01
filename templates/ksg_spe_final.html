@@ -3,159 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG Sovereign Performance Engine | AWP Digitization</title>
+    <title>KSG Sovereign Performance Engine | LIVE MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
+        .transition-all { transition: all 0.5s ease-in-out; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-900">
 
-    <header class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
-        <div class="container mx-auto flex flex-wrap justify-between items-center gap-4">
+    <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-inner">
-                    <span class="ksg-text-maroon font-black text-xl px-1">KSG</span>
-                </div>
+                <div class="bg-white p-1 rounded-sm"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold leading-none">KENYA SCHOOL OF GOVERNMENT</h1>
-                    <p class="text-[9px] uppercase tracking-widest text-yellow-500">Center for Customer Service Excellence</p>
+                    <h1 class="text-lg font-bold leading-none uppercase">Kenya School of Government</h1>
+                    <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
-            <div class="flex items-center gap-4 text-xs">
-                <div class="hidden sm:block text-right border-r pr-4 border-red-900">
-                    <p class="font-bold">DAN ALWENDE</p>
-                    <p class="opacity-70 text-[10px]">Asst. Head of Centre</p>
-                </div>
-                <button class="bg-yellow-600 px-3 py-2 rounded font-bold uppercase text-[10px] hover:bg-yellow-700 transition">Portal Login</button>
+            <div class="text-right text-xs">
+                <p class="font-bold">SUSAN CHESANG | DAN ALWENDE</p>
+                <p class="opacity-70 text-[10px] uppercase">Centre Leadership Team</p>
             </div>
         </div>
-    </header>
+    </nav>
 
     <main class="container mx-auto py-6 px-4">
-        <section class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-            <div class="lg:col-span-3 bg-white rounded-lg shadow-sm p-6">
-                <h2 class="ksg-text-maroon font-black text-xs uppercase mb-4 tracking-tighter">Center Performance vs Annual Work Plan (AWP 2025/26)</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-gray-50 rounded border-l-4 ksg-border-maroon">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase">Revenue (SO_6)</span>
-                        <p class="text-2xl font-black">12.4M <span class="text-xs font-normal text-gray-400">/ 50M</span></p>
-                        <div class="w-full bg-gray-200 h-1.5 mt-2 rounded-full overflow-hidden">
-                            <div class="bg-yellow-600 h-full" style="width: 25%"></div>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded border-l-4 ksg-border-maroon">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase">Digitalization (SO_9)</span>
-                        <p class="text-2xl font-black">45% <span class="text-xs font-normal text-gray-400">Achieved</span></p>
-                        <div class="w-full bg-gray-200 h-1.5 mt-2 rounded-full overflow-hidden">
-                            <div class="ksg-maroon h-full" style="width: 45%"></div>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded border-l-4 ksg-border-maroon">
-                        <span class="text-[10px] text-gray-400 font-bold uppercase">Charter Compliance</span>
-                        <p class="text-2xl font-black text-red-600">88%</p>
-                        <p class="text-[9px] text-red-400 mt-1">Variance detected in Cert Processing</p>
-                    </div>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-8 ksg-border-maroon">
+                <p class="text-[10px] text-gray-400 font-black uppercase">Revenue (SO_6) Progress</p>
+                <h2 id="revenueText" class="text-3xl font-black ksg-text-maroon">12.4M <span class="text-xs font-normal text-gray-400">/ 50M</span></h2>
+                <div class="w-full bg-gray-200 h-3 mt-3 rounded-full overflow-hidden">
+                    <div id="revenueBar" class="bg-yellow-600 h-full transition-all" style="width: 24.8%"></div>
                 </div>
             </div>
-
-            <div class="bg-white rounded-lg shadow-sm p-6 border-t-4 border-yellow-600">
-                <h3 class="ksg-text-maroon font-black text-xs uppercase mb-4">CSE Staff Rankings</h3>
-                <ul class="space-y-3 text-xs">
-                    <li class="flex justify-between items-center border-b pb-2">
-                        <span>1. Sherry Bartuin</span>
-                        <span class="font-black text-green-600">98%</span>
-                    </li>
-                    <li class="flex justify-between items-center border-b pb-2">
-                        <span>2. Jerry Okumu</span>
-                        <span class="font-black text-green-600">96%</span>
-                    </li>
-                    <li class="flex justify-between items-center opacity-60">
-                        <span>3. Dan Alwende</span>
-                        <span class="font-black text-yellow-600">92%</span>
-                    </li>
-                </ul>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-8 ksg-border-maroon">
+                <p class="text-[10px] text-gray-400 font-black uppercase">Digitalization (SO_9)</p>
+                <h2 class="text-3xl font-black ksg-text-maroon">45%</h2>
+                <div class="w-full bg-gray-200 h-3 mt-3 rounded-full overflow-hidden">
+                    <div class="ksg-maroon h-full" style="width: 45%"></div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-8 border-green-600">
+                <p class="text-[10px] text-gray-400 font-black uppercase">Staff Lead</p>
+                <h2 class="text-3xl font-black text-green-600 uppercase">Sherry B.</h2>
+                <p class="text-[10px] mt-2 font-bold text-gray-500 italic">Score: 98.2% (Target: 100%)</p>
             </div>
         </section>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-4 bg-white rounded-lg shadow-md border overflow-hidden">
-                <div class="ksg-maroon p-4 text-white text-xs font-bold uppercase tracking-widest">
-                    Performance Entry Portal
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-lg shadow-xl border overflow-hidden">
+                    <div class="ksg-maroon p-4 text-white text-xs font-bold uppercase">Monthly Achievement Entry</div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Activity Owner</label>
+                            <select id="staffName" class="w-full border p-2 rounded text-sm bg-gray-50 font-bold">
+                                <option>Jerry Okumu</option>
+                                <option>Sherry Bartuin</option>
+                                <option>Dan Alwende</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Value to Add (Revenue KES)</label>
+                            <input id="inputValue" type="number" placeholder="Enter amount..." class="w-full border p-2 rounded focus:ring-2 ksg-border-maroon outline-none">
+                        </div>
+                        <button onclick="updatePerformance()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg hover:bg-black transition">Submit Achievement</button>
+                    </div>
                 </div>
-                <form class="p-6 space-y-4 text-sm">
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Select Activity Owner</label>
-                        <select class="w-full border p-2 rounded bg-gray-50">
-                            <option>Sherry Bartuin</option>
-                            <option>Jerry Okumu</option>
-                            <option selected>Dan Alwende</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Work Plan Objective</label>
-                        <select class="w-full border p-2 rounded bg-gray-50">
-                            <option>SO_6: Resource Mobilization</option>
-                            <option>SO_9: Digitalize Systems</option>
-                            <option>Citizen Service Charter (Processing)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Monthly Achievement Value</label>
-                        <input type="number" class="w-full border p-2 rounded outline-none focus:ring-1 ksg-border-maroon">
-                    </div>
-                    <button type="button" class="w-full ksg-maroon text-white py-3 rounded font-bold text-xs uppercase shadow-lg">Submit Achievement</button>
-                    <p class="text-[9px] text-gray-400 text-center italic">Self-reporting requires digital signature verification</p>
-                </form>
             </div>
 
-            <div class="lg:col-span-8 bg-white rounded-lg shadow-md border overflow-hidden">
-                <div class="p-4 bg-gray-50 border-b flex justify-between items-center">
-                    <h3 class="font-black text-xs uppercase ksg-text-maroon">Digitized Performance Ledger</h3>
-                    <span class="text-[9px] font-bold text-gray-500 uppercase">FY 2025/2026 Quarter 1</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-gray-100 text-[10px] text-gray-400 uppercase border-b">
-                            <tr>
-                                <th class="p-4">Objective / Activity</th>
-                                <th class="p-4">Owner</th>
-                                <th class="p-4">Target</th>
-                                <th class="p-4">Actual</th>
-                                <th class="p-4">Variance Analysis (AI)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y">
-                            <tr>
-                                <td class="p-4 font-bold">Revenue Mobilization</td>
-                                <td class="p-4">Jerry O.</td>
-                                <td class="p-4 font-bold">50M</td>
-                                <td class="p-4 text-red-600 font-bold">12.4M</td>
-                                <td class="p-4">
-                                    <div class="bg-red-50 p-2 rounded border-l-2 ksg-border-maroon">
-                                        <p class="italic text-[10px]">"Shortfall detected. Triggering Resource Mobilization Strategy Chapter 5."</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-4 font-bold">Training Certs (Charter)</td>
-                                <td class="p-4">Sherry B.</td>
-                                <td class="p-4 font-bold">5 Days</td>
-                                <td class="p-4 text-red-600 font-bold">7 Days</td>
-                                <td class="p-4">
-                                    <div class="bg-red-50 p-2 rounded border-l-2 ksg-border-maroon">
-                                        <p class="italic text-[10px]">"Action: Review approval chain per Productivity Strategy Sec 3.2."</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="lg:col-span-8 bg-white rounded-lg shadow border overflow-hidden">
+                <div class="p-4 bg-gray-50 border-b font-bold ksg-text-maroon text-xs uppercase">CSE Live Performance Ledger</div>
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-gray-100 text-[10px] text-gray-400 uppercase">
+                        <tr>
+                            <th class="p-4">Objective</th>
+                            <th class="p-4">Actual</th>
+                            <th class="p-4">Target</th>
+                            <th class="p-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y" id="ledgerBody">
+                        <tr>
+                            <td class="p-4 font-bold">Revenue Mobilization (SO_6)</td>
+                            <td class="p-4 font-black" id="currentRev">12,400,000</td>
+                            <td class="p-4">50,000,000</td>
+                            <td class="p-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-[10px] font-bold">IN PROGRESS</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
+
+    <script>
+        let currentRevenue = 12400000;
+        const targetRevenue = 50000000;
+
+        function updatePerformance() {
+            const val = document.getElementById('inputValue').value;
+            if(!val) return alert("Please enter a value");
+            
+            currentRevenue += parseInt(val);
+            const percentage = (currentRevenue / targetRevenue) * 100;
+            
+            // Update UI
+            document.getElementById('revenueBar').style.width = percentage + '%';
+            document.getElementById('revenueText').innerHTML = (currentRevenue/1000000).toFixed(1) + 'M <span class="text-xs font-normal text-gray-400">/ 50M</span>';
+            document.getElementById('currentRev').innerText = currentRevenue.toLocaleString();
+            
+            document.getElementById('inputValue').value = '';
+            console.log("Performance Updated: New Revenue is " + currentRevenue);
+        }
+    </script>
 </body>
 </html>
