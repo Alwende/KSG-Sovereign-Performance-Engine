@@ -1,37 +1,37 @@
 import json
 
-def calculate_compliance(standard_days, actual_days):
-    """
-    Logic: If actual <= standard, compliance is 100%.
-    If actual > standard, compliance is (standard/actual)*100.
-    """
-    if actual_days <= standard_days:
-        return 100.0
-    return round((standard_days / actual_days) * 100, 2)
-
-def generate_report_entry(service_id, achievement_value):
-    # This simulates pulling the standard from our schema
-    standards = {
-        1: {"name": "Processing of training certificates", "target": 5},
-        2: {"name": "Response to consultancy enquiries", "target": 2} # 48 hours = 2 days
-    }
+def get_ksg_ai_recommendation(service, compliance):
+    # This logic mimics the Vertex AI grounding in the KSG Productivity Strategy
+    if compliance >= 100:
+        return "Target met. Maintain current service standards."
     
-    target = standards[service_id]["target"]
-    compliance = calculate_compliance(target, achievement_value)
-    
-    entry = {
-        "service": standards[service_id]["name"],
-        "target_standard": f"Within {target} days",
-        "actual_achievement": f"{achievement_value} days",
-        "compliance": f"{compliance}%",
-        "needs_ai_analysis": compliance < 100
+    knowledge_base = {
+        "Training Certificates": "Variance due to manual verification. Action: Implement Digital Signature Workflows as per Strategy Sec 4.1.",
+        "Consultancy Enquiries": "Delayed response. Action: Decentralize enquiry handling to Departmental Liaisons.",
+        "Revenue Mobilization": "Shortfall detected. Action: Execute the AWP SO_6 Resource Mobilization Strategy immediately."
     }
-    return entry
+    return knowledge_base.get(service, "Review internal process bottlenecks and realign with FY 2025/26 targets.")
 
-# Simulation of a monthly reporting cycle
-monthly_results = [
-    generate_report_entry(1, 7), # 2 days late
-    generate_report_entry(2, 1)  # Ahead of schedule
+def generate_ksg_report(achievements):
+    report_data = []
+    for item in achievements:
+        # Calculate % Compliance: (Target / Actual) * 100
+        compliance = (item['target'] / item['actual']) * 100 if item['actual'] > item['target'] else 100
+        compliance = round(compliance, 1)
+        
+        report_data.append({
+            "Service": item['service'],
+            "Target": f"Within {item['target']} Days",
+            "Actual": f"{item['actual']} Days",
+            "Compliance": f"{compliance}%",
+            "AI_Corrective_Action": get_ksg_ai_recommendation(item['service'], compliance)
+        })
+    return report_data
+
+# DEMO DATA: Simulating a month at the CCSE
+demo_input = [
+    {"service": "Training Certificates", "target": 5, "actual": 8},
+    {"service": "Consultancy Enquiries", "target": 2, "actual": 1}
 ]
 
-print(json.dumps(monthly_results, indent=2))
+print(json.dumps(generate_ksg_report(demo_input), indent=4))
