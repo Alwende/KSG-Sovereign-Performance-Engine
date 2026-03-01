@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Unified Governance Portal</title>
+    <title>KSG SPE | Unified Sovereign Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
@@ -17,17 +17,17 @@
     <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
                     <h1 class="text-lg font-bold leading-none uppercase">Kenya School of Government</h1>
                     <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
-            <div class="flex gap-4 items-center text-right">
-                <button onclick="resetSystem()" class="text-[9px] border border-red-400 px-2 py-1 rounded hover:bg-red-900 transition font-bold">RESET SYSTEM</button>
-                <div class="border-l pl-4 border-red-900">
+            <div class="flex gap-4 items-center">
+                <button onclick="resetSystem()" class="text-[9px] border border-red-400 px-2 py-1 rounded hover:bg-red-900 transition font-bold uppercase">Reset System</button>
+                <div class="text-right border-l pl-4 border-red-900">
                     <p class="text-xs font-bold uppercase">SUSAN CHESANG | DAN ALWENDE</p>
-                    <p class="text-[9px] opacity-70 italic tracking-widest uppercase">Centre Leadership</p>
+                    <p class="text-[9px] opacity-70 italic">Centre Leadership</p>
                 </div>
             </div>
         </div>
@@ -35,31 +35,31 @@
 
     <main class="container mx-auto py-6 px-4">
         
+        <h2 class="text-[10px] font-black ksg-text-maroon uppercase mb-3 tracking-widest">FY 2025/2026 Annual Work Plan Status</h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 1: Training (Sherry)</p>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">KRA 1: Training (Sherry)</p>
                 <h3 id="ui-kra1" class="text-xl font-black ksg-text-maroon">0 / 10 Programs</h3>
                 <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 2: Consultancy (Dan)</p>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">KRA 2: Consultancy (Dan)</p>
                 <h3 id="ui-kra2" class="text-xl font-black ksg-text-maroon">0 / 3 Pilots</h3>
                 <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow-sm border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-bold uppercase">KRA 3: Research (Jerry)</p>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">KRA 3: Research (Jerry)</p>
                 <h3 id="ui-kra3" class="text-xl font-black ksg-text-maroon">0 / 1 Brief</h3>
                 <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="ksg-maroon h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow-sm border-b-4 border-yellow-600">
-                <p class="text-[9px] text-slate-400 font-bold uppercase">Revenue (SO_6 - Susan)</p>
+                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">Revenue (SO_6 - Susan)</p>
                 <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0M / 50M</h3>
                 <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
                     <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Day 1: Learner Self-Registration</div>
@@ -71,38 +71,62 @@
                             <option value="Assessors">Assessors (14 Days - 255k)</option>
                             <option value="Technical">Technical Officers (28 Days - 296k)</option>
                         </select>
-                        <input id="regName" type="text" placeholder="Full Name" class="w-full border p-2 text-xs rounded outline-none focus:ring-1 ksg-border-maroon">
-                        <input id="regStation" type="text" placeholder="Work Station / Employer" class="w-full border p-2 text-xs rounded outline-none">
-                        <input id="regPhone" type="tel" placeholder="Telephone Number" class="w-full border p-2 text-xs rounded outline-none">
-                        <input id="regEmail" type="email" placeholder="Email Address" class="w-full border p-2 text-xs rounded outline-none">
-                        <button type="button" onclick="learnerRegister()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg">Submit Registration</button>
+                        <input id="regName" type="text" placeholder="Full Name" class="w-full border p-2 text-xs rounded">
+                        <input id="regStation" type="text" placeholder="Work Station/Employer" class="w-full border p-2 text-xs rounded">
+                        <input id="regPhone" type="text" placeholder="Telephone" class="w-full border p-2 text-xs rounded">
+                        <input id="regEmail" type="text" placeholder="Email Address" class="w-full border p-2 text-xs rounded">
+                        <button type="button" onclick="registerLearner()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg">Submit & Clock-In</button>
                     </form>
                 </div>
 
                 <div class="bg-slate-800 rounded shadow-lg overflow-hidden border">
-                    <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900 border-b border-slate-700">
-                        <span>PA Portal: Roll Call</span>
-                        <span id="activeCount" class="text-yellow-500">0 Active</span>
+                    <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900">
+                        <span>PA PORTAL: ROLL CALL</span>
+                        <span id="ui-activeCount" class="text-yellow-500">0 Active</span>
                     </div>
-                    <div id="paRoster" class="p-4 space-y-2 max-h-60 overflow-y-auto">
-                        <p class="text-slate-500 text-[9px] italic text-center">No learners registered yet.</p>
-                    </div>
+                    <div id="paRoster" class="p-4 space-y-2 max-h-64 overflow-y-auto">
+                        </div>
                 </div>
             </div>
 
             <div class="lg:col-span-8 space-y-6">
-                <div class="bg-white rounded shadow border overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
-                        <h3 class="font-black text-[10px] uppercase ksg-text-maroon">Digitized CSE Performance Ledger</h3>
-                        <div class="flex gap-2">
-                             <span class="bg-green-100 text-green-700 text-[9px] px-2 py-1 rounded font-bold uppercase">Audit Ready</span>
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-yellow-600 p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-black text-[11px] uppercase ksg-text-maroon tracking-widest">Interactive Lecturer Appraisal Form</h3>
+                        <span class="text-[9px] text-slate-400 italic font-bold">REPLACES WHATSAPP GOOGLE FORMS</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <select id="appraiseLecturer" class="w-full border-2 p-2 rounded font-bold text-sm bg-slate-50">
+                                <option value="Dan">Dan Alwende</option>
+                                <option value="Jerry">Jerry Okumu</option>
+                                <option value="Sherry">Sherry Bartuin</option>
+                                <option value="Susan">Susan Chesang</option>
+                            </select>
+                            <div class="flex items-center gap-4">
+                                <label class="text-[10px] font-bold uppercase text-slate-500">Rate Delivery (1-5):</label>
+                                <input id="appraiseScore" type="number" min="1" max="5" value="5" class="w-16 border-2 rounded p-2 text-center font-black ksg-text-maroon">
+                            </div>
+                            <button onclick="submitAppraisal()" class="w-full bg-yellow-600 text-white font-black py-3 rounded text-xs uppercase shadow hover:bg-yellow-700">Submit Session Rating</button>
                         </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border flex flex-col justify-center items-center">
+                            <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Live Faculty Standing</p>
+                            <div id="ui-facultyRatings" class="w-full space-y-2">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded shadow border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-xs font-bold ksg-text-maroon">
+                        <span class="uppercase tracking-widest">Digitized CSE Work Plan Ledger</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[9px]">LIVE AUDIT MODE</span>
                     </div>
                     <table class="w-full text-left text-xs">
                         <thead class="bg-slate-100 text-[9px] uppercase text-slate-400 font-bold border-b">
                             <tr>
                                 <th class="p-4">Owner</th>
-                                <th class="p-4">AWP KRA / Activity</th>
+                                <th class="p-4">KRA Activity</th>
                                 <th class="p-4 text-center">Achieve %</th>
                                 <th class="p-4">AI Variance Insight</th>
                             </tr>
@@ -111,93 +135,108 @@
                             </tbody>
                     </table>
                 </div>
-
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-black text-[10px] uppercase mb-4 ksg-text-maroon border-b pb-2">Lecturer Appraisal Leaderboard</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="ratingsGrid">
-                        </div>
-                </div>
             </div>
         </div>
     </main>
 
     <script>
-        // PERSISTENCE & MAPPING
-        let ksgData = JSON.parse(localStorage.getItem('ksg_sovereign_final')) || {
-            Sherry: { kra1: 0, rating: 4.8 },
-            Dan: { kra2: 0, rating: 4.9 },
-            Jerry: { kra3: 0, rating: 4.7 },
-            Susan: { revenue: 0, rating: 5.0 },
-            learners: []
+        // SOVEREIGN DATA STORAGE
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final_v4')) || {
+            learners: [],
+            ratings: { Dan: 5.0, Jerry: 5.0, Sherry: 5.0, Susan: 5.0, counts: { Dan: 1, Jerry: 1, Sherry: 1, Susan: 1 } },
+            revenue: 0,
+            kra2: 0,
+            kra3: 0
         };
 
-        const targets = { kra1: 10, kra2: 3, kra3: 1, revenue: 50000000 };
         const rates = { "Senior Managers": 127000, "Frontline": 127000, "Executives": 87000, "Assessors": 255000, "Technical": 296000 };
+        const targets = { kra1: 10, kra2: 3, kra3: 1, revenue: 50000000 };
 
-        function learnerRegister() {
+        function registerLearner() {
             const name = document.getElementById('regName').value;
             const station = document.getElementById('regStation').value;
             const phone = document.getElementById('regPhone').value;
             const email = document.getElementById('regEmail').value;
             const course = document.getElementById('regCourse').value;
 
-            if(!name || !station || !phone || !email) return alert("Please fill all learner details.");
+            if(!name || !station) return alert("Fill Name and Work Station.");
 
-            ksgData.learners.unshift({ name, station, phone, email, course, date: new Date().toLocaleDateString() });
-            ksgData.Susan.revenue += rates[course];
-            ksgData.Sherry.kra1 = Number((ksgData.learners.length * 0.1).toFixed(1));
-
+            state.learners.unshift({ 
+                id: Date.now(), name, station, phone, email, course, 
+                attendance: ["Present"] // Day 1 Auto
+            });
+            state.revenue += rates[course];
+            
             saveAndRender();
-            // Clear form
             ['regName','regStation','regPhone','regEmail'].forEach(id => document.getElementById(id).value = '');
         }
 
+        function toggleAttendance(id, dayIndex) {
+            // Interactive PA Portal Logic
+            const l = state.learners.find(x => x.id === id);
+            l.attendance[dayIndex] = l.attendance[dayIndex] === "Present" ? "Absent" : "Present";
+            saveAndRender();
+        }
+
+        function submitAppraisal() {
+            const lecturer = document.getElementById('appraiseLecturer').value;
+            const score = parseFloat(document.getElementById('appraiseScore').value);
+            
+            state.ratings[lecturer] = ((state.ratings[lecturer] * state.ratings.counts[lecturer]) + score) / (state.ratings.counts[lecturer] + 1);
+            state.ratings.counts[lecturer]++;
+            
+            saveAndRender();
+            alert("Feedback submitted for " + lecturer);
+        }
+
         function saveAndRender() {
-            localStorage.setItem('ksg_sovereign_final', JSON.stringify(ksgData));
+            localStorage.setItem('ksg_sovereign_final_v4', JSON.stringify(state));
             render();
         }
 
-        function resetSystem() { localStorage.removeItem('ksg_sovereign_final'); location.reload(); }
+        function resetSystem() { localStorage.removeItem('ksg_sovereign_final_v4'); location.reload(); }
 
         function render() {
             // Stats
-            document.getElementById('ui-kra1').innerText = ksgData.Sherry.kra1 + ' / 10';
-            document.getElementById('bar-kra1').style.width = (ksgData.Sherry.kra1/10)*100 + '%';
-            document.getElementById('ui-kra2').innerText = ksgData.Dan.kra2 + ' / 3';
-            document.getElementById('bar-kra2').style.width = (ksgData.Dan.kra2/3)*100 + '%';
-            document.getElementById('ui-kra3').innerText = ksgData.Jerry.kra3 + ' / 1';
-            document.getElementById('bar-kra3').style.width = (ksgData.Jerry.kra3/1)*100 + '%';
-            document.getElementById('ui-rev').innerText = (ksgData.Susan.revenue/1000000).toFixed(2) + 'M / 50M';
-            document.getElementById('bar-rev').style.width = (ksgData.Susan.revenue/50000000)*100 + '%';
-            document.getElementById('activeCount').innerText = ksgData.learners.length + ' Active';
+            const kra1Count = Number((state.learners.length * 0.1).toFixed(1));
+            document.getElementById('ui-kra1').innerText = kra1Count + ' / 10';
+            document.getElementById('bar-kra1').style.width = (kra1Count/10)*100 + '%';
+            document.getElementById('ui-kra2').innerText = state.kra2 + ' / 3';
+            document.getElementById('bar-kra2').style.width = (state.kra2/3)*100 + '%';
+            document.getElementById('ui-kra3').innerText = state.kra3 + ' / 1';
+            document.getElementById('bar-kra3').style.width = (state.kra3/1)*100 + '%';
+            document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
+            document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
+            document.getElementById('ui-activeCount').innerText = state.learners.length + ' Active';
 
-            // Roster
-            document.getElementById('paRoster').innerHTML = ksgData.learners.map(l => `
-                <div class="bg-slate-900 p-2 rounded mb-1 border border-slate-700 text-[9px]">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-white font-bold uppercase">${l.name}</span>
-                        <button class="bg-green-600 text-[7px] px-1 py-0.5 rounded text-white font-bold">PRESENT</button>
+            // PA Roster
+            document.getElementById('paRoster').innerHTML = state.learners.map(l => `
+                <div class="bg-slate-900 p-3 rounded mb-2 border border-slate-700 shadow-lg">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="text-[10px] text-white font-black uppercase">${l.name}</div>
+                        <div class="text-[8px] px-2 py-0.5 rounded font-bold ${l.attendance[0] === 'Present' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}">
+                            ${l.attendance[0]}
+                        </div>
                     </div>
-                    <div class="text-slate-500 grid grid-cols-2 gap-1 italic">
-                        <span>${l.station}</span>
-                        <span class="text-right">${l.phone}</span>
+                    <div class="flex justify-between items-center">
+                        <span class="text-[8px] text-slate-400 italic">${l.station}</span>
+                        <button onclick="toggleAttendance(${l.id}, 0)" class="text-[8px] text-yellow-500 font-bold border border-yellow-500 px-2 py-0.5 rounded">Toggle Roll Call</button>
                     </div>
                 </div>
-            `).join('') || '<p class="text-slate-500 text-[9px] italic text-center">No active learners.</p>';
+            `).join('');
+
+            // Faculty Ratings
+            document.getElementById('ui-facultyRatings').innerHTML = ['Dan','Jerry','Sherry','Susan'].map(name => `
+                <div class="flex justify-between border-b pb-1 text-[10px] font-bold">
+                    <span>${name}</span><span class="ksg-text-maroon">${state.ratings[name].toFixed(2)} / 5</span>
+                </div>
+            `).join('');
 
             // Ledger
             document.getElementById('ledgerRows').innerHTML = `
-                <tr><td class="p-4 font-bold uppercase">Sherry Bartuin</td><td class="p-4 italic">KRA 1: Training Delivery</td><td class="p-4 text-center font-bold">${((ksgData.Sherry.kra1/10)*100).toFixed(1)}%</td><td class="p-4 text-[9px] italic text-slate-500">Auto-Tracking Learner Data...</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Susan Chesang</td><td class="p-4 italic">KRA 4: Revenue (SO_6)</td><td class="p-4 text-center font-bold">${((ksgData.Susan.revenue/50000000)*100).toFixed(1)}%</td><td class="p-4 text-[9px] italic text-red-500 font-bold tracking-tighter">Variance Flagged: Execute Sec 5.1</td></tr>
+                <tr><td class="p-4 font-bold">Sherry Bartuin</td><td class="p-4 italic">KRA 1: Program Delivery</td><td class="p-4 text-center font-black">${((kra1Count/10)*100).toFixed(1)}%</td><td class="p-4 text-[9px] italic text-slate-500">Auto-Tracking Registrations...</td></tr>
+                <tr><td class="p-4 font-bold">Susan Chesang</td><td class="p-4 italic">KRA 4: Revenue Growth</td><td class="p-4 text-center font-black">${((state.revenue/50000000)*100).toFixed(1)}%</td><td class="p-4 text-[9px] font-bold text-red-600 italic border-l-2 border-red-500 bg-red-50">Variance Detected: Action SO_6 Required</td></tr>
             `;
-
-            // Ratings
-            document.getElementById('ratingsGrid').innerHTML = ['Sherry', 'Dan', 'Jerry', 'Susan'].map(s => `
-                <div class="text-center bg-slate-50 p-2 rounded">
-                    <p class="text-[8px] font-bold text-slate-400 uppercase">${s}</p>
-                    <h4 class="text-lg font-black ksg-text-maroon">${ksgData[s].rating.toFixed(1)}</h4>
-                </div>
-            `).join('');
         }
         render();
     </script>
