@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Facilitator & Payment Portal</title>
+    <title>KSG SPE | Unified Sovereign Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .ksg-maroon { background-color: #800000; }
-        .ksg-text-maroon { color: #800000; }
-        .ksg-border-maroon { border-color: #800000; }
-        .gold-accent { border-color: #D4AF37; }
+        :root { --ksg-maroon: #800000; --ksg-gold: #D4AF37; }
+        .bg-ksg-maroon { background-color: var(--ksg-maroon); }
+        .text-ksg-maroon { color: var(--ksg-maroon); }
+        .border-ksg-maroon { border-color: var(--ksg-maroon); }
+        .border-ksg-gold { border-color: var(--ksg-gold); }
+        .btn-primary { background-color: var(--ksg-maroon); color: white; font-weight: 800; text-transform: uppercase; }
+        .btn-primary:hover { background-color: #600000; }
+        .transition-all { transition: all 0.4s ease-in-out; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-20">
 
-    <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
+    <nav class="bg-ksg-maroon text-white p-4 shadow-2xl border-b-4 border-ksg-gold sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm shadow-md"><span class="text-ksg-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
                     <h1 class="text-lg font-bold uppercase tracking-tight leading-none">Kenya School of Government</h1>
-                    <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">PA Portal: Facilitator & Finance</p>
+                <p class="text-xs font-bold uppercase">Susan Chesang | Dan Alwende</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
@@ -32,166 +36,153 @@
 
     <main class="container mx-auto py-6 px-4">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
-            <div class="lg:col-span-4">
-                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
-                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">
-                        Digital Facilitator Log-In
-                    </div>
-                    <form class="p-5 space-y-3" id="facLogForm">
-                        <label class="text-[10px] font-bold uppercase text-slate-500">Scheduled Facilitator (From Timetable)</label>
-                        <select id="facSelect" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold border-slate-300">
-                            <option value="">-- Choose Facilitator --</option>
-                            <option>Susan Chesang</option>
-                            <option>Rachel Ngesa, PhD</option>
-                            <option>Dan Alwende</option>
-                            <option>Sherry Bartuin</option>
-                            <option>Jerry Okumu</option>
-                            <option>Guest Facilitator (Adjunct)</option>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Competency (Sherry)</p>
+                <h3 id="ui-kra1" class="text-xl font-black text-ksg-maroon">0 / 10</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy (Dan)</p>
+                <h3 id="ui-kra2" class="text-xl font-black text-ksg-maroon">0 / 3</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Research (Jerry)</p>
+                <h3 id="ui-kra3" class="text-xl font-black text-ksg-maroon">0 / 1</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-gold">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Sustainability (Susan)</p>
+                <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0.00M / 50M</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all" style="width: 0%"></div></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-xl shadow-lg border-2 border-ksg-maroon overflow-hidden">
+                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Gateway (Day 1 Entry)</div>
+                    <form class="p-5 space-y-3" id="enrollForm">
+                        <select id="regCourse" class="w-full border p-2 text-[10px] rounded font-bold bg-slate-50 border-slate-300">
+                            <option value="Frontline">Frontline Officers (5 Days)</option>
+                            <option value="Senior">Senior Managers (5 Days)</option>
+                            <option value="Technical">Technical Officers (4 Weeks)</option>
                         </select>
-                        
-                        <label class="text-[10px] font-bold uppercase text-slate-500">Current Program / Session</label>
-                        <input id="facProg" type="text" placeholder="e.g. CSE for Technical Officers" class="w-full border p-2 text-xs rounded border-slate-300">
-                        <select id="facSess" class="w-full border p-2 text-xs rounded border-slate-300">
-                            <option>Morning (08:30am - 10:30am)</option>
-                            <option>Mid-Morning (11:00am - 01:00pm)</option>
-                            <option>Afternoon (02:00pm - 04:00pm)</option>
-                        </select>
-                        
-                        <button type="button" onclick="logSession()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg transition">Check-In Facilitator</button>
+                        <input id="regName" type="text" placeholder="FULL NAME (CAPITALS)" class="w-full border p-2 text-xs rounded uppercase">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded">
+                            <input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select>
+                            <select id="regPWD" class="border p-2 text-[10px] rounded"><option value="No">No PWD</option><option value="Yes">Yes PWD</option></select>
+                        </div>
+                        <button type="button" onclick="enroll()" class="w-full btn-primary py-3 rounded text-xs shadow-lg transition">Confirm & Enroll</button>
                     </form>
+                </div>
+
+                <div class="bg-white rounded shadow border-t-4 border-ksg-gold p-4">
+                    <h3 class="font-black text-[10px] uppercase text-ksg-maroon border-b pb-2 mb-3">Live Program Schedule</h3>
+                    <div id="timetableUI" class="space-y-2 text-[10px] font-bold">
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>08:30 - 10:30</span><span class="text-right">Transformation Agenda</span></div>
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>11:00 - 13:00</span><span class="text-right">Knowledge Management</span></div>
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>14:00 - 16:00</span><span class="text-right">Service Excellence Trends</span></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-8">
-                <div class="bg-white rounded shadow-xl border overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
-                        <span>Consolidated Guest Facilitator Payment Ledger (August & September 2025)</span>
-                        <div class="flex gap-2">
-                            <button onclick="generatePaymentMemo()" class="bg-yellow-600 text-white px-3 py-1 rounded text-[8px] font-bold uppercase">Generate DG Memo</button>
-                        </div>
+            <div class="lg:col-span-8 space-y-6">
+                <div class="bg-white rounded shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black text-ksg-maroon uppercase">
+                        <span>Interactive Class Attendance Register (100% Roll Call)</span>
+                        <span id="windowStatus" class="font-bold text-green-600">WiFi: SECURE</span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-[10px] border-collapse">
                             <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
                                 <tr>
-                                    <th class="p-3 border">Name</th>
-                                    <th class="p-3 border">Session/Date</th>
-                                    <th class="p-3 border text-center">Hrs</th>
-                                    <th class="p-3 border text-center">Amount</th>
-                                    <th class="p-3 border text-center">Tax (10%)</th>
-                                    <th class="p-3 border text-center">Total</th>
-                                    <th class="p-3 border text-center">Status</th>
+                                    <th class="p-3 border">Name</th><th class="p-3 border">Org</th>
+                                    <th class="p-3 border text-center">M1</th><th class="p-3 border text-center">T2</th>
+                                    <th class="p-3 border text-center">W3</th><th class="p-3 border text-center">T4</th>
+                                    <th class="p-3 border text-center">F5</th><th class="p-3 border text-center">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="paymentRows" class="divide-y font-medium text-slate-700">
-                                </tbody>
-                            <tfoot class="bg-slate-50 font-black uppercase text-slate-900 border-t-2">
-                                <tr>
-                                    <td colspan="5" class="p-3 text-right">Grand Total:</td>
-                                    <td id="grandTotal" class="p-3 text-center">Ksh 0.00</td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
+                            <tbody id="regRows" class="divide-y font-medium text-slate-700"></tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div id="memoContainer" class="hidden bg-white p-12 shadow-2xl border-2 border-slate-300 max-w-3xl mx-auto font-serif text-sm">
-            <div class="text-center border-b-2 border-slate-900 pb-4 mb-6">
-                <h2 class="font-bold text-lg uppercase">Kenya School of Government</h2>
-                <h3 class="font-black text-sm uppercase">Internal Memo</h3>
-            </div>
-            <div class="space-y-1 mb-6">
-                <p><strong>TO:</strong> Director General [cite: 17]</p>
-                <p><strong>FROM:</strong> Head of Centre for Customer Service Excellence [cite: 18]</p>
-                <p><strong>DATE:</strong> <span id="currentDate"></span></p>
-                <p><strong>SUBJECT: REQUEST FOR FACILITATION OF TRANSPORT AND DSA</strong> [cite: 21]</p>
-            </div>
-            <div class="mb-6 leading-relaxed">
-                <p>This is to notify you that the Centre for Customer Service Excellence conducted training sessions for the CSE Program[cite: 23].</p>
-                <p class="mt-4">The purpose of this memo is to request your office to facilitate payments as per the audited session logs attached[cite: 25].</p>
-            </div>
-            <div class="mt-12 pt-6 border-t border-slate-300">
-                <p class="font-bold">Susan Chesang [cite: 76]</p>
-                <p>Head of Centre, Customer Service Excellence [cite: 77]</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 text-white rounded shadow-lg p-5">
+                        <h3 class="font-black text-[10px] uppercase border-b border-slate-700 pb-2 mb-4">Facilitator Payment Ledger</h3>
+                        <div id="payLedger" class="space-y-2 max-h-40 overflow-y-auto"></div>
+                        <div class="mt-4 pt-4 border-t border-slate-700 flex justify-between font-black text-xs text-[#D4AF37]">
+                            <span>TOTAL PAYABLE (SEPT):</span><span id="ui-grandTotal">Ksh 0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded shadow border-t-4 border-ksg-gold p-5">
+                        <h3 class="font-black text-[10px] uppercase text-ksg-maroon border-b pb-2 mb-4">Service Charter Compliance</h3>
+                        <div class="space-y-3 text-[10px]">
+                            <div class="flex justify-between font-bold"><span>Program Delivery</span><span class="text-green-600">92%</span></div>
+                            <div class="flex justify-between font-bold"><span>Cert Dispatch</span><span class="text-green-600">100%</span></div>
+                            <div class="flex justify-between font-bold"><span>Facilitator Pay</span><span class="text-red-600">Pending</span></div>
+                            <button onclick="resetSystem()" class="w-full mt-4 border border-slate-200 py-1 rounded text-[8px] uppercase font-bold text-slate-400">System Reset</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <script>
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_pay_v1')) || {
-            logs: []
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_vAudit')) || {
+            learners: [], logs: [], revenue: 0, Sherry: 0, Dan: 0, Jerry: 0
         };
 
-        const HOURLY_RATE = 3000;
-        const TAX_RATE = 0.10;
-
-        function logSession() {
-            const name = document.getElementById('facSelect').value;
-            const prog = document.getElementById('facProg').value;
-            const sess = document.getElementById('facSess').value;
-            
-            if(!name || !prog) return alert("Select Facilitator and Program.");
-
-            const hours = 2; // Fixed per session block in timetable
-            const amount = hours * HOURLY_RATE;
-            const tax = amount * TAX_RATE;
-            const total = amount - tax;
-
-            state.logs.unshift({
-                id: Date.now(),
-                name,
-                session: `${prog} (${sess})`,
-                date: new Date().toLocaleDateString(),
-                hours,
-                amount,
-                tax,
-                total,
-                status: "AUDITED"
+        function enroll() {
+            const name = document.getElementById('regName').value;
+            const course = document.getElementById('regCourse').value;
+            if(!name) return alert("Required: Full Name");
+            state.learners.unshift({ 
+                id: Date.now(), name, org: document.getElementById('regOrg').value,
+                attendance: [true, false, false, false, false], status: "Active" 
             });
-            
+            state.revenue += course === "Technical" ? 296000 : 127000;
+            state.Sherry = Number((state.learners.length * 0.1).toFixed(1));
             saveAndRender();
-            document.getElementById('facLogForm').reset();
+            document.getElementById('enrollForm').reset();
         }
 
         function saveAndRender() {
-            localStorage.setItem('ksg_sovereign_pay_v1', JSON.stringify(state));
+            localStorage.setItem('ksg_sovereign_vAudit', JSON.stringify(state));
             render();
         }
 
+        function resetSystem() { localStorage.removeItem('ksg_sovereign_vAudit'); location.reload(); }
+
         function render() {
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
-            document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-            
-            const rows = document.getElementById('paymentRows');
-            let grandTotal = 0;
+            document.getElementById('ui-kra1').innerText = state.Sherry + ' / 10';
+            document.getElementById('bar-kra1').style.width = (state.Sherry/10)*100 + '%';
+            document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
+            document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
 
-            rows.innerHTML = state.logs.map(l => {
-                grandTotal += l.total;
-                return `
-                    <tr>
-                        <td class="p-3 border font-black uppercase">${l.name}</td>
-                        <td class="p-3 border">${l.session} <br><span class="text-slate-400 text-[8px]">${l.date}</span></td>
-                        <td class="p-3 border text-center">${l.hours}</td>
-                        <td class="p-3 border text-center">${l.amount.toLocaleString()}</td>
-                        <td class="p-3 border text-center">${l.tax.toLocaleString()}</td>
-                        <td class="p-3 border text-center font-bold text-green-700">${l.total.toLocaleString()}</td>
-                        <td class="p-3 border text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded">${l.status}</span></td>
-                    </tr>
-                `;
-            }).join('') || '<tr><td colspan="7" class="p-10 text-center italic text-slate-400">No facilitation logs found. Check-in required.</td></tr>';
-            
-            document.getElementById('grandTotal').innerText = "Ksh " + grandTotal.toLocaleString();
+            document.getElementById('regRows').innerHTML = state.learners.map(l => `
+                <tr>
+                    <td class="p-3 border font-black uppercase">${l.name}</td>
+                    <td class="p-3 border text-slate-500">${l.org}</td>
+                    <td class="p-3 border text-center bg-green-50 text-green-700 font-bold">P</td>
+                    <td class="p-3 border text-center text-slate-300">A</td>
+                    <td class="p-3 border text-center text-slate-300">A</td>
+                    <td class="p-3 border text-center text-slate-300">A</td>
+                    <td class="p-3 border text-center text-slate-300">A</td>
+                    <td class="p-3 border text-center"><button class="bg-ksg-maroon text-white px-2 py-0.5 rounded text-[8px] font-bold">VERIFY</button></td>
+                </tr>
+            `).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400">Waiting for Day 1 enrollments...</td></tr>';
         }
-
-        function generatePaymentMemo() {
-            document.getElementById('memoContainer').classList.remove('hidden');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-
         render();
     </script>
 </body>
