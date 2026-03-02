@@ -79,19 +79,19 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-[10px] font-bold">DAY:</span>
+                    <span class="text-[10px] font-bold text-yellow-500">SCHEDULER AUDIT MODE</span>
                     <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none"></select>
                     <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold">DOWNLOAD PDF</button>
                 </div>
             </div>
             <div class="hidden print:block p-8 text-center border-b-2 border-slate-900">
                 <h1 class="text-2xl font-bold uppercase text-ksg-maroon">Kenya School of Government</h1>
-                <h2 class="text-sm font-bold uppercase">Digital Program Schedule</h2>
+                <h2 class="text-sm font-bold uppercase">Center for Customer Service Excellence</h2>
                 <h3 id="printTitle" class="mt-4 text-lg font-black underline italic"></h3>
             </div>
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 border">Time</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Selection</th><th class="p-4 border text-center no-print">Status</th></tr>
+                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Scheduler Approval</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
@@ -163,7 +163,7 @@
             { kra: "SO 6", activity: "Mobilize 50,000,000 Revenue", owner: "Susan Chesang", target: 50000000, key: "rev", type: "money" }
         ];
 
-        let state = JSON.parse(localStorage.getItem('ksg_vMaster_Final_V9')) || { 
+        let state = JSON.parse(localStorage.getItem('ksg_vMaster_Final_V10')) || { 
             learners: [], kra1:0, kra2:0, kra3:0, rev:0, satisfaction:0, 
             approvals: {}, facilitatorAssignments: {}
         };
@@ -195,7 +195,7 @@
                         </select>
                     </td>
                     <td class="p-4 border text-center no-print">
-                        <button onclick="toggleApp('${sID}')" class="text-[8px] font-bold uppercase px-2 py-1 rounded ${isApp ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">
+                        <button onclick="toggleApp('${sID}', '${b}')" class="text-[8px] font-bold uppercase px-2 py-1 rounded ${isApp ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">
                             ${isApp ? 'APPROVED':'PENDING'}
                         </button>
                     </td>
@@ -208,7 +208,30 @@
             save();
         }
 
-        function toggleApp(id) { state.approvals[id] = !state.approvals[id]; save(); }
+        function toggleApp(id, timeBlock) {
+            const facilitator = state.facilitatorAssignments[id];
+            
+            // GATE 1: Check if facilitator is selected
+            if (!facilitator || facilitator === "") {
+                return alert("GOVERNANCE LOCK: You cannot approve a session without selecting a facilitator.");
+            }
+
+            // GATE 2: Conflict Check (Only if trying to approve)
+            if (!state.approvals[id]) {
+                const conflict = Object.keys(state.approvals).find(key => {
+                    return state.approvals[key] === true && 
+                           state.facilitatorAssignments[key] === facilitator && 
+                           key.endsWith(id.split('-').pop()); // Match the time block index (i)
+                });
+
+                if (conflict) {
+                    return alert(`CONFLICT DETECTED: ${facilitator} is already approved for another course during the ${timeBlock} session.`);
+                }
+            }
+
+            state.approvals[id] = !state.approvals[id];
+            save();
+        }
 
         function renderAWP() {
             document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => {
@@ -240,8 +263,8 @@
         }
 
         function logWork(k, v) { state[k] += v; save(); }
-        function save() { localStorage.setItem('ksg_vMaster_Final_V9', JSON.stringify(state)); render(); }
-        function resetSystem() { localStorage.removeItem('ksg_vMaster_Final_V9'); location.reload(); }
+        function save() { localStorage.setItem('ksg_vMaster_Final_V10', JSON.stringify(state)); render(); }
+        function resetSystem() { localStorage.removeItem('ksg_vMaster_Final_V10'); location.reload(); }
 
         function render() {
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
