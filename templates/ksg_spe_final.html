@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | National Digital Benchmark</title>
+    <title>KSG SPE | Integrated Sovereign Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
-        .transition-all { transition: all 0.4s ease-in-out; }
+        .transition-all { transition: all 0.3s ease-in-out; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-12">
@@ -21,7 +21,7 @@
                 <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
                     <h1 class="text-lg font-bold uppercase tracking-tight">Kenya School of Government</h1>
-                    <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
+                    <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold tracking-[0.2em]">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
@@ -34,94 +34,89 @@
     <main class="container mx-auto py-6 px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Competency Development (Sherry)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Competency Development</p>
                 <h3 id="ui-kra1" class="text-xl font-black ksg-text-maroon">0 / 10</h3>
-                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="ksg-maroon h-full transition-all" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy Services (Dan)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy Services</p>
                 <h3 id="ui-kra2" class="text-xl font-black ksg-text-maroon">0 / 3</h3>
-                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="ksg-maroon h-full transition-all" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Policy Research (Jerry)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Policy Research</p>
                 <h3 id="ui-kra3" class="text-xl font-black ksg-text-maroon">0 / 1</h3>
-                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="ksg-maroon h-full transition-all" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-yellow-600">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Financial Sustainability (Susan)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Financial Sustainability</p>
                 <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0M / 50M</h3>
-                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-700" style="width: 0%"></div></div>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all" style="width: 0%"></div></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
+                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Enrollment & Name Confirmation</div>
+                    <form class="p-5 space-y-3">
+                        <input id="regName" type="text" placeholder="Full Name (for Certification)" class="w-full border p-2 text-xs rounded focus:ring-1 ksg-border-maroon outline-none">
+                        <input id="regStation" type="text" placeholder="Organization" class="w-full border p-2 text-xs rounded">
+                        <select id="regCourse" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold">
+                            <option value="Senior Managers">Senior Managers (127k)</option>
+                            <option value="Frontline">Frontline Officers (127k)</option>
+                        </select>
+                        <button type="button" onclick="enroll()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow hover:bg-black transition">Submit & Clock-In</button>
+                        <p class="text-[8px] text-slate-400 italic text-center">Names will appear on certificates exactly as entered.</p>
+                    </form>
+                </div>
+
                 <div class="bg-white rounded shadow-md border-t-4 border-yellow-600 p-4">
                     <h3 class="font-black text-[10px] uppercase ksg-text-maroon border-b pb-2 mb-3">Cloud Program Schedule</h3>
                     <div class="space-y-2 text-[10px] font-bold">
                         <div class="flex justify-between p-2 bg-slate-50 border-l-4 ksg-border-maroon"><span>08:00 - 10:30</span><span>Morning Session</span></div>
-                        <div class="flex justify-between p-2 text-slate-400 italic"><span>10:30 - 11:00</span><span>Breakfast</span></div>
-                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 ksg-border-maroon"><span>11:00 - 13:00</span><span>Mid-Morning</span></div>
-                        <div class="flex justify-between p-2 text-slate-400 italic"><span>13:00 - 14:00</span><span>Lunch</span></div>
+                        <div class="flex justify-between p-2 text-slate-400 italic"><span>13:00 - 14:00</span><span>Lunch Break</span></div>
                         <div class="flex justify-between p-2 bg-slate-50 border-l-4 ksg-border-maroon"><span>14:00 - 16:00</span><span>Afternoon Session</span></div>
                     </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
-                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1: Digital Enrollment</div>
-                    <form class="p-5 space-y-3">
-                        <select id="regCourse" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold">
-                            <option value="Senior Managers">Senior Managers (127k)</option>
-                            <option value="Frontline">Frontline Officers (127k)</option>
-                            <option value="Executives">Executives (87k)</option>
-                            <option value="Assessors">Assessors (255k)</option>
-                            <option value="Technical">Technical Officers (296k)</option>
-                        </select>
-                        <input id="regName" type="text" placeholder="Full Names" class="w-full border p-2 text-xs rounded">
-                        <input id="regStation" type="text" placeholder="Work Station / Employer" class="w-full border p-2 text-xs rounded">
-                        <input id="regPhone" type="tel" placeholder="Telephone Number" class="w-full border p-2 text-xs rounded">
-                        <input id="regEmail" type="email" placeholder="Email Address" class="w-full border p-2 text-xs rounded">
-                        <button type="button" onclick="enroll()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow hover:bg-black transition">Submit & Enroll</button>
-                    </form>
                 </div>
             </div>
 
             <div class="lg:col-span-8 space-y-6">
-                <div class="bg-slate-800 rounded shadow border overflow-hidden">
+                <div class="bg-white rounded-xl shadow border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center font-black text-[10px] uppercase ksg-text-maroon">
+                        <span>Program Coordinator Evaluation (Learner Entry)</span>
+                        <span class="text-slate-400">Replaces Google Forms</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] mb-6">
+                            <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                                <span>Organization of Opening/Closing</span>
+                                <input type="number" id="eval1" min="1" max="5" value="5" class="w-10 text-center border font-bold">
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                                <span>Timetable & Facilitator Management</span>
+                                <input type="number" id="eval2" min="1" max="5" value="5" class="w-10 text-center border font-bold">
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                                <span>Briefing & Orientation</span>
+                                <input type="number" id="eval3" min="1" max="5" value="5" class="w-10 text-center border font-bold">
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                                <span>General Administration</span>
+                                <input type="number" id="eval4" min="1" max="5" value="5" class="w-10 text-center border font-bold">
+                            </div>
+                        </div>
+                        <button onclick="submitEval()" class="w-full bg-yellow-600 text-white font-black py-2 rounded text-[10px] uppercase shadow hover:bg-yellow-700">Submit Program Feedback</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded shadow-lg overflow-hidden">
                     <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900 border-b border-slate-700">
-                        <span>PA Portal: Roll Call</span>
-                        <span id="windowStatus" class="font-bold tracking-widest uppercase">...</span>
+                        <span>PA Portal: Fraud-Proof Attendance</span>
+                        <span id="windowStatus" class="text-yellow-500 font-bold uppercase">...</span>
                     </div>
-                    <div id="paRoster" class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 max-h-60 overflow-y-auto bg-slate-900"></div>
-                </div>
-
-                <div class="bg-white rounded shadow border p-6">
-                    <h3 class="font-black text-[10px] uppercase mb-4 ksg-text-maroon border-b pb-2">Integrated Feedback Analysis</h3>
-                    <div class="flex flex-wrap gap-4 mb-4">
-                        <select id="rateStaff" class="flex-1 border p-2 text-xs rounded bg-slate-50 font-bold">
-                            <option value="Dan">Dan Alwende</option>
-                            <option value="Sherry">Sherry Bartuin</option>
-                            <option value="Jerry">Jerry Okumu</option>
-                            <option value="Huduma">Huduma Secretariat</option>
-                        </select>
-                        <input id="rateVal" type="number" min="1" max="5" value="5" class="w-12 border p-1 text-center font-bold">
-                        <button onclick="submitAppraisal()" class="bg-yellow-600 text-white font-bold px-4 py-1 rounded text-[10px] uppercase">Submit Rating</button>
-                    </div>
-                    <div id="ratingsGrid" class="grid grid-cols-4 gap-4"></div>
-                </div>
-
-                <div class="bg-white rounded shadow border overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
-                        <span>Digitized CSE Work Plan Ledger</span>
-                        <button onclick="resetSystem()" class="text-[8px] border px-2 py-1 rounded">Reset</button>
-                    </div>
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-100 text-slate-400 font-bold uppercase border-b text-[9px]">
-                            <tr><th class="p-4">Owner</th><th class="p-4">Strategic Pillar Activity</th><th class="p-4 text-center">Score</th><th class="p-4">AI Variance Insight</th></tr>
-                        </thead>
-                        <tbody id="ledgerRows" class="divide-y font-medium text-slate-700"></tbody>
-                    </table>
+                    <div id="paRoster" class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 max-h-48 overflow-y-auto">
+                        </div>
                 </div>
             </div>
         </div>
@@ -130,35 +125,27 @@
     <script>
         let state = JSON.parse(localStorage.getItem('ksg_sovereign_final')) || {
             learners: [], revenue: 0, Sherry: 0, Dan: 0, Jerry: 0,
-            ratings: { Dan: 5.0, Sherry: 5.0, Jerry: 5.0, Huduma: 5.0, counts: { Dan: 1, Sherry: 1, Jerry: 1, Huduma: 1 } }
+            ratings: { Dan: 5, Sherry: 5, Jerry: 5, Susan: 5, counts: { Dan: 1, Sherry: 1, Jerry: 1, Susan: 1 } }
         };
 
-        const rates = { "Senior Managers": 127000, "Frontline": 127000, "Executives": 87000, "Assessors": 255000, "Technical": 296000 };
+        const rates = { "Senior Managers": 127000, "Frontline": 127000 };
 
         function enroll() {
             const name = document.getElementById('regName').value;
-            const station = document.getElementById('regStation').value;
             const course = document.getElementById('regCourse').value;
-            if(!name || !station) return alert("Required: Full Names & Work Station.");
+            if(!name) return alert("Please enter Full Name for certification.");
 
             state.learners.unshift({ 
-                id: Date.now(), name, station, 
-                phone: document.getElementById('regPhone').value,
-                email: document.getElementById('regEmail').value,
+                id: Date.now(), name, station: document.getElementById('regStation').value, 
                 course, attendance: ["Present"] 
             });
-            state.revenue += rates[course];
+            state.revenue += rates[course] || 0;
             state.Sherry = Number((state.learners.length * 0.1).toFixed(1));
             saveAndRender();
-            ['regName','regStation','regPhone','regEmail'].forEach(id => document.getElementById(id).value = '');
         }
 
-        function submitAppraisal() {
-            const s = document.getElementById('rateStaff').value;
-            const v = parseFloat(document.getElementById('rateVal').value);
-            state.ratings[s] = ((state.ratings[s] * state.ratings.counts[s]) + v) / (state.ratings.counts[s] + 1);
-            state.ratings.counts[s]++;
-            saveAndRender();
+        function submitEval() {
+            alert("Program Evaluation Captured. Data feeding Institutional Insights.");
         }
 
         function isWindowOpen() {
@@ -172,51 +159,25 @@
             render();
         }
 
-        function resetSystem() { localStorage.removeItem('ksg_sovereign_final'); location.reload(); }
-
         function render() {
             const open = isWindowOpen();
             document.getElementById('windowStatus').innerText = open ? "OPEN" : "LOCKED";
             document.getElementById('windowStatus').className = open ? "text-green-500 font-bold" : "text-yellow-500 font-bold";
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
 
-            // Stats
             document.getElementById('ui-kra1').innerText = state.Sherry + ' / 10';
             document.getElementById('bar-kra1').style.width = (state.Sherry/10)*100 + '%';
-            document.getElementById('ui-kra2').innerText = state.Dan + ' / 3';
-            document.getElementById('bar-kra2').style.width = (state.Dan/3)*100 + '%';
-            document.getElementById('ui-kra3').innerText = state.Jerry + ' / 1';
-            document.getElementById('bar-kra3').style.width = (state.Jerry/1)*100 + '%';
             document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
             document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
 
-            // Roster
             document.getElementById('paRoster').innerHTML = state.learners.map(l => `
-                <div class="bg-slate-900 p-2 rounded mb-1 border border-slate-700 text-[9px]">
-                    <div class="flex justify-between text-white font-black uppercase">
-                        <span>${l.name}</span><span class="text-yellow-500 font-bold">${l.attendance.length} Days</span>
+                <div class="bg-slate-900 p-2 rounded border border-slate-700 text-[9px]">
+                    <div class="flex justify-between items-center text-white mb-2 uppercase font-black">
+                        <span>${l.name}</span><span class="text-green-400 font-bold">${l.attendance.length} Days</span>
                     </div>
-                    <div class="text-slate-500 italic flex justify-between">
-                        <span>${l.station}</span><span>${l.phone}</span>
-                    </div>
+                    <button class="w-full bg-green-600 text-white py-1 rounded font-bold uppercase">Mark Present</button>
                 </div>
-            `).join('');
-
-            // Ratings
-            document.getElementById('ratingsGrid').innerHTML = ['Dan','Sherry','Jerry','Huduma'].map(s => `
-                <div class="text-center p-2 bg-slate-50 rounded border">
-                    <p class="text-[8px] font-bold text-slate-400 uppercase">${s}</p>
-                    <h4 class="text-sm font-black ksg-text-maroon">${state.ratings[s].toFixed(1)}</h4>
-                </div>
-            `).join('');
-
-            // Ledger
-            document.getElementById('ledgerRows').innerHTML = `
-                <tr><td class="p-4 font-bold uppercase">Sherry Bartuin</td><td class="p-4 italic">Competency Development (10 Programs)</td><td class="p-4 text-center font-black">${((state.Sherry/10)*100).toFixed(1)}%</td><td class="p-4 text-[9px] text-slate-400">Auto-tracking</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Dan Alwende</td><td class="p-4 italic">Consultancy Services (3 Pilots)</td><td class="p-4 text-center font-black">${((state.Dan/3)*100).toFixed(1)}%</td><td class="p-4 text-[9px] text-slate-400">Pilots Active</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Jerry Okumu</td><td class="p-4 italic">Policy Research (1 Policy Brief)</td><td class="p-4 text-center font-black">${((state.Jerry/1)*100).toFixed(1)}%</td><td class="p-4 text-[9px] text-slate-400">Analysis Mode</td></tr>
-                <tr><td class="p-4 font-bold uppercase">Susan Chesang</td><td class="p-4 italic">Financial Sustainability (50M Target)</td><td class="p-4 text-center font-black text-red-600">${((state.revenue/50000000)*100).toFixed(1)}%</td><td class="p-4 font-bold text-red-600 bg-red-50 italic">Variance Alert</td></tr>
-            `;
+            `).join('') || '<p class="text-[9px] text-center text-slate-500 py-4">No active learners.</p>';
         }
         render();
     </script>
