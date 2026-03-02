@@ -15,7 +15,13 @@
         .btn-ksg:hover { background-color: #600000; transform: translateY(-1px); }
         .active-session { border-left: 6px solid var(--ksg-maroon); background-color: #fff5f5; }
         .present-cell { background-color: #dcfce7; color: #166534; font-weight: 900; text-align: center; }
-        @media print { .no-print { display: none; } }
+        
+        @media print {
+            body * { visibility: hidden; }
+            #printableTimetable, #printableTimetable * { visibility: visible; }
+            #printableTimetable { position: absolute; left: 0; top: 0; width: 100%; border: none; }
+            .no-print { display: none !important; }
+        }
     </style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-900 pb-20">
@@ -31,7 +37,7 @@
             </div>
             <div class="text-right border-l pl-4 border-red-900">
                 <p class="text-xs font-bold uppercase">Susan Chesang (HOC) | Dan Alwende (PA)</p>
-                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
+                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase tracking-widest">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
@@ -61,7 +67,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-xl border overflow-hidden">
+        <div id="printableTimetable" class="bg-white rounded-xl shadow-xl border overflow-hidden">
             <div class="p-4 bg-ksg-maroon text-white flex flex-wrap justify-between items-center gap-4 no-print">
                 <div class="flex items-center gap-4">
                     <h2 class="text-xs font-bold uppercase tracking-widest">Master Digital Timetable</h2>
@@ -75,16 +81,30 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] font-bold">SELECT DAY:</span>
-                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none"></select>
-                    <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold">DOWNLOAD PDF</button>
+                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase outline-none"></select>
+                    <button onclick="downloadDocumentOnly()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold">DOWNLOAD PDF</button>
                 </div>
             </div>
+            
+            <div class="hidden print:block p-8 text-center border-b-2 border-slate-900">
+                <h1 class="text-2xl font-bold uppercase">Kenya School of Government</h1>
+                <h2 class="text-sm font-bold uppercase tracking-widest">Center for Customer Service Excellence</h2>
+                <h3 id="printTitle" class="mt-4 text-lg font-black underline"></h3>
+            </div>
+
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 w-32 border">Time</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator</th><th class="p-4 border text-center">Scheduler Status</th></tr>
+                    <tr><th class="p-4 w-32 border">Time</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator</th><th class="p-4 border text-center no-print">Scheduler Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
+            
+            <div class="hidden print:block p-8 text-[10px]">
+                <div class="grid grid-cols-2 gap-20 mt-10">
+                    <div class="border-t border-slate-400 pt-2">Prepared By: Program Assistant</div>
+                    <div class="border-t border-slate-400 pt-2">Approved By: School Scheduler</div>
+                </div>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 no-print">
@@ -103,72 +123,90 @@
         </div>
 
         <div class="bg-white rounded-xl shadow border overflow-hidden no-print">
-            <div class="p-4 bg-slate-800 text-white text-[10px] font-black uppercase">Institutional Work Plan Activities</div>
+            <div class="p-4 bg-slate-800 text-white flex justify-between items-center text-[10px] font-black uppercase">
+                <span>Annual Work Plan Activities (Interactive)</span>
+                <button onclick="resetSystem()" class="text-[8px] bg-red-700 px-2 py-1 rounded">Reset All</button>
+            </div>
             <table class="w-full text-left text-[10px] border-collapse">
                 <thead class="bg-slate-100 font-bold uppercase text-slate-500 border-b">
-                    <tr><th class="p-4">Officer</th><th class="p-4">Strategic Activity</th><th class="p-4">Indicator</th><th class="p-4 text-center">Log</th></tr>
+                    <tr><th class="p-4">Officer</th><th class="p-4">Strategic Activity</th><th class="p-4">Indicator</th><th class="p-4 text-center">Action</th></tr>
                 </thead>
-                <tbody id="awpBody" class="divide-y text-slate-700 font-medium"></tbody>
+                <tbody id="awpBody" class="divide-y text-slate-700"></tbody>
             </table>
         </div>
     </main>
 
     <script>
         const ttData = {
-            exec: { days: 3, units: [ ["Opening", "Gov Transformation", "Knowledge Mgt"], ["Trends", "Culture", "Purpose"], ["CSR", "Env Changes", "Closure"] ] },
-            senior: { days: 5, units: [ ["Essentials", "Regulatory", "National Dev"], ["Pillar 1", "Pillar 2", "Pillar 3"], ["Digital", "Re-eng", "Resource"], ["Audit", "Evaluation", "Wellness"], ["Study", "Cert", "Closing"] ] },
-            frontline: { days: 5, units: [ ["Professional", "Insights", "Life Skills"], ["Ethics", "Standards", "Problem Solving"], ["EI", "Comm", "Practicum"], ["Crisis", "KPIs", "Role Play"], ["Eval", "Review", "Closing"] ] },
-            assessor: { days: 10, units: [ ["Assessor Intro", "Audit Standards", "Ethics"], ["Regulatory", "Quality Framework", "Tools"], ["Mock Audit 1", "Evidence", "Reports"], ["Assessment Process", "Metrics", "Feedback"], ["Audit Review", "Gaps", "Action Plans"], ["Week 2: Advanced Audit", "Case Studies", "Simulations"], ["Institutional Audit", "Benchmarking", "Compliance"], ["Audit Closing", "Certification Prep", "Peer Review"], ["Final Assessment", "Presentation", "Verification"], ["Certification", "Closing", "Action Planning"] ] },
-            tech: { days: 20, units: [ ["Registration", "BETA Rationale", "Policy"], ["Strategy", "Resource Allocation", "Structures"], ["Internal Env", "External Env", "Improvement"], ["Indicators", "Wellness", "Work Dynamics"], ["Week 2: CX Foundations", "Channel Mgt", "Touchpoints"], ["Service Recovery", "Service Level Agreements", "SLA Tools"], ["Digital CX", "Automation", "Portal Mgt"], ["Compliance", "Audit", "Verification"], ["Week 3: Feedback Mgt", "Process", "Optimization"], ["Feedback Tools", "Analytics", "Optimization"], ["Field Study Intro", "Visit Checklist", "Field Data"], ["Field Study Execution", "Field Study", "Field Study"], ["Field Study Wrap", "Data Review", "Initial Findings"], ["Report Writing", "Compiling", "Drafting"], ["Peer Review", "Presentation", "Submission"], ["Week 4: Finalization", "Strategic Alignment", "PC Contract"], ["Impact Analysis", "Reporting", "DG Briefing"], ["Institutional Change", "Sustainability", "Next Steps"], ["Program Evaluation", "Action Planning", "Feedback"], ["Final Closing", "Certification", "Closing"] ] }
+            exec: { name: "Executive Leaders", days: 3, units: [ ["Opening & Briefing", "Gov Transformation", "Knowledge Mgt"], ["CSE Trends", "Sustaining Culture", "Purpose Gap"], ["Transforming Lives", "Business Env", "Closing"] ] },
+            senior: { name: "Senior Managers", days: 5, units: [ ["CSE Essentials", "Regulatory Framework", "National Dev"], ["Pillar 1", "Pillar 2", "Pillar 3"], ["Digitalization", "Process Re-eng", "Resource Mgt"], ["Quality Audit", "Evaluation", "Wellness"], ["Field Study", "Certification", "Closing"] ] },
+            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["EI", "Comm Strategy", "Practicum"], ["Crisis Mgt", "KPIs", "Role Play"], ["Evaluation", "Peer Review", "Closing"] ] },
+            assessor: { name: "Quality Assessors", days: 10, units: Array(10).fill(["Assessor Module", "Audit Framework", "Compliance Metrics"]) },
+            tech: { name: "Technical Officers", days: 20, units: Array(20).fill(["Technical Foundations", "BETA Rationale", "Process Maps"]) }
         };
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final_hardened')) || { 
-            learners: [], kra1:0, kra2:0, kra3:0, rev:0, currentProgram: 'exec', schedulerApproved: false 
+        let state = JSON.parse(localStorage.getItem('ksg_vMaster_Final')) || { 
+            learners: [], kra1:0, kra2:0, kra3:0, rev:0, 
+            approvals: {} // Decoupled approval storage
         };
 
         function initTimetable() {
-            state.currentProgram = document.getElementById('progSelect').value;
-            const days = ttData[state.currentProgram].days;
+            const progKey = document.getElementById('progSelect').value;
+            const days = ttData[progKey].days;
             const daySel = document.getElementById('daySelect');
             daySel.innerHTML = Array.from({length: days}, (_, i) => `<option value="${i}">Day ${i+1}</option>`).join('');
             renderTimetable();
         }
 
         function renderTimetable() {
+            const progKey = document.getElementById('progSelect').value;
             const dayIdx = document.getElementById('daySelect').value || 0;
-            const units = ttData[state.currentProgram].units[dayIdx] || ["Unit TBD", "Unit TBD", "Unit TBD"];
+            const units = ttData[progKey].units[dayIdx];
             const blocks = ["08:30 - 10:30", "11:00 - 13:00", "14:00 - 16:00"];
-            document.getElementById('timetableRows').innerHTML = blocks.map((b, i) => `
-                <tr class="hover:bg-slate-50 transition ${i===0 ? 'active-session':''}">
-                    <td class="p-4 border font-black text-ksg-maroon">${b}</td>
-                    <td class="p-4 border font-bold uppercase">${units[i]}</td>
-                    <td class="p-4 border">
-                        <select class="text-[9px] border p-1 rounded bg-white w-full"><option>Susan Chesang</option><option>Dan Alwende</option><option>Sherry Bartuin</option><option>Jerry Okumu</option></select>
-                    </td>
-                    <td class="p-4 border text-center">
-                        <button onclick="toggleApproval()" class="text-[8px] font-bold uppercase px-2 py-1 rounded ${state.schedulerApproved ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">
-                            ${state.schedulerApproved ? 'APPROVED' : 'PENDING'}
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
+            
+            document.getElementById('printTitle').innerText = `PROGRAM TIMETABLE: ${ttData[progKey].name} - DAY ${parseInt(dayIdx)+1}`;
+
+            document.getElementById('timetableRows').innerHTML = blocks.map((b, i) => {
+                const sessionID = `${progKey}-${dayIdx}-${i}`;
+                const isApproved = state.approvals[sessionID] || false;
+                return `
+                    <tr class="hover:bg-slate-50 transition ${i===0 ? 'active-session':''}">
+                        <td class="p-4 border font-black text-ksg-maroon">${b}</td>
+                        <td class="p-4 border font-bold uppercase">${units[i]}</td>
+                        <td class="p-4 border">
+                            <select class="text-[9px] border p-1 rounded bg-white w-full"><option>Susan Chesang</option><option>Dan Alwende</option><option>Sherry Bartuin</option><option>Jerry Okumu</option></select>
+                        </td>
+                        <td class="p-4 border text-center no-print">
+                            <button onclick="toggleSessionApproval('${sessionID}')" class="text-[8px] font-bold uppercase px-2 py-1 rounded ${isApproved ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">
+                                ${isApproved ? 'APPROVED' : 'PENDING'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function toggleSessionApproval(id) {
+            state.approvals[id] = !state.approvals[id];
+            save();
+        }
+
+        function downloadDocumentOnly() {
+            window.print();
         }
 
         function renderGateway() {
             const gate = document.getElementById('idGateway');
             if (state.learners.length === 0) {
-                gate.innerHTML = `
-                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1 Enrollment</div>
+                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1 Enrollment</div>
                     <form class="p-5 space-y-3" id="enrollForm">
                         <input id="regName" type="text" placeholder="FULL NAME (CAPITALS)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
-                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded"></div>
-                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded"><option>No PWD</option><option>Yes PWD</option></select></div>
+                        <div class="grid grid-cols-2 gap-2"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded border-slate-300"></div>
                         <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs">Register</button>
                     </form>`;
             } else {
-                gate.innerHTML = `
-                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Daily Sign-In</div>
-                    <div class="p-8 text-center"><button onclick="markDaily()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black">MARK ATTENDANCE: DAY ${state.learners[0].att.filter(x=>x).length + 1}</button></div>`;
+                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Daily Sign-In</div>
+                    <div class="p-8 text-center"><button onclick="markDaily()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase">Mark Attendance: Day ${state.learners[0].att.filter(x=>x).length + 1}</button></div>`;
             }
         }
 
@@ -188,25 +226,24 @@
             alert("Signed In!");
         }
 
-        function toggleApproval() { state.schedulerApproved = !state.schedulerApproved; save(); }
         function logWork(key, val) { state[key] += val; save(); }
-        function save() { localStorage.setItem('ksg_sovereign_final_hardened', JSON.stringify(state)); render(); }
-        function resetSystem() { localStorage.removeItem('ksg_sovereign_final_hardened'); location.reload(); }
+        function save() { localStorage.setItem('ksg_vMaster_Final', JSON.stringify(state)); render(); }
+        function resetSystem() { localStorage.removeItem('ksg_vMaster_Final'); location.reload(); }
 
         function render() {
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
             document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
-            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
             document.getElementById('ui-rev').innerText = (state.rev/1000000).toFixed(2) + 'M / 50M';
+            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
             document.getElementById('bar-rev').style.width = (state.rev/50000000)*100 + '%';
 
             document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
-                <tr><td class="p-2 border font-bold uppercase">${l.name}</td><td class="p-2 border text-[8px]">${l.org}</td>${l.att.map(a => `<td class="p-2 border text-center ${a?'present-cell':''}">${a?'P':'A'}</td>`).join('')}</tr>
+                <tr><td class="p-2 border font-bold uppercase text-[8px]">${l.name}</td><td class="p-2 border text-[7px]">${l.org}</td>${l.att.map(a => `<td class="p-2 border text-center ${a?'present-cell':''}">${a?'P':'A'}</td>`).join('')}</tr>
             `).join('');
 
             document.getElementById('awpBody').innerHTML = `
-                <tr><td class="p-4 font-bold">Sherry</td><td class="p-4 text-[9px]">Roll out 10 Programs</td><td class="p-4">10</td><td class="p-4 text-center"><button onclick="logWork('kra1', 1)" class="btn-ksg px-3 py-1 rounded text-[8px]">Log</button></td></tr>
-                <tr><td class="p-4 font-bold">Susan</td><td class="p-4 text-[9px]">Mobilize 50M</td><td class="p-4">50M</td><td class="p-4 text-center"><button onclick="logWork('rev', 127000)" class="bg-yellow-600 text-white px-3 py-1 rounded text-[8px] font-bold">Log</button></td></tr>
+                <tr><td class="p-4 font-bold">Sherry</td><td class="p-4 text-[9px]">Roll out 10 Training Programs</td><td class="p-4">10</td><td class="p-4 text-center"><button onclick="logWork('kra1', 1)" class="btn-ksg px-3 py-1 rounded text-[8px]">Log</button></td></tr>
+                <tr><td class="p-4 font-bold">Susan</td><td class="p-4 text-[9px]">Mobilize 50M Revenue</td><td class="p-4">50M</td><td class="p-4 text-center"><button onclick="logWork('rev', 127000)" class="bg-yellow-600 text-white px-3 py-1 rounded text-[8px] font-bold">Log</button></td></tr>
             `;
             
             renderGateway();
