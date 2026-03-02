@@ -15,7 +15,7 @@
         .btn-ksg:hover { background-color: #600000; transform: translateY(-1px); }
         .active-session { border-left: 6px solid var(--ksg-maroon); background-color: #fff5f5; }
         .present-cell { background-color: #dcfce7; color: #166534; font-weight: 900; text-align: center; }
-        @media print { .no-print { display: none !important; } }
+        @media print { .no-print { display: none !important; } #printableTimetable { visibility: visible; position: absolute; left: 0; top: 0; width: 100%; } }
     </style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-900 pb-20">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">Susan Chesang (HOC) | Attendance Command</p>
+                <p class="text-xs font-bold uppercase">Susan Chesang (HOC) | dan alwende (PA)</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
@@ -38,43 +38,37 @@
 
     <main class="container mx-auto py-6 px-4 space-y-10">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 no-print">
-            <div class="lg:col-span-5">
-                <div id="enrollmentModule" class="bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
-                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Entry: Identity Gateway</div>
-                    <div id="gatewayContent" class="p-6"></div>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 no-print text-center">
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Competency (Sherry)</p>
+                <h3 id="ui-comp" class="text-xl font-black text-ksg-maroon">0 / 10</h3>
+                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-comp" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
             </div>
-
-            <div class="lg:col-span-7">
-                <div class="bg-white rounded-xl shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
-                        <h2 class="text-xs font-black text-ksg-maroon uppercase">PA Daily Roll Call & Verification</h2>
-                        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded">WiFi: KSG-NET SECURE</span>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-[9px] border-collapse">
-                            <thead class="bg-slate-100 uppercase border-b text-slate-500 font-bold">
-                                <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Action</th></tr>
-                            </thead>
-                            <tbody id="paRegisterRows" class="divide-y font-medium text-slate-700"></tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy (Dan)</p>
+                <h3 id="ui-cons" class="text-xl font-black text-ksg-maroon">0 / 3</h3>
+                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-cons" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Research (Jerry)</p>
+                <h3 id="ui-res" class="text-xl font-black text-ksg-maroon">0 / 1</h3>
+                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-res" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-gold">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Sustainability (Susan)</p>
+                <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0.00M / 50M</h3>
+                <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-1000"></div></div>
             </div>
         </div>
 
-        <div id="quorumLockOverlay" class="hidden bg-slate-900/10 p-10 rounded-xl border-2 border-dashed border-slate-400 text-center">
-            <h3 class="text-slate-500 font-black uppercase tracking-widest">Timetable Locked: Quorum (Min 10 Learners) Not Met</h3>
-        </div>
-
-        <div id="timetableModule" class="bg-white rounded-xl shadow-xl border overflow-hidden">
+        <div id="printableTimetable" class="bg-white rounded-xl shadow-xl border overflow-hidden">
             <div class="p-4 bg-ksg-maroon text-white flex flex-wrap justify-between items-center gap-4 no-print">
                 <div class="flex items-center gap-4">
                     <h2 class="text-xs font-bold uppercase tracking-widest">Master Digital Timetable</h2>
                     <select id="progSelect" onchange="initTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none">
                         <option value="tech">Technical Officers (4 Weeks)</option>
                         <option value="assessor">Quality Assessors (10 Days)</option>
+                        <option value="exec">Executive Leaders (3 Days)</option>
                         <option value="frontline">Frontline Officers (5 Days)</option>
                         <option value="senior">Senior Managers (5 Days)</option>
                     </select>
@@ -82,15 +76,56 @@
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] font-bold">DAY:</span>
                     <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none"></select>
-                    <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold">PDF</button>
+                    <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold uppercase">Download Schedule</button>
                 </div>
             </div>
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 border">Time</th><th class="p-4 border">Unit Details</th><th class="p-4 border">Facilitator</th><th class="p-4 border text-center no-print">Approval</th></tr>
+                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Selection</th><th class="p-4 border text-center no-print">Approval Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-2xl border-t-4 border-slate-800 overflow-hidden no-print">
+            <div class="p-4 bg-slate-800 text-white flex justify-between items-center">
+                <h2 class="text-xs font-bold uppercase tracking-widest">CSE Strategic Deliverables FY 2025/2026</h2>
+                <button onclick="resetSystem()" class="text-[8px] bg-red-700 px-3 py-1 rounded uppercase font-bold">System Wipe</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-[10px] border-collapse">
+                    <thead class="bg-slate-100 uppercase text-slate-600 font-black border-b">
+                        <tr><th class="p-4 border">Strategic Objective</th><th class="p-4 border">Activity Details</th><th class="p-4 border">Owner</th><th class="p-4 border text-center">Progress</th><th class="p-4 border text-center">Action</th></tr>
+                    </thead>
+                    <tbody id="awpLedgerBody" class="divide-y text-slate-700 font-medium"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 no-print">
+            <div class="lg:col-span-4">
+                <div id="enrollmentModule" class="bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
+                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Entry Gateway: Identity Capture</div>
+                    <div id="gatewayContent" class="p-5"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded-xl shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
+                        <h2 class="text-xs font-black text-ksg-maroon uppercase tracking-tighter">Verified Attendance Register</h2>
+                        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase">WiFi Check Active</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-[9px] border-collapse">
+                            <thead class="bg-slate-100 uppercase border-b text-slate-500 font-bold">
+                                <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border">Organization</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Payment Status</th></tr>
+                            </thead>
+                            <tbody id="paRegisterRows" class="divide-y font-medium text-slate-700"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -107,14 +142,22 @@
                 ["Assessment Process", "Metrics", "Feedback"], ["Audit Review", "Gaps", "Correction"], ["Advanced Audit", "Benchmarking", "Case Studies"],
                 ["System Audit", "Compliance", "Certification Prep"], ["Peer Assessment", "Validation", "Verification"], ["Final Assessment", "Presentation", "Verification"], ["Certification", "Closing", "Action Planning"]
             ]},
-            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["EI", "Comm Strategy", "Practicum"], ["Crisis Mgt", "Performance Indicators", "Role Play"], ["Evaluation", "Review", "Closing"] ] },
+            exec: { name: "Executive Leaders", days: 3, units: [ ["Briefing & Opening", "Gov Transformation", "Knowledge Mgt"], ["CSE Trends", "Sustaining Culture", "Purpose Gap"], ["Transforming Lives", "Business Env", "Action Planning"] ] },
+            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["EI", "Comm Strategy", "Practicum"], ["Crisis Mgt", "Performance Indicators", "Role Play"], ["Evaluation", "Peer Review", "Closing"] ] },
             senior: { name: "Senior Managers", days: 5, units: [ ["CSE Essentials", "Regulatory Framework", "National Dev"], ["Culture Pillars", "Service Delivery", "Process Re-eng"], ["Digital Transformation", "Strategic Communication", "Resource Allocation"], ["Quality Audit", "Performance Evaluation", "Wellness"], ["Certification", "Field Study", "Closure"] ] }
         };
 
         const facilitators = ["Susan Chesang", "Rachel Ngesa, PhD", "Dan Alwende", "Sherry Bartuin", "Jerry Okumu", "Guest Facilitator"];
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V15')) || { 
-            learners: [], approvals: {}, currentLearner: null, facilitatorAssignments: {}
+        const awpActivities = [
+            { kra: "KRA 1", activity: "Roll out 10 CSE Training Programs", owner: "Sherry Bartuin", target: 10, key: "kra1", type: "count" },
+            { kra: "KRA 2", activity: "Pilot standardized CSE models in 3 State Corps", owner: "Dan Alwende", target: 3, key: "kra2", type: "count" },
+            { kra: "KRA 3", activity: "Develop 1 Policy Brief/Advocacy Paper", owner: "Jerry Okumu", target: 1, key: "kra3", type: "count" },
+            { kra: "SO 6", activity: "Mobilize 50,000,000 Revenue", owner: "Susan Chesang", target: 50000000, key: "rev", type: "money" }
+        ];
+
+        let state = JSON.parse(localStorage.getItem('ksg_vMaster_Final_V16')) || { 
+            learners: [], approvals: {}, currentLearner: null, facilitatorAssignments: {}, kra1:0, kra2:0, kra3:0, rev:0
         };
 
         function renderGateway() {
@@ -125,52 +168,48 @@
                         <select id="regCourse" class="w-full border p-2 text-[10px] font-bold bg-slate-50 rounded">
                             <option value="tech">Technical Officers Program</option>
                             <option value="assessor">Quality Assessors Program</option>
+                            <option value="exec">Executive Leaders Program</option>
                             <option value="frontline">Frontline Officers Program</option>
                             <option value="senior">Senior Managers Program</option>
                         </select>
-                        <input id="regName" type="text" placeholder="NAME (CAPS)" class="w-full border p-2 text-xs rounded uppercase">
+                        <input id="regName" type="text" placeholder="NAME (CAPITAL LETTERS)" class="w-full border p-2 text-xs rounded uppercase">
                         <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded"></div>
-                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded"><option>No PWD</option><option>Yes PWD</option></select></div>
+                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded bg-slate-50"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded bg-slate-50"><option value="No">No PWD</option><option value="Yes">Yes PWD</option></select></div>
                         <div class="grid grid-cols-2 gap-2"><input id="regPhone" type="tel" placeholder="Phone" class="border p-2 text-xs rounded"><input id="regEmail" type="email" placeholder="Email" class="border p-2 text-xs rounded"></div>
                         <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg font-black uppercase">Confirm & Enroll</button>
                     </form>`;
             } else {
                 container.innerHTML = `
                     <div class="text-center space-y-4 py-8">
-                        <h4 class="font-black text-ksg-maroon uppercase">MEMBER: ${state.currentLearner.name}</h4>
-                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase">Verify Today's Presence</button>
-                        <p class="text-[8px] text-slate-400 font-bold italic">KSG Network Check Active</p>
+                        <h4 class="font-black text-ksg-maroon uppercase">CONNECTED: ${state.currentLearner.name}</h4>
+                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase">Log Today's Presence</button>
+                        <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">Gated: 08:00 - 17:00 | KSG WiFi Only</p>
                     </div>`;
             }
         }
 
         function enroll() {
             const name = document.getElementById('regName').value;
-            if(!name) return alert("Certification Name Required");
+            if(!name) return alert("Required: Full CAPS Name");
             const newLearner = {
                 id: Date.now(), name: name.toUpperCase(), course: document.getElementById('regCourse').value,
-                att: [true, false, false, false, false], approved: false
+                org: document.getElementById('regOrg').value, att: [true, false, false, false, false], paid: false
             };
             state.learners.unshift(newLearner); state.currentLearner = newLearner; save();
         }
 
         function markAttendance() {
             const h = new Date().getHours();
-            if (h < 8 || h >= 17) return alert("PORTAL CLOSED: Attendance only between 08:00 - 17:00.");
+            if (h < 8 || h >= 17) return alert("GATE LOCKED: Sign-ins only permitted during class hours.");
             const l = state.learners.find(x => x.id === state.currentLearner.id);
             const nextDay = l.att.indexOf(false);
             if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Recorded.");
         }
 
-        function approveLearner(id) { const l = state.learners.find(x => x.id === id); l.approved = !l.approved; save(); }
+        function togglePayment(id) { const l = state.learners.find(x => x.id === id); l.paid = !l.paid; save(); }
 
         function initTimetable() {
             const pk = document.getElementById('progSelect').value;
-            const quorumMet = state.learners.filter(x => x.course === pk).length >= 10;
-            const overlay = document.getElementById('quorumLockOverlay');
-            const tt = document.getElementById('timetableModule');
-            overlay.className = quorumMet ? "hidden" : "bg-slate-900/10 p-10 rounded-xl border-2 border-dashed border-slate-400 text-center";
-            tt.className = quorumMet ? "bg-white rounded-xl shadow-xl border overflow-hidden" : "opacity-30 pointer-events-none bg-white rounded-xl shadow-xl border overflow-hidden";
             const daySel = document.getElementById('daySelect');
             const curVal = daySel.value;
             daySel.innerHTML = Array.from({length: ttData[pk].days}, (_, i) => `<option value="${i}">Day ${i+1}</option>`).join('');
@@ -205,7 +244,6 @@
         }
 
         function assignFac(sID, val) { state.facilitatorAssignments[sID] = val; save(); }
-
         function toggleApp(id, timeBlock) {
             const fac = state.facilitatorAssignments[id];
             if (!fac) return alert("GOVERNANCE LOCK: Select a facilitator first.");
@@ -216,21 +254,40 @@
             state.approvals[id] = !state.approvals[id]; save();
         }
 
-        function save() { localStorage.setItem('ksg_sovereign_MASTER_V15', JSON.stringify(state)); render(); }
+        function renderAWP() {
+            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => `<tr>
+                <td class="p-4 border font-bold text-[9px]">${a.kra}</td><td class="p-4 border italic text-[9px]">${a.activity}</td><td class="p-4 border font-bold text-[9px]">${a.owner}</td>
+                <td class="p-4 border text-center font-black text-blue-600">${a.type==='money'?(state[a.key]/1000000).toFixed(2)+'M / 50M':state[a.key]+' / '+a.target}</td>
+                <td class="p-4 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-3 py-1 rounded text-[8px]">Update</button></td>
+            </tr>`).join('');
+        }
+
+        function logWork(k, v) { state[k] += v; save(); }
+        function save() { localStorage.setItem('ksg_vMaster_Final_V16', JSON.stringify(state)); render(); }
+        function resetSystem() { localStorage.removeItem('ksg_vMaster_Final_V16'); location.reload(); }
 
         function render() {
-            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
+            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
+            document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
+            document.getElementById('ui-cons').innerText = state.kra2 + ' / 3';
+            document.getElementById('ui-res').innerText = state.kra3 + ' / 1';
+            document.getElementById('ui-rev').innerText = (state.rev/1000000).toFixed(2) + 'M / 50M';
+            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
+            document.getElementById('bar-rev').style.width = (state.rev/50000000)*100 + '%';
+            
             document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
-                <tr class="${l.approved ? 'bg-green-50' : ''}">
+                <tr class="${l.paid ? 'bg-green-50' : ''}">
                     <td class="p-3 border font-black uppercase text-ksg-maroon">${l.name}</td>
+                    <td class="p-3 border text-slate-500">${l.org}</td>
                     ${l.att.map(a => `<td class="p-3 border text-center ${a ? 'present-cell' : ''}">${a ? 'P' : 'A'}</td>`).join('')}
                     <td class="p-3 border text-center no-print">
-                        <button onclick="approveLearner(${l.id})" class="text-[8px] font-black px-2 py-1 rounded ${l.approved ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-600'}">
-                            ${l.approved ? 'VERIFIED' : 'VERIFY'}
+                        <button onclick="togglePayment(${l.id})" class="text-[8px] font-black px-2 py-1 rounded ${l.paid ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-600'}">
+                            ${l.paid ? 'PAYMENT CONFIRMED' : 'WAITING PAYMENT'}
                         </button>
                     </td>
-                </tr>`).join('') || '<tr><td colspan="7" class="p-8 text-center italic text-slate-400 font-bold uppercase tracking-widest">Waiting for enrollments...</td></tr>';
-            renderGateway(); initTimetable();
+                </tr>`).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400 font-bold">Waiting for enrollments...</td></tr>';
+            
+            renderGateway(); initTimetable(); renderAWP();
         }
         render();
     </script>
