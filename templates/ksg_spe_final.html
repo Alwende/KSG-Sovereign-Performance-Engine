@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Unified Sovereign Engine</title>
+    <title>KSG SPE | Master Unified Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --ksg-maroon: #800000; --ksg-gold: #D4AF37; }
@@ -11,51 +11,52 @@
         .text-ksg-maroon { color: var(--ksg-maroon); }
         .border-ksg-maroon { border-color: var(--ksg-maroon); }
         .border-ksg-gold { border-color: var(--ksg-gold); }
-        .btn-primary { background-color: var(--ksg-maroon); color: white; font-weight: 800; text-transform: uppercase; }
-        .btn-primary:hover { background-color: #600000; }
-        .transition-all { transition: all 0.4s ease-in-out; }
+        .btn-ksg { background-color: var(--ksg-maroon); color: white; font-weight: 800; text-transform: uppercase; border-bottom: 3px solid #600000; }
+        .btn-ksg:hover { background-color: #600000; }
+        .present { background-color: #dcfce7; color: #166534; font-weight: 900; }
+        .absent { background-color: #fee2e2; color: #991b1b; font-weight: 900; }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-900 pb-20">
+<body class="bg-slate-100 font-sans text-slate-900 pb-20">
 
     <nav class="bg-ksg-maroon text-white p-4 shadow-2xl border-b-4 border-ksg-gold sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm shadow-md"><span class="text-ksg-maroon font-black text-xl px-1">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm"><span class="text-ksg-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold uppercase tracking-tight leading-none">Kenya School of Government</h1>
+                    <h1 class="text-lg font-bold uppercase leading-none">Kenya School of Government</h1>
                     <p class="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">Susan Chesang | Dan Alwende</p>
+                <p class="text-xs font-bold uppercase">Ms. Susan Chesang (HOC) | Dan Alwende (PA)</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto py-6 px-4">
+    <main class="container mx-auto py-6 px-4 space-y-8">
         
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
                 <p class="text-[9px] text-slate-400 font-black uppercase">Competency (Sherry)</p>
-                <h3 id="ui-kra1" class="text-xl font-black text-ksg-maroon">0 / 10</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+                <h3 id="ui-comp" class="text-xl font-black text-ksg-maroon">0 / 10</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-comp" class="bg-ksg-maroon h-full" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
                 <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy (Dan)</p>
-                <h3 id="ui-kra2" class="text-xl font-black text-ksg-maroon">0 / 3</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+                <h3 id="ui-cons" class="text-xl font-black text-ksg-maroon">0 / 3</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-cons" class="bg-ksg-maroon h-full" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
                 <p class="text-[9px] text-slate-400 font-black uppercase">Research (Jerry)</p>
-                <h3 id="ui-kra3" class="text-xl font-black text-ksg-maroon">0 / 1</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="bg-ksg-maroon h-full transition-all" style="width: 0%"></div></div>
+                <h3 id="ui-res" class="text-xl font-black text-ksg-maroon">0 / 1</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-res" class="bg-ksg-maroon h-full" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-gold">
                 <p class="text-[9px] text-slate-400 font-black uppercase">Sustainability (Susan)</p>
-                <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0.00M / 50M</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all" style="width: 0%"></div></div>
+                <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0M / 50M</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full" style="width: 0%"></div></div>
             </div>
         </div>
 
@@ -63,14 +64,15 @@
             
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-white rounded-xl shadow-lg border-2 border-ksg-maroon overflow-hidden">
-                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Gateway (Day 1 Entry)</div>
+                    <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Enrollment Gate</div>
                     <form class="p-5 space-y-3" id="enrollForm">
-                        <select id="regCourse" class="w-full border p-2 text-[10px] rounded font-bold bg-slate-50 border-slate-300">
+                        <select id="regCourse" class="w-full border p-2 text-xs rounded font-bold bg-slate-50">
                             <option value="Frontline">Frontline Officers (5 Days)</option>
                             <option value="Senior">Senior Managers (5 Days)</option>
                             <option value="Technical">Technical Officers (4 Weeks)</option>
+                            <option value="Executive">Executive Leaders (3 Days)</option>
                         </select>
-                        <input id="regName" type="text" placeholder="FULL NAME (CAPITALS)" class="w-full border p-2 text-xs rounded uppercase">
+                        <input id="regName" type="text" placeholder="FULL NAME (FOR CERTIFICATE)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
                         <div class="grid grid-cols-2 gap-2">
                             <input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded">
                             <input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded">
@@ -79,16 +81,17 @@
                             <select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select>
                             <select id="regPWD" class="border p-2 text-[10px] rounded"><option value="No">No PWD</option><option value="Yes">Yes PWD</option></select>
                         </div>
-                        <button type="button" onclick="enroll()" class="w-full btn-primary py-3 rounded text-xs shadow-lg transition">Confirm & Enroll</button>
+                        <input id="regPhone" type="tel" placeholder="Phone Number" class="w-full border p-2 text-xs rounded">
+                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg">Submit & Lock Identity</button>
                     </form>
                 </div>
 
                 <div class="bg-white rounded shadow border-t-4 border-ksg-gold p-4">
-                    <h3 class="font-black text-[10px] uppercase text-ksg-maroon border-b pb-2 mb-3">Live Program Schedule</h3>
-                    <div id="timetableUI" class="space-y-2 text-[10px] font-bold">
-                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>08:30 - 10:30</span><span class="text-right">Transformation Agenda</span></div>
-                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>11:00 - 13:00</span><span class="text-right">Knowledge Management</span></div>
-                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>14:00 - 16:00</span><span class="text-right">Service Excellence Trends</span></div>
+                    <h3 class="font-black text-[10px] uppercase text-ksg-maroon border-b pb-2 mb-3 tracking-tighter">Current Day Program Schedule</h3>
+                    <div id="timetableRows" class="space-y-2 text-[10px] font-bold">
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>08:30 - 10:30</span><span class="text-right">Unit 1: Transformation Agenda</span></div>
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>11:00 - 13:00</span><span class="text-right">Unit 2: Knowledge Management</span></div>
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 border-ksg-maroon"><span>14:00 - 16:00</span><span class="text-right">Unit 3: Service Excellence Trends</span></div>
                     </div>
                 </div>
             </div>
@@ -96,40 +99,42 @@
             <div class="lg:col-span-8 space-y-6">
                 <div class="bg-white rounded shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
                     <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black text-ksg-maroon uppercase">
-                        <span>Interactive Class Attendance Register (100% Roll Call)</span>
-                        <span id="windowStatus" class="font-bold text-green-600">WiFi: SECURE</span>
+                        <span>Class Attendance Register (90% Paperless Goal)</span>
+                        <span class="text-green-600 font-bold">WiFi Status: LOCKED TO CAMPUS</span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-[10px] border-collapse">
                             <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
                                 <tr>
                                     <th class="p-3 border">Name</th><th class="p-3 border">Org</th>
-                                    <th class="p-3 border text-center">M1</th><th class="p-3 border text-center">T2</th>
-                                    <th class="p-3 border text-center">W3</th><th class="p-3 border text-center">T4</th>
-                                    <th class="p-3 border text-center">F5</th><th class="p-3 border text-center">Action</th>
+                                    <th class="p-3 border text-center">Day 1</th><th class="p-3 border text-center">Day 2</th><th class="p-3 border text-center">Day 3</th><th class="p-3 border text-center">Day 4</th><th class="p-3 border text-center">Day 5</th>
                                 </tr>
                             </thead>
-                            <tbody id="regRows" class="divide-y font-medium text-slate-700"></tbody>
+                            <tbody id="registerList" class="divide-y font-medium text-slate-700"></tbody>
                         </table>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-slate-800 text-white rounded shadow-lg p-5">
-                        <h3 class="font-black text-[10px] uppercase border-b border-slate-700 pb-2 mb-4">Facilitator Payment Ledger</h3>
-                        <div id="payLedger" class="space-y-2 max-h-40 overflow-y-auto"></div>
+                        <div class="flex justify-between border-b border-slate-700 pb-2 mb-4">
+                            <h3 class="font-black text-[10px] uppercase">Facilitator Payment Ledger</h3>
+                            <button onclick="window.print()" class="text-[8px] bg-slate-700 px-2 rounded">Generate Memo</button>
+                        </div>
+                        <div id="payLedger" class="space-y-2 text-[10px]">
+                            </div>
                         <div class="mt-4 pt-4 border-t border-slate-700 flex justify-between font-black text-xs text-[#D4AF37]">
-                            <span>TOTAL PAYABLE (SEPT):</span><span id="ui-grandTotal">Ksh 0.00</span>
+                            <span>TOTAL PAYABLE:</span><span id="ui-grandTotal">Ksh 0.00</span>
                         </div>
                     </div>
 
                     <div class="bg-white rounded shadow border-t-4 border-ksg-gold p-5">
                         <h3 class="font-black text-[10px] uppercase text-ksg-maroon border-b pb-2 mb-4">Service Charter Compliance</h3>
-                        <div class="space-y-3 text-[10px]">
-                            <div class="flex justify-between font-bold"><span>Program Delivery</span><span class="text-green-600">92%</span></div>
-                            <div class="flex justify-between font-bold"><span>Cert Dispatch</span><span class="text-green-600">100%</span></div>
-                            <div class="flex justify-between font-bold"><span>Facilitator Pay</span><span class="text-red-600">Pending</span></div>
-                            <button onclick="resetSystem()" class="w-full mt-4 border border-slate-200 py-1 rounded text-[8px] uppercase font-bold text-slate-400">System Reset</button>
+                        <div class="space-y-3 text-[10px] font-bold">
+                            <div class="flex justify-between"><span>Training Standard</span><span class="text-green-600">92%</span></div>
+                            <div class="flex justify-between"><span>Cert Dispatch</span><span class="text-green-600">100%</span></div>
+                            <div class="flex justify-between"><span>Payment Standard</span><span class="text-red-600">Pending</span></div>
+                            <button onclick="resetSystem()" class="w-full mt-4 border border-slate-200 py-1 rounded text-[8px] uppercase text-slate-400">System Wipe</button>
                         </div>
                     </div>
                 </div>
@@ -138,8 +143,8 @@
     </main>
 
     <script>
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_vAudit')) || {
-            learners: [], logs: [], revenue: 0, Sherry: 0, Dan: 0, Jerry: 0
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final_vMaster')) || {
+            learners: [], logs: [], revenue: 0, kra1: 0, kra2: 0, kra3: 0
         };
 
         function enroll() {
@@ -147,41 +152,46 @@
             const course = document.getElementById('regCourse').value;
             if(!name) return alert("Required: Full Name");
             state.learners.unshift({ 
-                id: Date.now(), name, org: document.getElementById('regOrg').value,
-                attendance: [true, false, false, false, false], status: "Active" 
+                id: Date.now(), name: name.toUpperCase(), 
+                org: document.getElementById('regOrg').value,
+                att: [true, false, false, false, false]
             });
             state.revenue += course === "Technical" ? 296000 : 127000;
-            state.Sherry = Number((state.learners.length * 0.1).toFixed(1));
+            state.kra1 = Number((state.learners.length * 0.1).toFixed(1));
             saveAndRender();
             document.getElementById('enrollForm').reset();
         }
 
+        function toggleAtt(lId, dayIdx) {
+            const l = state.learners.find(x => x.id === lId);
+            l.att[dayIdx] = !l.att[dayIdx];
+            saveAndRender();
+        }
+
         function saveAndRender() {
-            localStorage.setItem('ksg_sovereign_vAudit', JSON.stringify(state));
+            localStorage.setItem('ksg_sovereign_final_vMaster', JSON.stringify(state));
             render();
         }
 
-        function resetSystem() { localStorage.removeItem('ksg_sovereign_vAudit'); location.reload(); }
+        function resetSystem() { localStorage.removeItem('ksg_sovereign_final_vMaster'); location.reload(); }
 
         function render() {
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
-            document.getElementById('ui-kra1').innerText = state.Sherry + ' / 10';
-            document.getElementById('bar-kra1').style.width = (state.Sherry/10)*100 + '%';
+            
+            // Stats
+            document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
+            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
             document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
             document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
 
-            document.getElementById('regRows').innerHTML = state.learners.map(l => `
+            // Register
+            document.getElementById('registerList').innerHTML = state.learners.map(l => `
                 <tr>
-                    <td class="p-3 border font-black uppercase">${l.name}</td>
+                    <td class="p-3 border font-black uppercase text-ksg-maroon">${l.name}</td>
                     <td class="p-3 border text-slate-500">${l.org}</td>
-                    <td class="p-3 border text-center bg-green-50 text-green-700 font-bold">P</td>
-                    <td class="p-3 border text-center text-slate-300">A</td>
-                    <td class="p-3 border text-center text-slate-300">A</td>
-                    <td class="p-3 border text-center text-slate-300">A</td>
-                    <td class="p-3 border text-center text-slate-300">A</td>
-                    <td class="p-3 border text-center"><button class="bg-ksg-maroon text-white px-2 py-0.5 rounded text-[8px] font-bold">VERIFY</button></td>
+                    ${l.att.map((a, i) => `<td class="p-3 border text-center ${a ? 'present' : 'absent'}" onclick="toggleAtt(${l.id}, ${i})">${a ? 'P' : 'A'}</td>`).join('')}
                 </tr>
-            `).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400">Waiting for Day 1 enrollments...</td></tr>';
+            `).join('') || '<tr><td colspan="7" class="p-10 text-center italic text-slate-400">Waiting for enrollments...</td></tr>';
         }
         render();
     </script>
