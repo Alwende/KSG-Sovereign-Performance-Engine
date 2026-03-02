@@ -23,12 +23,10 @@
     <nav class="bg-ksg-maroon text-white p-4 shadow-2xl border-b-4 border-ksg-gold sticky top-0 z-50 no-print">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <div class="bg-white p-1 rounded-sm shadow-md flex items-center justify-center">
-                    <span class="text-ksg-maroon font-black text-2xl px-2">KSG</span>
-                </div>
+                <div class="bg-white p-1 rounded-sm shadow-md"><span class="text-ksg-maroon font-black text-2xl px-2">KSG</span></div>
                 <div>
                     <h1 class="text-lg font-bold uppercase leading-none tracking-tight">Kenya School of Government</h1>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">Empowering the Public Service | Strategic Partner: HUDUMA KENYA</p>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">Center for Customer Service Excellence | Partner: HUDUMA KENYA</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
@@ -42,22 +40,22 @@
         
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 no-print text-center">
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase tracking-widest">Sherry (Competency)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Sherry (Competency)</p>
                 <h3 id="ui-comp" class="text-xl font-black text-ksg-maroon">0 / 10</h3>
                 <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-comp" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase tracking-widest">Dan (Consultancy)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Dan (Consultancy)</p>
                 <h3 id="ui-cons" class="text-xl font-black text-ksg-maroon">0 / 3</h3>
                 <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-cons" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase tracking-widest">Jerry (Research)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Jerry (Research)</p>
                 <h3 id="ui-res" class="text-xl font-black text-ksg-maroon">0 / 1</h3>
                 <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-res" class="bg-ksg-maroon h-full transition-all duration-1000"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-ksg-gold">
-                <p class="text-[9px] text-slate-400 font-black uppercase tracking-widest">Susan (Sustainability)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Susan (Sustainability)</p>
                 <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0.00M / 50M</h3>
                 <div class="w-full bg-slate-100 h-2 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-1000"></div></div>
             </div>
@@ -67,7 +65,7 @@
             <div class="p-4 bg-ksg-maroon text-white flex flex-wrap justify-between items-center gap-4 no-print">
                 <div class="flex items-center gap-4">
                     <h2 class="text-xs font-bold uppercase tracking-widest italic border-l-4 border-ksg-gold pl-2">Master Digital Timetable</h2>
-                    <select id="progSelect" onchange="initTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none">
+                    <select id="progSelect" onchange="initTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase outline-none">
                         <option value="tech">Technical Officers (4 Weeks)</option>
                         <option value="assessor">Quality Assessors (10 Days)</option>
                         <option value="exec">Executive Leaders (3 Days)</option>
@@ -83,7 +81,7 @@
             </div>
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Scheduler Status</th></tr>
+                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Approval Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
@@ -97,7 +95,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-[10px] border-collapse">
                     <thead class="bg-slate-100 uppercase text-slate-600 font-black border-b">
-                        <tr><th class="p-4 border">Strategic Objective</th><th class="p-4 border">Activity Details</th><th class="p-4 border text-center">Current Progress</th><th class="p-4 border text-center">Log Action</th></tr>
+                        <tr><th class="p-4 border">Strategic Objective</th><th class="p-4 border">Activity Details</th><th class="p-4 border text-center">Progress</th><th class="p-4 border text-center">Log Action</th></tr>
                     </thead>
                     <tbody id="awpLedgerBody" class="divide-y text-slate-700 font-medium"></tbody>
                 </table>
@@ -105,23 +103,23 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 no-print">
-            <div class="lg:col-span-4">
+            <div class="lg:col-span-5">
                 <div id="enrollmentModule" class="bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
                     <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Portal: Identity Gateway</div>
-                    <div id="gatewayContent" class="p-5"></div>
+                    <div id="gatewayContent" class="p-6"></div>
                 </div>
             </div>
 
-            <div class="lg:col-span-8">
+            <div class="lg:col-span-7">
                 <div class="bg-white rounded-xl shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
                     <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
                         <h2 class="text-xs font-black text-ksg-maroon uppercase">Verified Attendance Register</h2>
-                        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase tracking-widest">WiFi: KSG-NET OK</span>
+                        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase">WiFi: SECURE (KSG-NET)</span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-[9px] border-collapse">
                             <thead class="bg-slate-100 uppercase border-b text-slate-500 font-bold">
-                                <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border">Org</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Payment Gate</th></tr>
+                                <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Payment</th></tr>
                             </thead>
                             <tbody id="paRegisterRows" class="divide-y font-medium text-slate-700"></tbody>
                         </table>
@@ -145,7 +143,7 @@
                 ["System Audit", "Compliance", "Certification Prep"], ["Peer Assessment", "Validation", "Verification"], ["Final Assessment", "Presentation", "Verification"], ["Certification", "Closing", "Action Planning"]
             ]},
             exec: { name: "Executive Leaders", days: 3, units: [ ["Briefing & Opening", "Gov Transformation", "Knowledge Mgt"], ["CSE Trends", "Sustaining Culture", "Purpose Gap"], ["Transforming Lives", "Business Env", "Action Planning"] ] },
-            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["EI", "Comm Strategy", "Practicum"], ["Crisis Mgt", "Performance Indicators", "Role Play"], ["Evaluation", "Peer Review", "Closing"] ] },
+            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["EI", "Comm Strategy", "Practicum"], ["Crisis Mgt", "Performance Indicators", "Role Play"], ["Evaluation", "Review", "Closing"] ] },
             senior: { name: "Senior Managers", days: 5, units: [ ["CSE Essentials", "Regulatory Framework", "National Dev"], ["Culture Pillars", "Service Delivery", "Process Re-eng"], ["Digital Transformation", "Strategic Communication", "Resource Allocation"], ["Quality Audit", "Performance Evaluation", "Wellness"], ["Certification", "Field Study", "Closure"] ] }
         };
 
@@ -158,7 +156,7 @@
             { kra: "SO 6", activity: "Mobilize 50,000,000 Revenue", owner: "Susan Chesang", target: 50000000, key: "rev", type: "money" }
         ];
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V18')) || { 
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V20')) || { 
             learners: [], approvals: {}, currentLearner: null, facilitatorAssignments: {}, kra1:0, kra2:0, kra3:0, rev:0
         };
 
@@ -166,32 +164,34 @@
             const container = document.getElementById('gatewayContent');
             if (!state.currentLearner) {
                 container.innerHTML = `
-                    <form id="enrollForm" class="space-y-2">
+                    <p class="text-[10px] font-bold text-slate-500 mb-4 uppercase">Day 1: Identity Capture (Paperwork Merged)</p>
+                    <form id="enrollForm" class="space-y-3">
                         <select id="regCourse" class="w-full border p-2 text-[10px] font-bold bg-slate-50 rounded uppercase">
-                            <option value="tech">Technical Officers Program</option>
-                            <option value="assessor">Quality Assessors Program</option>
-                            <option value="exec">Executive Leaders Program</option>
-                            <option value="frontline">Frontline Officers Program</option>
-                            <option value="senior">Senior Managers Program</option>
+                            <option value="tech">Technical Officers</option>
+                            <option value="assessor">Quality Assessors</option>
+                            <option value="exec">Executive Leaders</option>
+                            <option value="frontline">Frontline Officers</option>
+                            <option value="senior">Senior Managers</option>
                         </select>
-                        <input id="regName" type="text" placeholder="NAME (CAPITAL LETTERS)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
-                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded"></div>
-                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded bg-slate-50"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded bg-slate-50"><option value="No">No PWD</option><option value="Yes">Yes PWD</option></select></div>
-                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg font-black uppercase tracking-widest">Confirm & Enroll</button>
+                        <input id="regName" type="text" placeholder="NAME TO APPEAR ON CERTIFICATE (CAPS)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
+                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded border-slate-300"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded border-slate-300"></div>
+                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded bg-slate-50 font-bold"><option>MALE</option><option>FEMALE</option></select><select id="regPWD" class="border p-2 text-[10px] rounded bg-slate-50 font-bold"><option value="No">NO PWD</option><option value="Yes">YES PWD</option></select></div>
+                        <div class="grid grid-cols-2 gap-2"><input id="regPhone" type="tel" placeholder="Phone No" class="border p-2 text-xs rounded border-slate-300"><input id="regEmail" type="email" placeholder="Official Email" class="border p-2 text-xs rounded border-slate-300"></div>
+                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg font-black uppercase tracking-widest">Confirm & Start Training</button>
                     </form>`;
             } else {
                 container.innerHTML = `
                     <div class="text-center space-y-4 py-8">
                         <h4 class="font-black text-ksg-maroon uppercase text-xs">MEMBER CONNECTED: ${state.currentLearner.name}</h4>
-                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase">Verify Today's Presence</button>
-                        <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">Gate: 08:00 - 17:00 | KSG Network Verified</p>
+                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase">Log Daily Sign-In</button>
+                        <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">Gated: 08:00 - 17:00 | WiFi Security Active</p>
                     </div>`;
             }
         }
 
         function enroll() {
             const name = document.getElementById('regName').value;
-            if(!name) return alert("Required: Full CAPS Name");
+            if(!name) return alert("Validation Error: Full CAPS Name Required for Certification");
             const newLearner = {
                 id: Date.now(), name: name.toUpperCase(), course: document.getElementById('regCourse').value,
                 org: document.getElementById('regOrg').value || "KSG", att: [true, false, false, false, false], paid: false
@@ -201,10 +201,10 @@
 
         function markAttendance() {
             const h = new Date().getHours();
-            if (h < 8 || h >= 17) return alert("GATE LOCKED: Sign-ins only permitted during class hours.");
+            if (h < 8 || h >= 17) return alert("GOVERNANCE LOCK: Sign-ins only permitted during session hours (08:00 - 17:00).");
             const l = state.learners.find(x => x.id === state.currentLearner.id);
             const nextDay = l.att.indexOf(false);
-            if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Recorded.");
+            if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Verified.");
         }
 
         function togglePayment(id) { const l = state.learners.find(x => x.id === id); l.paid = !l.paid; save(); }
@@ -227,11 +227,11 @@
                 const isApp = state.approvals[sID] || false;
                 const assigned = state.facilitatorAssignments[sID] || "";
                 return `<tr>
-                    <td class="p-4 border font-bold text-ksg-maroon font-mono">${b}</td>
+                    <td class="p-4 border font-bold text-ksg-maroon font-mono text-[10px]">${b}</td>
                     <td class="p-4 border font-bold uppercase text-[10px] font-black">${units[i]}</td>
                     <td class="p-4 border">
-                        <select onchange="assignFac('${sID}', this.value)" class="text-[9px] border p-1 rounded bg-white w-full">
-                            <option value="">-- Select Facilitator --</option>
+                        <select onchange="assignFac('${sID}', this.value)" class="text-[9px] border p-1 rounded bg-white w-full uppercase font-bold text-slate-600">
+                            <option value="">-- Assign --</option>
                             ${facilitators.map(f => `<option value="${f}" ${assigned === f ? 'selected':''}>${f}</option>`).join('')}
                         </select>
                     </td>
@@ -247,7 +247,7 @@
         function assignFac(sID, val) { state.facilitatorAssignments[sID] = val; save(); }
         function toggleApp(id, timeBlock) {
             const fac = state.facilitatorAssignments[id];
-            if (!fac) return alert("GOVERNANCE LOCK: Select a facilitator first.");
+            if (!fac) return alert("GOVERNANCE LOCK: Assign a facilitator before approving.");
             if (!state.approvals[id]) {
                 const conflict = Object.keys(state.approvals).find(k => state.approvals[k] === true && state.facilitatorAssignments[k] === fac && k.endsWith(id.split('-').pop()));
                 if (conflict) return alert("CONFLICT: " + fac + " is already approved for another session during " + timeBlock + ".");
@@ -263,14 +263,14 @@
                     <td class="p-4 border font-bold text-[9px] uppercase tracking-tighter">${a.kra}</td>
                     <td class="p-4 border italic text-[9px] font-bold">${a.activity}</td>
                     <td class="p-4 border text-center font-black text-blue-600">${display}</td>
-                    <td class="p-4 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-3 py-1 rounded text-[8px] font-black uppercase shadow-sm">Update Progress</button></td>
+                    <td class="p-4 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-3 py-1 rounded text-[8px] font-black uppercase shadow-sm">Log Progress</button></td>
                 </tr>`;
             }).join('');
         }
 
         function logWork(k, v) { state[k] += v; save(); }
-        function save() { localStorage.setItem('ksg_sovereign_MASTER_V18', JSON.stringify(state)); render(); }
-        function resetSystem() { if(confirm("ARE YOU SURE? This will wipe the entire institutional ledger.")){ localStorage.removeItem('ksg_sovereign_MASTER_V18'); location.reload(); } }
+        function save() { localStorage.setItem('ksg_sovereign_MASTER_V20', JSON.stringify(state)); render(); }
+        function resetSystem() { if(confirm("ARE YOU SURE? This will wipe the institutional data.")){ localStorage.removeItem('ksg_sovereign_MASTER_V20'); location.reload(); } }
 
         function render() {
             document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
@@ -281,15 +281,14 @@
             
             document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
                 <tr class="${l.paid ? 'bg-green-50' : ''}">
-                    <td class="p-3 border font-black uppercase text-ksg-maroon">${l.name}</td>
-                    <td class="p-3 border text-slate-500 uppercase text-[8px] font-black">${l.org}</td>
+                    <td class="p-3 border font-black uppercase text-ksg-maroon text-[10px]">${l.name}</td>
                     ${l.att.map(a => `<td class="p-3 border text-center ${a ? 'present-cell' : ''}">${a ? 'P' : 'A'}</td>`).join('')}
                     <td class="p-3 border text-center no-print">
                         <button onclick="togglePayment(${l.id})" class="text-[8px] font-black px-2 py-1 rounded ${l.paid ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-600 border'}">
-                            ${l.paid ? 'FEE VERIFIED' : 'PENDING'}
+                            ${l.paid ? 'VERIFIED' : 'PENDING'}
                         </button>
                     </td>
-                </tr>`).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400 font-black uppercase tracking-widest">Waiting for session enrollments...</td></tr>';
+                </tr>`).join('') || '<tr><td colspan="7" class="p-8 text-center italic text-slate-400 font-black uppercase tracking-widest">Waiting for session enrollments...</td></tr>';
             
             renderGateway(); initTimetable(); renderAWP();
         }
