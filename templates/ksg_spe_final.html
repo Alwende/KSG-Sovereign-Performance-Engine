@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Executive Automation Portal</title>
+    <title>KSG SPE | National Digital Benchmark</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
+        .transition-all { transition: all 0.4s ease-in-out; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-12">
@@ -19,146 +20,193 @@
             <div class="flex items-center gap-3">
                 <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold uppercase tracking-tight leading-none">Kenya School of Government</h1>
-                    <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
+                    <h1 class="text-lg font-bold uppercase tracking-tight">Kenya School of Government</h1>
+                    <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold tracking-[0.2em]">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">SUSAN CHESANG | DAN ALWENDE</p>
+                <p class="text-xs font-bold uppercase text-white">SUSAN CHESANG | DAN ALWENDE</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto py-6 px-4">
+        
+        <h2 class="text-[10px] font-black ksg-text-maroon uppercase mb-3 tracking-widest">Master Work Plan Scoreboard (FY 2025/2026)</h2>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Active Program</p>
-                <h3 class="text-xl font-black ksg-text-maroon">CSE for Frontline</h3>
-                <p class="text-[8px] text-slate-400 italic">Target: 32 Participants</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Competency Development (Sherry)</p>
+                <h3 id="ui-kra1" class="text-xl font-black ksg-text-maroon">0 / 10</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra1" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Verified for Certs</p>
-                <h3 id="ui-readyCerts" class="text-xl font-black text-green-600">0</h3>
-                <p class="text-[8px] text-slate-400 italic">Based on Attendance</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy Services (Dan)</p>
+                <h3 id="ui-kra2" class="text-xl font-black ksg-text-maroon">0 / 3</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra2" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Policy Research (Jerry)</p>
+                <h3 id="ui-kra3" class="text-xl font-black ksg-text-maroon">0 / 1</h3>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-kra3" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
             </div>
             <div class="bg-white p-4 rounded shadow border-b-4 border-yellow-600">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Revenue (SO_6)</p>
+                <p class="text-[9px] text-slate-400 font-black uppercase">Financial Sustainability (Susan)</p>
                 <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0M / 50M</h3>
-            </div>
-            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon text-center">
-                <button onclick="generateMemo()" class="w-full bg-yellow-600 text-white font-black py-2 rounded text-[10px] uppercase shadow-lg hover:bg-yellow-700 transition">Generate Dispatch Memo</button>
+                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-700" style="width: 0%"></div></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-7">
-                <div class="bg-white p-12 shadow-2xl border border-slate-200 min-h-[600px] relative overflow-hidden">
-                    <div class="text-center border-b-2 border-slate-900 pb-4 mb-6">
-                        <h2 class="font-bold text-lg uppercase">Kenya School of Government</h2>
-                        <p class="text-xs italic">Empowering the Public Service</p>
-                        <h3 class="font-black text-sm uppercase mt-2">MEMO</h3>
-                    </div>
-                    
-                    <div class="space-y-1 text-sm font-bold mb-6">
-                        <p>TO: Director General</p>
-                        <p>FROM: Head of Centre for Customer Service Excellence</p>
-                        <p>REF: KSG/NRB/TRN/97/VOL.III</p>
-                        <p>DATE: <span id="memoDate">---</span></p>
-                    </div>
+            
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
+                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Enrollment & Certification Confirmation</div>
+                    <form class="p-5 space-y-3">
+                        <input id="regName" type="text" placeholder="Full Name (for Certification)" class="w-full border p-2 text-xs rounded focus:ring-1 ksg-border-maroon outline-none">
+                        <input id="regStation" type="text" placeholder="Organization / Employer" class="w-full border p-2 text-xs rounded">
+                        <input id="regPhone" type="text" placeholder="Telephone Number" class="w-full border p-2 text-xs rounded">
+                        <select id="regCourse" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold">
+                            <option value="Senior Managers">Senior Managers (127k)</option>
+                            <option value="Frontline">Frontline Officers (127k)</option>
+                            <option value="Technical">Technical Officers (296k)</option>
+                        </select>
+                        <button type="button" onclick="enroll()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow hover:bg-black transition">Submit & Clock-In</button>
+                    </form>
+                </div>
 
-                    <div class="border-y-2 border-slate-900 py-2 mb-6">
-                        <p class="font-black text-sm uppercase">Subject: Dispatch of Certificates for CSE Program</p>
+                <div class="bg-white rounded shadow-md border-t-4 border-yellow-600 p-4">
+                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon border-b pb-2 mb-3">Cloud Program Schedule</h3>
+                    <div class="space-y-2 text-[10px] font-bold">
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 ksg-border-maroon"><span>08:00 - 10:30</span><span>Morning Session</span></div>
+                        <div class="flex justify-between p-2 text-slate-400 italic"><span>13:00 - 14:00</span><span>Lunch Break</span></div>
+                        <div class="flex justify-between p-2 bg-slate-50 border-l-4 ksg-border-maroon"><span>14:00 - 16:00</span><span>Afternoon Session</span></div>
                     </div>
+                </div>
 
-                    <div class="text-sm leading-relaxed mb-8">
-                        <p>This is to notify you that the Centre for Customer Service Excellence conducted training for <span class="font-bold">Frontline Officers</span>.</p>
-                        <p class="mt-4">The following participants successfully completed the program and are verified for certification:</p>
-                        
-                        <table class="w-full mt-4 border-collapse border border-slate-300">
-                            <thead class="bg-slate-50 text-[10px] uppercase">
-                                <tr>
-                                    <th class="border border-slate-300 p-2">No.</th>
-                                    <th class="border border-slate-300 p-2">Full Name (Confirmed)</th>
-                                    <th class="border border-slate-300 p-2">Organization</th>
-                                </tr>
-                            </thead>
-                            <tbody id="memoList" class="text-[10px]">
-                                </tbody>
-                        </table>
-                    </div>
-
-                    <div class="mt-12">
-                        <p class="font-bold">Susan Chesang</p>
-                        <p class="text-xs">Head of Centre for Customer Service Excellence</p>
-                    </div>
+                <div class="bg-slate-100 rounded shadow p-4 border border-slate-300">
+                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon mb-3">Facilitator Session Log</h3>
+                    <select id="facName" class="w-full border p-2 text-xs rounded mb-2 bg-white">
+                        <option>Dan Alwende</option><option>Sherry Bartuin</option><option>Huduma Adjunct</option>
+                    </select>
+                    <button onclick="logFacilitator()" class="w-full bg-slate-700 text-white py-2 rounded text-[10px] font-bold uppercase shadow">Log Hours</button>
                 </div>
             </div>
 
-            <div class="lg:col-span-5 space-y-6">
-                <div class="bg-white rounded shadow-lg border-2 ksg-border-maroon p-5">
-                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon border-b pb-2 mb-4 tracking-widest">New Program Enrollment</h3>
-                    <div class="space-y-3">
-                        <input id="regName" type="text" placeholder="Full Name (for Cert)" class="w-full border p-2 text-xs rounded outline-none focus:ring-1 ksg-border-maroon">
-                        <input id="regStation" type="text" placeholder="Organization" class="w-full border p-2 text-xs rounded">
-                        <button onclick="enroll()" class="w-full ksg-maroon text-white font-black py-3 rounded text-xs uppercase shadow-lg">Confirm & Enroll</button>
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="bg-white rounded shadow border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
+                        <span>Digitized CSE Work Plan Ledger</span>
+                        <button onclick="resetSystem()" class="text-[8px] border px-2 py-1 rounded">Reset</button>
                     </div>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-100 text-slate-400 font-bold uppercase border-b text-[9px]">
+                            <tr><th class="p-4">Owner</th><th class="p-4">Activity</th><th class="p-4 text-center">Score</th><th class="p-4">AI Variance Insight</th></tr>
+                        </thead>
+                        <tbody id="ledgerRows" class="divide-y font-medium text-slate-700"></tbody>
+                    </table>
                 </div>
 
-                <div class="bg-slate-800 rounded shadow-lg p-5">
-                    <h3 class="text-white font-black text-[10px] uppercase border-b border-slate-700 pb-2 mb-4">Verification Roster</h3>
-                    <div id="roster" class="space-y-2 max-h-48 overflow-y-auto">
-                        </div>
+                <div class="bg-slate-800 rounded shadow-lg overflow-hidden">
+                    <div class="p-3 text-white text-[10px] font-bold uppercase flex justify-between bg-slate-900 border-b border-slate-700">
+                        <span>PA Portal: Fraud-Proof Attendance</span>
+                        <span id="windowStatus" class="text-yellow-500 font-bold uppercase tracking-widest">...</span>
+                    </div>
+                    <div id="paRoster" class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 max-h-48 overflow-y-auto"></div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border p-5">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2">
+                        <h3 class="font-black text-[10px] uppercase ksg-text-maroon">Executive Automation: Request for Certs</h3>
+                        <button onclick="generateMemo()" class="bg-yellow-600 text-white px-4 py-1 rounded text-[10px] font-bold uppercase shadow">Generate Memo Draft</button>
+                    </div>
+                    <div id="memoPreview" class="hidden bg-slate-50 p-6 border text-[10px] font-serif">
+                        <p class="font-bold text-center underline mb-4 uppercase">MEMO: Request for Preparation of Certificates</p>
+                        <p>TO: Director General</p>
+                        <p>FROM: Head of Centre, CSE</p>
+                        <div class="mt-4 border-t pt-2" id="memoContent"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_memo_v1')) || {
-            learners: [], revenue: 0
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final')) || {
+            learners: [], logs: [], revenue: 0, Sherry: 0, Dan: 0, Jerry: 0
         };
+
+        const rates = { "Senior Managers": 127000, "Frontline": 127000, "Technical": 296000 };
 
         function enroll() {
             const name = document.getElementById('regName').value;
-            const station = document.getElementById('regStation').value;
-            if(!name || !station) return alert("Fill Name and Station.");
-
-            state.learners.unshift({ id: Date.now(), name, station, verified: true });
-            state.revenue += 127000;
+            const course = document.getElementById('regCourse').value;
+            if(!name) return alert("Required: Full Name");
+            state.learners.unshift({ 
+                id: Date.now(), name, station: document.getElementById('regStation').value, 
+                phone: document.getElementById('regPhone').value, course, attendance: ["Present"] 
+            });
+            state.revenue += rates[course];
+            state.Sherry = Number((state.learners.length * 0.1).toFixed(1));
             saveAndRender();
-            document.getElementById('regName').value = '';
-            document.getElementById('regStation').value = '';
+            ['regName','regStation','regPhone'].forEach(id => document.getElementById(id).value = '');
         }
 
-        function saveAndRender() {
-            localStorage.setItem('ksg_sovereign_memo_v1', JSON.stringify(state));
-            render();
+        function logFacilitator() {
+            const name = document.getElementById('facName').value;
+            state.logs.unshift({ name, date: new Date().toLocaleDateString(), hours: 2 });
+            saveAndRender();
         }
 
         function generateMemo() {
-            document.getElementById('memoDate').innerText = new Date().toLocaleDateString();
-            const list = document.getElementById('memoList');
-            list.innerHTML = state.learners.map((l, i) => `
-                <tr>
-                    <td class="border border-slate-300 p-2 text-center">${i+1}</td>
-                    <td class="border border-slate-300 p-2 font-bold uppercase">${l.name}</td>
-                    <td class="border border-slate-300 p-2 uppercase">${l.station}</td>
-                </tr>
-            `).join('');
-            window.scrollTo({ top: 400, behavior: 'smooth' });
+            const preview = document.getElementById('memoPreview');
+            preview.classList.remove('hidden');
+            const content = document.getElementById('memoContent');
+            content.innerHTML = `<p>The following ${state.learners.length} participants have successfully completed the ${state.learners[0]?.course || 'CSE'} program and are verified for certification:</p>` +
+                state.learners.map(l => `<div class="mt-1 border-b pb-1 font-bold uppercase">${l.name} - ${l.station}</div>`).join('');
         }
 
+        function isWindowOpen() {
+            const now = new Date();
+            const d = now.getDay(), h = now.getHours();
+            return (d >= 1 && d <= 5) && (h >= 8 && h < 16);
+        }
+
+        function saveAndRender() {
+            localStorage.setItem('ksg_sovereign_final', JSON.stringify(state));
+            render();
+        }
+
+        function resetSystem() { localStorage.removeItem('ksg_sovereign_final'); location.reload(); }
+
         function render() {
-            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
-            document.getElementById('ui-readyCerts').innerText = state.learners.length;
+            const open = isWindowOpen();
+            document.getElementById('windowStatus').innerText = open ? "OPEN" : "LOCKED";
+            document.getElementById('windowStatus').className = open ? "text-green-500 font-bold" : "text-yellow-500 font-bold";
+            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
+
+            document.getElementById('ui-kra1').innerText = state.Sherry + ' / 10';
+            document.getElementById('bar-kra1').style.width = (state.Sherry/10)*100 + '%';
             document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
-            
-            document.getElementById('roster').innerHTML = state.learners.map(l => `
-                <div class="flex justify-between items-center text-[10px] text-white border-b border-slate-700 pb-1">
-                    <span>${l.name}</span><span class="text-green-400 font-bold">VERIFIED</span>
+            document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
+
+            document.getElementById('ledgerRows').innerHTML = `
+                <tr><td class="p-4 font-bold uppercase">Sherry Bartuin</td><td class="p-4 italic">Competency Development</td><td class="p-4 text-center font-black">${((state.Sherry/10)*100).toFixed(1)}%</td><td class="p-4 text-[9px] text-slate-400 italic">Auto-tracking</td></tr>
+                <tr><td class="p-4 font-bold uppercase">Susan Chesang</td><td class="p-4 italic">Financial Sustainability</td><td class="p-4 text-center font-black text-red-600">${((state.revenue/50000000)*100).toFixed(1)}%</td><td class="p-4 font-bold text-red-600 bg-red-50 italic uppercase">Variance: Strategy Sec 5.1</td></tr>
+            `;
+
+            document.getElementById('paRoster').innerHTML = state.learners.map(l => `
+                <div class="bg-slate-900 p-2 rounded mb-1 border border-slate-700 text-[10px]">
+                    <div class="flex justify-between items-center text-white mb-1 uppercase font-black">
+                        <span>${l.name}</span><span class="text-green-400">${l.attendance.length} Days</span>
+                    </div>
+                    <div class="text-[8px] text-slate-500 italic flex justify-between">
+                        <span>${l.station}</span><span>${l.phone}</span>
+                    </div>
+                    <button class="w-full mt-2 bg-green-600 text-white py-1 rounded font-bold uppercase">Mark Present</button>
                 </div>
-            `).join('') || '<p class="text-slate-500 text-[9px] text-center">No participants.</p>';
+            `).join('') || '<p class="text-[9px] text-center text-slate-500 py-4">No active learners.</p>';
         }
         render();
     </script>
