@@ -16,7 +16,7 @@
         .btn-ksg:hover { background-color: #600000; transform: translateY(-1px); }
         .active-session { border-left: 6px solid var(--ksg-maroon); background-color: #fff5f5; }
         .present-cell { background-color: #dcfce7; color: #166534; font-weight: 900; text-align: center; }
-        .rating-star { cursor: pointer; font-size: 1.5rem; color: #cbd5e1; transition: color 0.2s; }
+        .rating-star { cursor: pointer; font-size: 1.2rem; color: #cbd5e1; }
         .rating-star.active { color: var(--ksg-gold); }
         @media print { .no-print { display: none !important; } #printableTimetable { visibility: visible; position: absolute; left: 0; top: 0; width: 100%; } }
     </style>
@@ -83,7 +83,7 @@
             </div>
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Approval Status</th></tr>
+                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Institutional Approval Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
@@ -91,19 +91,19 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 no-print">
             <div class="lg:col-span-4 bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
-                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Day 1 Identity Capture</div>
+                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Portal: Identity Capture</div>
                 <div id="gatewayContent" class="p-5"></div>
             </div>
 
             <div class="lg:col-span-8 bg-white rounded-xl shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
                 <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
                     <h2 class="text-xs font-black text-ksg-maroon uppercase">PA Verified Attendance Register</h2>
-                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase">WiFi: SECURE (KSG-NET)</span>
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase tracking-widest">WiFi: SECURE</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-[9px] border-collapse">
                         <thead class="bg-slate-100 uppercase border-b text-slate-500 font-bold">
-                            <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border">Org</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Fee Status</th></tr>
+                            <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Payment Status</th></tr>
                         </thead>
                         <tbody id="paRegisterRows" class="divide-y font-medium text-slate-700"></tbody>
                     </table>
@@ -138,7 +138,7 @@
             { kra: "SO 6", activity: "Mobilize 50,000,000 Revenue", owner: "Susan", target: 50000000, key: "rev", type: "money" }
         ];
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V27')) || { 
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V30')) || { 
             learners: [], approvals: {}, facilitatorAssignments: {}, ratings: [], kra1:0, kra2:0, kra3:0, rev:0, currentLearner: null
         };
 
@@ -165,9 +165,9 @@
             } else {
                 container.innerHTML = `
                     <div class="text-center space-y-4 py-8">
-                        <h4 class="font-black text-ksg-maroon uppercase text-xs">MEMBER: ${state.currentLearner.name}</h4>
-                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase tracking-widest">Mark Present (Today)</button>
-                        <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">WiFi Authenticated</p>
+                        <h4 class="font-black text-ksg-maroon uppercase text-xs">MEMBER CONNECTED: ${state.currentLearner.name}</h4>
+                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase tracking-widest">Log Attendance (Today)</button>
+                        <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">Verified Access Gateway</p>
                     </div>`;
             }
         }
@@ -176,13 +176,9 @@
             const name = document.getElementById('regName').value;
             if(!name) return alert("Required: Full CAPS Name");
             const newLearner = {
-                id: Date.now(), 
-                name: name.toUpperCase(), 
-                course: document.getElementById('regCourse').value,
-                desig: document.getElementById('regDesig').value,
-                org: document.getElementById('regOrg').value || "KSG", 
-                att: [true, false, false, false, false], 
-                paid: false
+                id: Date.now(), name: name.toUpperCase(), course: document.getElementById('regCourse').value,
+                desig: document.getElementById('regDesig').value, org: document.getElementById('regOrg').value || "KSG",
+                att: [true, false, false, false, false], paid: false
             };
             state.learners.unshift(newLearner); state.currentLearner = newLearner; save();
         }
@@ -192,7 +188,7 @@
             if (h < 8 || h >= 17) return alert("PORTAL CLOSED: Sign-ins permitted 08:00 - 17:00.");
             const l = state.learners.find(x => x.id === state.currentLearner.id);
             const nextDay = l.att.indexOf(false);
-            if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Captured.");
+            if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Verified.");
         }
 
         function togglePayment(id) { const l = state.learners.find(x => x.id === id); l.paid = !l.paid; save(); }
@@ -201,14 +197,15 @@
             const container = document.getElementById('evalGatewayContent');
             const pk = document.getElementById('progSelect').value;
             const dIdx = document.getElementById('daySelect').value || 0;
-            const fac = state.facilitatorAssignments[pk + '-' + dIdx + '-0']; // Link to Morning Session
+            const facID = pk + '-' + dIdx + '-0';
+            const fac = state.facilitatorAssignments[facID];
 
             if (!state.currentLearner) {
-                container.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs italic uppercase">Enroll to provide feedback.</div>';
+                container.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs italic uppercase">Login to provide feedback.</div>';
                 return;
             }
             if (!fac) {
-                container.innerHTML = '<div class="text-center py-10 text-ksg-maroon font-bold text-[10px] uppercase tracking-widest">Awaiting session assignment...</div>';
+                container.innerHTML = '<div class="text-center py-10 text-ksg-maroon font-bold text-[10px] uppercase tracking-widest">Waiting for session assignment...</div>';
                 return;
             }
 
@@ -218,7 +215,7 @@
                     <div class="flex justify-center gap-2">
                         ${[1,2,3,4,5].map(i => `<span onclick="submitRating(${i})" class="rating-star ${window.tempRating >= i ? 'active' : ''}">★</span>`).join('')}
                     </div>
-                    <textarea id="evalComments" placeholder="How can we improve?" class="w-full border p-2 text-xs rounded border-slate-300 h-20"></textarea>
+                    <textarea id="evalComments" placeholder="Improving our Public Service..." class="w-full border p-2 text-xs rounded border-slate-300 h-20"></textarea>
                     <button onclick="confirmRating('${fac}')" class="w-full btn-ksg py-2 rounded text-[10px] font-black uppercase">Submit Evaluation</button>
                 </div>`;
         }
@@ -242,7 +239,7 @@
                 type: 'bar',
                 data: {
                     labels: facilitators.map(f => f.split(',')[0].split(' ')[0]),
-                    datasets: [{ label: 'Avg Rating', data: Object.values(dataMap), backgroundColor: '#800000', borderColor: '#D4AF37', borderWidth: 1 }]
+                    datasets: [{ label: 'Avg Score', data: Object.values(dataMap), backgroundColor: '#800000', borderColor: '#D4AF37', borderWidth: 1 }]
                 },
                 options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 5 } } }
             });
@@ -266,7 +263,7 @@
                 return `<tr>
                     <td class="p-4 border font-bold text-ksg-maroon font-mono text-[10px]">${b}</td>
                     <td class="p-4 border font-bold uppercase text-[10px] font-black text-slate-600">${units[i]}</td>
-                    <td class="p-4 border">
+                    <td class="p-4 border text-center">
                         <select onchange="assignFac('${sID}', this.value)" class="text-[9px] border p-1 rounded bg-white w-full uppercase font-bold text-slate-500">
                             <option value="">-- Assign --</option>
                             ${facilitators.map(f => `<option value="${f}" ${assigned === f ? 'selected':''}>${f}</option>`).join('')}
@@ -285,43 +282,43 @@
         function assignFac(sID, val) { state.facilitatorAssignments[sID] = val; save(); }
         function toggleApp(id, timeBlock) {
             const fac = state.facilitatorAssignments[id];
-            if (!fac) return alert("Select facilitator first.");
+            if (!fac) return alert("GOVERNANCE LOCK: Select facilitator first.");
             if (!state.approvals[id]) {
                 const conflict = Object.keys(state.approvals).find(k => state.approvals[k] === true && state.facilitatorAssignments[k] === fac && k.endsWith(id.split('-').pop()));
-                if (conflict) return alert("CONFLICT: " + fac + " is already approved elsewhere during " + timeBlock + ".");
+                if (conflict) return alert("CONFLICT: Facilitator already approved elsewhere during " + timeBlock + ".");
             }
             state.approvals[id] = !state.approvals[id]; save();
         }
 
         function renderAWP() {
-            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => {
-                const progValue = state[a.key];
-                const display = a.type === 'money' ? (progValue/1000000).toFixed(2) + 'M / 50M' : progValue + ' / ' + a.target;
-                return `<tr>
-                    <td class="p-2 border font-bold text-[9px] uppercase tracking-tighter text-slate-500">${a.kra}</td>
-                    <td class="p-2 border text-center font-black text-blue-600">${display}</td>
-                    <td class="p-2 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-2 py-1 rounded text-[8px] font-black shadow-sm uppercase">Log</button></td>
-                </tr>`;
-            }).join('');
+            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => `<tr>
+                <td class="p-2 border font-bold text-[9px] uppercase tracking-tighter text-slate-500">${a.kra}</td>
+                <td class="p-2 border text-center font-black text-blue-600">${a.type==='money'?(state[a.key]/1000000).toFixed(2)+'M/50M':state[a.key]+'/'+a.target}</td>
+                <td class="p-2 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-2 py-1 rounded text-[8px] font-black shadow-sm uppercase">Log</button></td>
+            </tr>`).join('');
         }
 
         function logWork(k, v) { state[k] += v; save(); }
-        function save() { localStorage.setItem('ksg_sovereign_MASTER_V27', JSON.stringify(state)); render(); }
-        function resetSystem() { if(confirm("ARE YOU SURE? This will wipe the institutional data.")){ localStorage.removeItem('ksg_sovereign_MASTER_V27'); location.reload(); } }
+        function save() { localStorage.setItem('ksg_sovereign_MASTER_V30', JSON.stringify(state)); render(); }
+        function resetSystem() { if(confirm("ARE YOU SURE?")){ localStorage.removeItem('ksg_sovereign_MASTER_V30'); location.reload(); } }
 
         function render() {
-            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
+            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
+            document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
+            document.getElementById('ui-rev').innerText = (state.rev/1000000).toFixed(2) + 'M / 50M';
+            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
+            document.getElementById('bar-rev').style.width = (state.rev/50000000)*100 + '%';
+            
             document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
                 <tr class="${l.paid ? 'bg-green-50' : ''}">
                     <td class="p-3 border font-black uppercase text-ksg-maroon text-[10px]">${l.name}</td>
-                    <td class="p-3 border text-slate-500 uppercase text-[8px] font-black">${l.org}</td>
                     ${l.att.map(a => `<td class="p-3 border text-center ${a ? 'present-cell' : ''}">${a ? 'P' : 'A'}</td>`).join('')}
                     <td class="p-3 border text-center no-print">
                         <button onclick="togglePayment(${l.id})" class="text-[8px] font-black px-2 py-1 rounded ${l.paid ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-600'}">
                             ${l.paid ? 'VERIFIED' : 'PENDING'}
                         </button>
                     </td>
-                </tr>`).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400 font-black uppercase tracking-widest">Waiting for enrollments...</td></tr>';
+                </tr>`).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400 font-black">Waiting for enrollments...</td></tr>';
             renderGateway(); updateCharts(); renderAWP();
         }
         initTimetable(); render();
