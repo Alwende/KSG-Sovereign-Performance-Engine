@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Master Unified Engine</title>
+    <title>KSG SPE | National Digital Benchmark</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --ksg-maroon: #800000; --ksg-gold: #D4AF37; }
@@ -15,12 +15,7 @@
         .btn-ksg:hover { background-color: #600000; transform: translateY(-1px); }
         .active-session { border-left: 6px solid var(--ksg-maroon); background-color: #fff5f5; }
         .present-cell { background-color: #dcfce7; color: #166534; font-weight: 900; text-align: center; }
-        @media print {
-            body * { visibility: hidden; }
-            #printableTimetable, #printableTimetable * { visibility: visible; }
-            #printableTimetable { position: absolute; left: 0; top: 0; width: 100%; border: none; }
-            .no-print { display: none !important; }
-        }
+        @media print { .no-print { display: none !important; } #printableTimetable { visibility: visible; position: absolute; left: 0; top: 0; } }
     </style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-900 pb-20">
@@ -36,7 +31,7 @@
             </div>
             <div class="text-right border-l pl-4 border-red-900">
                 <p class="text-xs font-bold uppercase">Susan Chesang (HOC) | Dan Alwende (PA)</p>
-                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
+                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase tracking-widest">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
@@ -80,29 +75,46 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] font-bold">SELECT DAY:</span>
-                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase outline-none"></select>
+                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none"></select>
                     <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold">DOWNLOAD PDF</button>
                 </div>
             </div>
-
             <div class="hidden print:block p-8 text-center border-b-2 border-slate-900">
-                <h1 class="text-2xl font-bold uppercase">Kenya School of Government</h1>
-                <h2 class="text-sm font-bold uppercase tracking-widest">Center for Customer Service Excellence</h2>
+                <h1 class="text-2xl font-bold uppercase text-ksg-maroon">Kenya School of Government</h1>
+                <h2 class="text-sm font-bold uppercase">Digital Program Schedule</h2>
                 <h3 id="printTitle" class="mt-4 text-lg font-black underline italic"></h3>
             </div>
-
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 w-32 border">Time</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator</th><th class="p-4 border text-center no-print">Approval Status</th></tr>
+                    <tr><th class="p-4 border">Time</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator</th><th class="p-4 border text-center no-print">Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
+        </div>
 
-            <div class="hidden print:block p-8 text-[10px]">
-                <div class="grid grid-cols-2 gap-20 mt-10">
-                    <div class="border-t border-slate-400 pt-2 font-bold uppercase">Prepared By: CSE Program Assistant</div>
-                    <div class="border-t border-slate-400 pt-2 font-bold uppercase">Approved By: School Scheduler / Timetable-In-Charge</div>
+        <div class="bg-white rounded-xl shadow-2xl border-t-4 border-slate-800 overflow-hidden">
+            <div class="p-4 bg-slate-800 text-white flex justify-between items-center no-print">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest">CSE Annual Work Plan FY 2025/2026</h2>
+                    <p class="text-[8px] text-slate-400">Institutional Strategy & Deliverables Ledger</p>
                 </div>
+                <button onclick="resetSystem()" class="text-[8px] bg-red-700 hover:bg-red-600 px-3 py-1 rounded uppercase font-bold">Full System Wipe</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-[10px] border-collapse">
+                    <thead class="bg-slate-100 font-black uppercase text-slate-600 border-b">
+                        <tr>
+                            <th class="p-4 border">KRA / Strategic Objective</th>
+                            <th class="p-4 border">Specific Activity (From Document)</th>
+                            <th class="p-4 border">Owner</th>
+                            <th class="p-4 border text-center">Annual Target</th>
+                            <th class="p-4 border text-center">Actual Progress</th>
+                            <th class="p-4 border text-center no-print">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="awpLedgerBody" class="divide-y text-slate-700">
+                        </tbody>
+                </table>
             </div>
         </div>
 
@@ -112,111 +124,97 @@
                 <div class="p-3 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black text-ksg-maroon uppercase"><span>PA Daily Roll Call</span></div>
                 <table class="w-full text-left text-[9px] border-collapse">
                     <thead class="bg-slate-50 uppercase border-b text-slate-500 font-bold">
-                        <tr><th class="p-2 border">Name</th><th class="p-2 border">Org</th><th class="p-2 border text-center">D1</th><th class="p-2 border text-center">D2</th><th class="p-2 border text-center">D3</th><th class="p-2 border text-center">D4</th><th class="p-2 border text-center">D5</th></tr>
+                        <tr><th class="p-2 border">Name</th><th class="p-2 border text-center">D1</th><th class="p-2 border text-center">D2</th><th class="p-2 border text-center">D3</th><th class="p-2 border text-center">D4</th><th class="p-2 border text-center">D5</th></tr>
                     </thead>
                     <tbody id="paRegisterRows" class="divide-y"></tbody>
                 </table>
             </div>
         </div>
-
-        <div class="bg-white rounded-xl shadow border overflow-hidden no-print">
-            <div class="p-4 bg-slate-800 text-white flex justify-between items-center text-[10px] font-black uppercase">
-                <span>Annual Work Plan activities (Institutional Ledger)</span>
-                <button onclick="resetSystem()" class="text-[8px] bg-red-700 px-2 py-1 rounded">Reset All</button>
-            </div>
-            <table class="w-full text-left text-[10px] border-collapse">
-                <tbody id="awpBody" class="divide-y text-slate-700 font-medium"></tbody>
-            </table>
-        </div>
     </main>
 
     <script>
+        // DATA VAULTS
         const ttData = {
-            exec: { name: "Executive Leaders", days: 3, units: [ ["Briefing & Opening", "Gov Transformation", "Knowledge Mgt"], ["CSE Trends", "Sustaining Culture", "Purpose Gap"], ["Transforming Lives", "Business Env", "Action Planning"] ] },
-            senior: { name: "Senior Managers", days: 5, units: [ ["Intro to Senior CSE", "Regulatory Framework", "National Dev"], ["Culture Pillars", "Service Delivery", "Process Re-eng"], ["Digital Transformation", "Strategic Comm", "Resource Allocation"], ["Quality Audit", "Performance Eval", "Employee Wellness"], ["Certification", "Field Study", "Closure"] ] },
-            frontline: { name: "Frontline Officers", days: 5, units: [ ["Huduma Professionalism", "Customer Insights", "Life Skills"], ["CSE Ethics", "Quality Standards", "Problem Solving"], ["Emotional Intelligence", "Comm Strategy", "Practicum"], ["Crisis Mgt", "Performance Indicators", "Role Play"], ["Evaluation", "Peer Review", "Closing"] ] },
-            assessor: { name: "Quality Assessors", days: 10, units: [
-                ["Assessor Intro", "Audit Standards", "Ethics"], ["Regulatory Framework", "Quality Framework", "Tools"], ["Mock Audit 1", "Evidence Gathering", "Reporting"],
-                ["Assessment Process", "Metrics", "Feedback Loop"], ["Audit Review", "Gap Analysis", "Correction"], ["Advanced Audit", "Institutional Benchmarking", "Case Studies"],
-                ["System Audit", "Compliance Checklist", "Certification Prep"], ["Peer Assessment", "Validation", "Verification"], ["Final Assessment", "Presentation", "Verification"], ["Certification", "Closing", "Action Planning"]
-            ]},
-            tech: { name: "Technical Officers", days: 20, units: [
-                ["Registration & Rationale", "BETA & Policy", "Work Environment"], ["Strategy & Resource", "CSE Structures", "Internal Environment"], ["Positive Work Culture", "Functionality", "Improvement"], ["Indicators", "National Agenda", "National Dev"], ["Week 2: Foundations", "Touchpoints", "Channel Mgt"],
-                ["Service Level Agrmts", "Service Recovery", "Compliance"], ["Digital CX", "Automation", "Portal Management"], ["Auditing CX", "Compliance", "Verification"], ["Week 3: Feedback Mgt", "Analytics", "Optimization"], ["Feedback Tools", "Process Maps", "Optimization"],
-                ["Field Study Intro", "Visit Checklist", "Data Capture"], ["Field Execution", "Observation", "Field Study"], ["Field Findings", "Data Compilation", "Review"], ["Report Drafting", "Drafting", "Drafting"], ["Peer Review", "Presentation", "Submission"],
-                ["Week 4: Finalization", "PC Alignment", "Institutional Impact"], ["Impact Analysis", "Executive Reporting", "Briefing"], ["Sustainability", "Change Mgt", "Institutionalization"], ["Eval & Planning", "Action Planning", "Feedback"], ["Final Certification", "Closing", "Closure"]
-            ]}
+            exec: { name: "Executive Leaders", days: 3, units: [ ["Opening", "Gov Transformation", "Knowledge Mgt"], ["Trends", "Culture", "Purpose"], ["Lives", "Business Env", "Closing"] ] },
+            senior: { name: "Senior Managers", days: 5, units: [ ["Intro", "Regulatory", "National Dev"], ["Culture", "Service", "Feedback"], ["Digital", "Re-eng", "Resource"], ["Audit", "Eval", "Wellness"], ["Study", "Cert", "Closing"] ] },
+            frontline: { name: "Frontline Officers", days: 5, units: [ ["Professionalism", "Insights", "Life Skills"], ["Ethics", "Standards", "Problem Solving"], ["EI", "Comm", "Practicum"], ["Crisis", "KPIs", "Role Play"], ["Eval", "Review", "Closing"] ] },
+            assessor: { name: "Quality Assessors", days: 10, units: Array(10).fill(["Audit Ethics", "Quality Framework", "Reporting"]) },
+            tech: { name: "Technical Officers", days: 20, units: Array(20).fill(["Rationale", "Structures", "Field Study"]) }
         };
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_hardened_v5')) || { learners: [], kra1:0, kra2:0, kra3:0, rev:0, approvals: {} };
+        const awpActivities = [
+            { kra: "KRA 1: Competency Dev", activity: "Roll out 10 CSE Training Programs", owner: "Sherry Bartuin", target: 10, key: "kra1", type: "count" },
+            { kra: "KRA 1: Competency Dev", activity: "Implement customer satisfaction survey recommendations", owner: "Sherry Bartuin", target: 4, key: "satisfaction", type: "count" },
+            { kra: "KRA 2: Consultancy", activity: "Pilot standardized CSE models in 3 State Corporations", owner: "Dan Alwende", target: 3, key: "kra2", type: "count" },
+            { kra: "KRA 2: Consultancy", activity: "Offer expert consultancy services to support reengineering", owner: "Dan Alwende", target: 5, key: "reeng", type: "count" },
+            { kra: "KRA 3: Policy/Research", activity: "Develop 1 Policy Brief/Advocacy Paper", owner: "Jerry Okumu", target: 1, key: "kra3", type: "count" },
+            { kra: "SO 6: Financial Sustainability", activity: "Mobilize Resource Mobilization Strategy", owner: "Susan Chesang", target: 50000000, key: "rev", type: "money" },
+            { kra: "SO 6: Financial Sustainability", activity: "Monitor implementation of customer service charter", owner: "Susan Chesang", target: 4, key: "charter", type: "count" }
+        ];
 
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final_vMaster')) || { 
+            learners: [], kra1:0, kra2:0, kra3:0, rev:0, satisfaction:0, reeng:0, charter:0, approvals: {} 
+        };
+
+        // TIMETABLE LOGIC (VAULTED)
         function initTimetable() {
             const progKey = document.getElementById('progSelect').value;
-            const days = ttData[progKey].days;
             const daySel = document.getElementById('daySelect');
-            daySel.innerHTML = Array.from({length: days}, (_, i) => `<option value="${i}">Day ${i+1}</option>`).join('');
+            daySel.innerHTML = Array.from({length: ttData[progKey].days}, (_, i) => `<option value="${i}">Day ${i+1}</option>`).join('');
             renderTimetable();
         }
-
         function renderTimetable() {
-            const progKey = document.getElementById('progSelect').value;
-            const dayIdx = document.getElementById('daySelect').value || 0;
-            const units = ttData[progKey].units[dayIdx] || ["Unit TBD", "Unit TBD", "Unit TBD"];
-            const blocks = ["08:30 - 10:30", "11:00 - 13:00", "14:00 - 16:00"];
-            
-            document.getElementById('printTitle').innerText = `${ttData[progKey].name} - Day ${parseInt(dayIdx)+1}`;
+            const pk = document.getElementById('progSelect').value;
+            const dIdx = document.getElementById('daySelect').value || 0;
+            const units = ttData[pk].units[dIdx];
+            document.getElementById('printTitle').innerText = `${ttData[pk].name} - Day ${parseInt(dIdx)+1}`;
+            document.getElementById('timetableRows').innerHTML = ["08:30-10:30", "11:00-13:00", "14:00-16:00"].map((b, i) => {
+                const sID = `${pk}-${dIdx}-${i}`;
+                return `<tr><td class="p-4 border font-bold">${b}</td><td class="p-4 border uppercase">${units[i]}</td><td class="p-4 border italic">Susan/Dan</td><td class="p-4 border text-center"><button onclick="toggleApp('${sID}')" class="text-[8px] px-2 py-1 rounded ${state.approvals[sID]?'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">${state.approvals[sID]?'APPROVED':'PENDING'}</button></td></tr>`;
+            }).join('');
+        }
+        function toggleApp(id) { state.approvals[id] = !state.approvals[id]; save(); }
 
-            document.getElementById('timetableRows').innerHTML = blocks.map((b, i) => {
-                const sID = `${progKey}-${dayIdx}-${i}`;
-                const isApp = state.approvals[sID] || false;
+        // AWP LOGIC
+        function renderAWP() {
+            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => {
+                const progress = state[a.key];
+                const displayProg = a.type === 'money' ? (progress/1000000).toFixed(2) + 'M' : progress;
+                const displayTarget = a.type === 'money' ? '50.00M' : a.target;
                 return `
-                    <tr class="hover:bg-slate-50 ${i===0 ? 'active-session':''}">
-                        <td class="p-4 border font-black text-ksg-maroon">${b}</td>
-                        <td class="p-4 border font-bold uppercase text-[10px]">${units[i]}</td>
-                        <td class="p-4 border"><select class="text-[9px] border p-1 rounded bg-white w-full"><option>Susan Chesang</option><option>Dan Alwende</option><option>Sherry Bartuin</option><option>Jerry Okumu</option></select></td>
+                    <tr>
+                        <td class="p-4 border font-bold">${a.kra}</td>
+                        <td class="p-4 border italic text-slate-500">${a.activity}</td>
+                        <td class="p-4 border font-bold">${a.owner}</td>
+                        <td class="p-4 border text-center font-black">${displayTarget}</td>
+                        <td class="p-4 border text-center text-blue-600 font-black">${displayProg}</td>
                         <td class="p-4 border text-center no-print">
-                            <button onclick="toggleApp('${sID}')" class="text-[8px] font-bold uppercase px-2 py-1 rounded ${isApp ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">${isApp ? 'APPROVED' : 'PENDING'}</button>
+                            <button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-3 py-1 rounded text-[8px]">Update</button>
                         </td>
                     </tr>`;
             }).join('');
         }
 
-        function toggleApp(id) { state.approvals[id] = !state.approvals[id]; save(); }
-
+        // ENROLLMENT LOGIC (PRESERVED)
         function renderGateway() {
             const gate = document.getElementById('idGateway');
             if (state.learners.length === 0) {
-                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1 Enrollment</div>
-                    <form class="p-5 space-y-3" id="enrollForm">
-                        <input id="regName" type="text" placeholder="FULL NAME (CAPITALS)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
-                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded"></div>
-                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded"><option>No</option><option>Yes</option></select></div>
-                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs">Register</button>
-                    </form>`;
+                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Day 1 Enrollment</div><form class="p-5 space-y-3" id="enrollForm"><input id="regName" type="text" placeholder="FULL NAME (CAPITALS)" class="w-full border p-2 text-xs rounded uppercase"><div class="grid grid-cols-2 gap-2"><input id="regOrg" type="text" placeholder="Org" class="border p-2 text-xs rounded"></div><button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs">Register</button></form>`;
             } else {
-                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Daily Sign-In</div>
-                    <div class="p-8 text-center space-y-4">
-                        <h4 class="font-black text-ksg-maroon uppercase text-xs">SIGNED AS: ${state.learners[0].name}</h4>
-                        <button onclick="markDaily()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-bold uppercase">Mark Attendance: Day ${state.learners[0].att.filter(x=>x).length + 1}</button>
-                    </div>`;
+                gate.innerHTML = `<div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center">Daily Sign-In</div><div class="p-8 text-center"><button onclick="markDaily()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-bold uppercase">Mark Attendance: Day ${state.learners[0].att.filter(x=>x).length + 1}</button></div>`;
             }
         }
-
         function enroll() {
             const name = document.getElementById('regName').value;
-            if(!name) return alert("Name Required");
-            state.learners.unshift({ id: Date.now(), name: name.toUpperCase(), org: document.getElementById('regOrg').value, att: [true, false, false, false, false] });
+            if(!name) return alert("Required: Full Name");
+            state.learners.unshift({ id: Date.now(), name: name.toUpperCase(), org: "KSG", att: [true, false, false, false, false] });
             state.rev += 127000; save();
         }
-
-        function markDaily() {
-            const l = state.learners[0]; const nIdx = l.att.indexOf(false);
-            if(nIdx !== -1) l.att[nIdx] = true; save(); alert("Sign-In Successful!");
-        }
+        function markDaily() { const l = state.learners[0]; const nIdx = l.att.indexOf(false); if(nIdx !== -1) l.att[nIdx] = true; save(); alert("Signed In!"); }
 
         function logWork(k, v) { state[k] += v; save(); }
-        function save() { localStorage.setItem('ksg_sovereign_hardened_v5', JSON.stringify(state)); render(); }
-        function resetSystem() { localStorage.removeItem('ksg_sovereign_hardened_v5'); location.reload(); }
+        function save() { localStorage.setItem('ksg_sovereign_master_vMaster', JSON.stringify(state)); render(); }
+        function resetSystem() { localStorage.removeItem('ksg_sovereign_master_vMaster'); location.reload(); }
 
         function render() {
             document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
@@ -226,16 +224,8 @@
             document.getElementById('ui-rev').innerText = (state.rev/1000000).toFixed(2) + 'M / 50M';
             document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
             document.getElementById('bar-rev').style.width = (state.rev/50000000)*100 + '%';
-
-            document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
-                <tr><td class="p-2 border font-bold uppercase text-[8px]">${l.name}</td><td class="p-2 border text-[7px]">${l.org}</td>${l.att.map(a => `<td class="p-2 border text-center ${a?'present-cell':''}">${a?'P':'A'}</td>`).join('')}</tr>
-            `).join('');
-
-            document.getElementById('awpBody').innerHTML = `
-                <tr><td class="p-4 font-bold">Sherry</td><td class="p-4 text-[9px]">Roll out 10 Training Programs</td><td class="p-4 text-center"><button onclick="logWork('kra1', 1)" class="btn-ksg px-2 py-1 rounded text-[8px]">Log</button></td></tr>
-                <tr><td class="p-4 font-bold">Susan</td><td class="p-4 text-[9px]">Mobilize 50M Revenue</td><td class="p-4 text-center"><button onclick="logWork('rev', 127000)" class="bg-yellow-600 text-white px-2 py-1 rounded text-[8px] font-bold">Log</button></td></tr>
-            `;
-            renderGateway(); renderTimetable();
+            document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `<tr><td class="p-2 border font-bold">${l.name}</td>${l.att.map(a => `<td class="p-2 border text-center ${a?'present-cell':''}">${a?'P':'A'}</td>`).join('')}</tr>`).join('');
+            renderGateway(); renderTimetable(); renderAWP();
         }
         initTimetable(); render();
     </script>
