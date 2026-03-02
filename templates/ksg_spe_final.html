@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | National Digital Benchmark</title>
+    <title>KSG SPE | Facilitator & Payment Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
@@ -19,12 +19,12 @@
             <div class="flex items-center gap-3">
                 <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold uppercase tracking-tight">Kenya School of Government</h1>
+                    <h1 class="text-lg font-bold uppercase tracking-tight leading-none">Kenya School of Government</h1>
                     <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">Susan Chesang | Dan Alwende</p>
+                <p class="text-xs font-bold uppercase">PA Portal: Facilitator & Finance</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
@@ -32,65 +32,167 @@
 
     <main class="container mx-auto py-6 px-4">
         
-        <div class="bg-white rounded-xl shadow-xl border-t-4 border-yellow-600 overflow-hidden mb-8">
-            <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
-                <span>Citizens' Service Delivery Charter Compliance Report</span>
-                <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[8px]">Strategic Repositioning (KRA 4)</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
+                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">
+                        Digital Facilitator Log-In
+                    </div>
+                    <form class="p-5 space-y-3" id="facLogForm">
+                        <label class="text-[10px] font-bold uppercase text-slate-500">Scheduled Facilitator (From Timetable)</label>
+                        <select id="facSelect" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold border-slate-300">
+                            <option value="">-- Choose Facilitator --</option>
+                            <option>Susan Chesang</option>
+                            <option>Rachel Ngesa, PhD</option>
+                            <option>Dan Alwende</option>
+                            <option>Sherry Bartuin</option>
+                            <option>Jerry Okumu</option>
+                            <option>Guest Facilitator (Adjunct)</option>
+                        </select>
+                        
+                        <label class="text-[10px] font-bold uppercase text-slate-500">Current Program / Session</label>
+                        <input id="facProg" type="text" placeholder="e.g. CSE for Technical Officers" class="w-full border p-2 text-xs rounded border-slate-300">
+                        <select id="facSess" class="w-full border p-2 text-xs rounded border-slate-300">
+                            <option>Morning (08:30am - 10:30am)</option>
+                            <option>Mid-Morning (11:00am - 01:00pm)</option>
+                            <option>Afternoon (02:00pm - 04:00pm)</option>
+                        </select>
+                        
+                        <button type="button" onclick="logSession()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg transition">Check-In Facilitator</button>
+                    </form>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-[10px] border-collapse">
-                    <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
-                        <tr>
-                            <th class="p-4 border">Service / Commitment</th>
-                            <th class="p-4 border">Target Standard</th>
-                            <th class="p-4 border text-center">Achievement</th>
-                            <th class="p-4 border text-center">% Compliance</th>
-                            <th class="p-4 border">AI Variance Insight</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y font-medium text-slate-700">
-                        <tr>
-                            <td class="p-4 border font-bold">CSE Program Delivery</td>
-                            <td class="p-4 border italic">Within 5 days of start date</td>
-                            <td class="p-4 border text-center">4.2 Days</td>
-                            <td id="ui-compRate" class="p-4 border text-center font-black text-green-600">92%</td>
-                            <td class="p-4 border text-[9px] text-slate-500 italic">Target met through digital PA roll-call efficiency.</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 border font-bold">Certification Dispatch</td>
-                            <td class="p-4 border italic">Within 7 days post-training</td>
-                            <td class="p-4 border text-center">Immediate</td>
-                            <td class="p-4 border text-center font-black text-green-600">100%</td>
-                            <td class="p-4 border text-[9px] text-slate-500 italic">Automated via Executive Memo module.</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 border font-bold">Facilitator Payment</td>
-                            <td class="p-4 border italic">Within 30 days of log entry</td>
-                            <td class="p-4 border text-center">TBD</td>
-                            <td class="p-4 border text-center font-black text-red-600">Pending</td>
-                            <td class="p-4 border text-[9px] text-red-600 font-bold">Action Required: Susan Chesang Approval needed.</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded shadow-xl border overflow-hidden">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
+                        <span>Consolidated Guest Facilitator Payment Ledger (August & September 2025)</span>
+                        <div class="flex gap-2">
+                            <button onclick="generatePaymentMemo()" class="bg-yellow-600 text-white px-3 py-1 rounded text-[8px] font-bold uppercase">Generate DG Memo</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-[10px] border-collapse">
+                            <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
+                                <tr>
+                                    <th class="p-3 border">Name</th>
+                                    <th class="p-3 border">Session/Date</th>
+                                    <th class="p-3 border text-center">Hrs</th>
+                                    <th class="p-3 border text-center">Amount</th>
+                                    <th class="p-3 border text-center">Tax (10%)</th>
+                                    <th class="p-3 border text-center">Total</th>
+                                    <th class="p-3 border text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentRows" class="divide-y font-medium text-slate-700">
+                                </tbody>
+                            <tfoot class="bg-slate-50 font-black uppercase text-slate-900 border-t-2">
+                                <tr>
+                                    <td colspan="5" class="p-3 text-right">Grand Total:</td>
+                                    <td id="grandTotal" class="p-3 text-center">Ksh 0.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 no-print">
-            <button onclick="location.reload()" class="bg-slate-800 text-white py-4 rounded font-black text-xs uppercase shadow-xl hover:bg-black">Refresh Core Engine</button>
-            <div class="bg-white p-4 rounded shadow border border-slate-200 text-center">
-                <p class="text-[10px] font-black uppercase ksg-text-maroon">Paperwork Reduction Target</p>
-                <h3 class="text-2xl font-black text-green-600">90%</h3>
+        <div id="memoContainer" class="hidden bg-white p-12 shadow-2xl border-2 border-slate-300 max-w-3xl mx-auto font-serif text-sm">
+            <div class="text-center border-b-2 border-slate-900 pb-4 mb-6">
+                <h2 class="font-bold text-lg uppercase">Kenya School of Government</h2>
+                <h3 class="font-black text-sm uppercase">Internal Memo</h3>
             </div>
-            <button onclick="window.print()" class="bg-yellow-600 text-white py-4 rounded font-black text-xs uppercase shadow-xl hover:bg-yellow-700">Print Compliance Report</button>
+            <div class="space-y-1 mb-6">
+                <p><strong>TO:</strong> Director General [cite: 17]</p>
+                <p><strong>FROM:</strong> Head of Centre for Customer Service Excellence [cite: 18]</p>
+                <p><strong>DATE:</strong> <span id="currentDate"></span></p>
+                <p><strong>SUBJECT: REQUEST FOR FACILITATION OF TRANSPORT AND DSA</strong> [cite: 21]</p>
+            </div>
+            <div class="mb-6 leading-relaxed">
+                <p>This is to notify you that the Centre for Customer Service Excellence conducted training sessions for the CSE Program[cite: 23].</p>
+                <p class="mt-4">The purpose of this memo is to request your office to facilitate payments as per the audited session logs attached[cite: 25].</p>
+            </div>
+            <div class="mt-12 pt-6 border-t border-slate-300">
+                <p class="font-bold">Susan Chesang [cite: 76]</p>
+                <p>Head of Centre, Customer Service Excellence [cite: 77]</p>
+            </div>
         </div>
     </main>
 
     <script>
-        function updateTime() {
-            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_pay_v1')) || {
+            logs: []
+        };
+
+        const HOURLY_RATE = 3000;
+        const TAX_RATE = 0.10;
+
+        function logSession() {
+            const name = document.getElementById('facSelect').value;
+            const prog = document.getElementById('facProg').value;
+            const sess = document.getElementById('facSess').value;
+            
+            if(!name || !prog) return alert("Select Facilitator and Program.");
+
+            const hours = 2; // Fixed per session block in timetable
+            const amount = hours * HOURLY_RATE;
+            const tax = amount * TAX_RATE;
+            const total = amount - tax;
+
+            state.logs.unshift({
+                id: Date.now(),
+                name,
+                session: `${prog} (${sess})`,
+                date: new Date().toLocaleDateString(),
+                hours,
+                amount,
+                tax,
+                total,
+                status: "AUDITED"
+            });
+            
+            saveAndRender();
+            document.getElementById('facLogForm').reset();
         }
-        setInterval(updateTime, 1000);
-        updateTime();
+
+        function saveAndRender() {
+            localStorage.setItem('ksg_sovereign_pay_v1', JSON.stringify(state));
+            render();
+        }
+
+        function render() {
+            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
+            document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            const rows = document.getElementById('paymentRows');
+            let grandTotal = 0;
+
+            rows.innerHTML = state.logs.map(l => {
+                grandTotal += l.total;
+                return `
+                    <tr>
+                        <td class="p-3 border font-black uppercase">${l.name}</td>
+                        <td class="p-3 border">${l.session} <br><span class="text-slate-400 text-[8px]">${l.date}</span></td>
+                        <td class="p-3 border text-center">${l.hours}</td>
+                        <td class="p-3 border text-center">${l.amount.toLocaleString()}</td>
+                        <td class="p-3 border text-center">${l.tax.toLocaleString()}</td>
+                        <td class="p-3 border text-center font-bold text-green-700">${l.total.toLocaleString()}</td>
+                        <td class="p-3 border text-center"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded">${l.status}</span></td>
+                    </tr>
+                `;
+            }).join('') || '<tr><td colspan="7" class="p-10 text-center italic text-slate-400">No facilitation logs found. Check-in required.</td></tr>';
+            
+            document.getElementById('grandTotal').innerText = "Ksh " + grandTotal.toLocaleString();
+        }
+
+        function generatePaymentMemo() {
+            document.getElementById('memoContainer').classList.remove('hidden');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        render();
     </script>
 </body>
 </html>
