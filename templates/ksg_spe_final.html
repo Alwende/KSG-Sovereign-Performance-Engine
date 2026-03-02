@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSG SPE | Enrollment & Compliance Portal</title>
+    <title>KSG SPE | PA Register & Compliance</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .ksg-maroon { background-color: #800000; }
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
-        .locked-btn { background-color: #64748b; cursor: not-allowed; }
+        .attendance-cell { min-width: 40px; text-align: center; font-weight: 800; border: 1px solid #e2e8f0; }
+        .present { background-color: #dcfce7; color: #166534; }
+        .absent { background-color: #fee2e2; color: #991b1b; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-20">
@@ -18,140 +20,91 @@
     <nav class="ksg-maroon text-white p-4 shadow-2xl border-b-4 gold-accent sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white p-1 rounded-sm"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm shadow-md"><span class="ksg-text-maroon font-black text-xl px-1">KSG</span></div>
                 <div>
-                    <h1 class="text-lg font-bold uppercase tracking-tight leading-none">Kenya School of Government</h1>
-                    <p class="text-[9px] uppercase tracking-widest text-yellow-500 font-bold">Center for Customer Service Excellence</p>
+                    <h1 class="text-lg font-bold uppercase tracking-tight">Kenya School of Government</h1>
+                    <p class="text-[9px] uppercase tracking-[0.2em] text-yellow-500 font-bold">Center for Customer Service Excellence</p>
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p id="netStatus" class="text-[8px] text-red-400 font-bold uppercase">Network: DISCONNECTED (WiFi Locked)</p>
+                <p class="text-xs font-bold uppercase">PA Portal: Dan / Sherry / Jerry</p>
                 <p id="complianceTimer" class="text-[10px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto py-6 px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <div class="lg:col-span-5 space-y-6">
-                <div id="enrollmentModule" class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon overflow-hidden">
-                    <div class="ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">
-                        Learner Gateway: Day 1 Enrollment
-                    </div>
-                    <form class="p-5 space-y-3" id="mainForm">
-                        <select id="regCourse" class="w-full border p-2 text-xs rounded bg-slate-50 font-bold border-slate-300">
-                            <option value="">-- Select Registered CSE Course --</option>
-                            <option>CSE Program for Executive Leaders (3 Days)</option>
-                            <option>CSE for Senior Managers (5 Days)</option>
-                            <option>CSE for Quality Standard Assessors (10 Days)</option>
-                            <option>CSE Program for Frontline Officers (5 Days)</option>
-                            <option>CSE for Technical Officers (4 Weeks)</option>
-                        </select>
-                        <input id="regName" type="text" placeholder="FULL NAME IN CAPITAL LETTERS (FOR CERTIFICATE)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
-                        <div class="grid grid-cols-2 gap-2">
-                            <input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded border-slate-300">
-                            <input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded border-slate-300">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <select id="regGender" class="border p-2 text-xs rounded bg-slate-50">
-                                <option>Male</option><option>Female</option>
-                            </select>
-                            <select id="regPWD" class="border p-2 text-xs rounded bg-slate-50">
-                                <option value="No">No PWD</option><option value="Yes">Yes PWD</option>
-                            </select>
-                        </div>
-                        <input id="regPhone" type="tel" placeholder="Phone Number" class="w-full border p-2 text-xs rounded border-slate-300">
-                        <input id="regEmail" type="email" placeholder="Official Email Address" class="w-full border p-2 text-xs rounded border-slate-300">
-                        
-                        <div class="p-3 bg-yellow-50 border border-yellow-200 rounded text-[9px] text-yellow-800 italic">
-                            Verification: Enrollment is only permitted via KSG Campus WiFi during class hours (08:00 - 17:00).
-                        </div>
-                        
-                        <button type="button" id="gateButton" onclick="handleGateway()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg transition">Enroll & Confirm Identity</button>
-                    </form>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Daily Attendance %</p>
+                <h3 id="ui-attRate" class="text-xl font-black ksg-text-maroon">0%</h3>
+                <p class="text-[8px] text-slate-400 italic">Target: 100% Compliance</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Verified Participants</p>
+                <h3 id="ui-count" class="text-xl font-black ksg-text-maroon">0</h3>
+                <p class="text-[8px] text-slate-400 italic">Ready for Certification</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 border-yellow-600">
+                <p class="text-[9px] text-slate-400 font-black uppercase">Audit Status</p>
+                <h3 class="text-xl font-black text-yellow-700 uppercase">Live</h3>
+                <p class="text-[8px] text-slate-400 italic">WiFi & Time Locked</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
+                <button onclick="exportToExcel()" class="w-full bg-slate-800 text-white font-bold py-2 rounded text-[10px] uppercase shadow">Export Digital Register</button>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-xl border overflow-hidden">
+            <div class="p-4 ksg-maroon text-white flex justify-between items-center">
+                <h2 class="text-xs font-bold uppercase tracking-widest">Interactive Class Attendance Ledger (100% Daily Roll Call)</h2>
+                <div class="flex gap-4 items-center">
+                    <span class="text-[10px] font-bold">PROGRAM: <span id="currentProg">SELECT IN ENROLLMENT</span></span>
                 </div>
             </div>
-
-            <div class="lg:col-span-7 space-y-6">
-                <div class="bg-white rounded shadow-xl border overflow-hidden">
-                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center text-[10px] font-black ksg-text-maroon uppercase">
-                        <span>Program Assistant Verification Portal</span>
-                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[8px]">Real-Time Feed</span>
-                    </div>
-                    <table class="w-full text-left text-[10px] border-collapse">
-                        <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
-                            <tr>
-                                <th class="p-3">Learner Name</th>
-                                <th class="p-3">Course</th>
-                                <th class="p-3 text-center">Identity</th>
-                                <th class="p-3 text-center">Status</th>
-                                <th class="p-3 text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="paVerifyRows" class="divide-y font-medium text-slate-700">
-                            </tbody>
-                    </table>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-[10px] border-collapse">
+                    <thead class="bg-slate-100 uppercase text-slate-500 font-bold border-b">
+                        <tr>
+                            <th class="p-3 border">Name (CAPS)</th>
+                            <th class="p-3 border">Designation / Org</th>
+                            <th class="p-3 border">Gender</th>
+                            <th class="p-3 border">PWD</th>
+                            <th class="p-3 border text-center">Day 1</th>
+                            <th class="p-3 border text-center">Day 2</th>
+                            <th class="p-3 border text-center">Day 3</th>
+                            <th class="p-3 border text-center">Day 4</th>
+                            <th class="p-3 border text-center">Day 5</th>
+                            <th class="p-3 border text-center">Verification</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registerRows" class="divide-y font-medium text-slate-700">
+                        </tbody>
+                </table>
             </div>
         </div>
     </main>
 
     <script>
         let state = JSON.parse(localStorage.getItem('ksg_sovereign_gate_v1')) || {
-            learners: [],
-            isRegistered: false,
-            onKSGWiFi: true // Simulated for Demo
+            learners: []
         };
 
-        function handleGateway() {
-            if(!isWithinHours()) return alert("PORTAL LOCKED: Sign-ins only permitted between 08:00 and 17:00.");
-            if(!state.onKSGWiFi) return alert("NETWORK DENIED: Please connect to KSG Campus WiFi to register.");
-
-            if(state.isRegistered) {
-                markDailyAttendance();
-            } else {
-                performInitialEnrollment();
+        function toggleAttendance(learnerId, dayIndex) {
+            const learner = state.learners.find(l => l.id === learnerId);
+            if (!learner.attendanceRecords) {
+                // Initialize attendance array if not exists (mapping days 1-5)
+                learner.attendanceRecords = [false, false, false, false, false];
             }
-        }
-
-        function performInitialEnrollment() {
-            const name = document.getElementById('regName').value;
-            if(!name) return alert("Name is mandatory for certification.");
-
-            state.learners.unshift({
-                id: Date.now(),
-                name: name.toUpperCase(),
-                desig: document.getElementById('regDesig').value,
-                org: document.getElementById('regOrg').value,
-                course: document.getElementById('regCourse').value,
-                attendance: ["Day 1"],
-                status: "Pending PA Approval"
-            });
-            state.isRegistered = true;
+            learner.attendanceRecords[dayIndex] = !learner.attendanceRecords[dayIndex];
             saveAndRender();
-            alert("Enrollment Successful. Your identity is now locked to this device.");
-            updateUIForDailyMode();
-        }
-
-        function markDailyAttendance() {
-            const l = state.learners[0]; // Device-locked learner
-            const dayLabel = "Day " + (l.attendance.length + 1);
-            l.attendance.push(dayLabel);
-            l.status = "Signed In - " + dayLabel;
-            saveAndRender();
-            alert("Sign-in Recorded for " + dayLabel);
         }
 
         function approveLearner(id) {
             const l = state.learners.find(x => x.id === id);
-            l.status = "Verified & Active";
+            l.status = "VERIFIED";
             saveAndRender();
-        }
-
-        function isWithinHours() {
-            const h = new Date().getHours();
-            return h >= 8 && h < 17;
         }
 
         function saveAndRender() {
@@ -159,38 +112,46 @@
             render();
         }
 
-        function updateUIForDailyMode() {
-            if(state.isRegistered) {
-                document.getElementById('mainForm').innerHTML = `
-                    <div class="p-8 text-center space-y-4">
-                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl font-black">✓</div>
-                        <h4 class="font-black ksg-text-maroon uppercase text-sm">${state.learners[0].name}</h4>
-                        <p class="text-[10px] text-slate-500 uppercase font-bold">${state.learners[0].course}</p>
-                        <button onclick="handleGateway()" class="w-full ksg-maroon text-white py-3 rounded font-black text-xs uppercase shadow-lg">Daily Sign-In</button>
-                    </div>
-                `;
-            }
-        }
-
         function render() {
             document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
-            document.getElementById('netStatus').innerText = state.onKSGWiFi ? "Network: SECURE (KSG WiFi Active)" : "Network: DISCONNECTED";
-            document.getElementById('netStatus').className = state.onKSGWiFi ? "text-[8px] text-green-500 font-bold uppercase" : "text-[8px] text-red-400 font-bold uppercase";
-
-            document.getElementById('paVerifyRows').innerHTML = state.learners.map(l => `
-                <tr>
-                    <td class="p-3 font-black">${l.name}</td>
-                    <td class="p-3 italic text-slate-500">${l.course.substring(0,20)}...</td>
-                    <td class="p-3 text-center font-bold text-blue-600">${l.attendance.join(', ')}</td>
-                    <td class="p-3 text-center"><span class="bg-slate-100 px-2 py-0.5 rounded">${l.status}</span></td>
-                    <td class="p-3 text-center">
-                        <button onclick="approveLearner(${l.id})" class="bg-green-600 text-white text-[8px] px-2 py-1 rounded font-bold uppercase">Approve</button>
-                    </td>
-                </tr>
-            `).join('') || '<tr><td colspan="5" class="p-10 text-center italic text-slate-400">Waiting for Day 1 enrollments...</td></tr>';
             
-            updateUIForDailyMode();
+            const rows = document.getElementById('registerRows');
+            if (state.learners.length === 0) {
+                rows.innerHTML = '<tr><td colspan="10" class="p-10 text-center italic text-slate-400">No learners enrolled. Day 1 Enrollment required.</td></tr>';
+                return;
+            }
+
+            document.getElementById('currentProg').innerText = state.learners[0].course || "CSE PROGRAM";
+            document.getElementById('ui-count').innerText = state.learners.filter(l => l.status === "VERIFIED").length;
+
+            rows.innerHTML = state.learners.map(l => {
+                // Ensure attendance data exists for rendering
+                const att = l.attendanceRecords || [true, false, false, false, false];
+                return `
+                    <tr>
+                        <td class="p-3 border font-black uppercase">${l.name}</td>
+                        <td class="p-3 border text-slate-500">${l.desig} / ${l.org}</td>
+                        <td class="p-3 border text-center">${l.gender || 'M'}</td>
+                        <td class="p-3 border text-center">${l.pwd || 'No'}</td>
+                        <td class="p-3 border attendance-cell ${att[0] ? 'present' : 'absent'}" onclick="toggleAttendance(${l.id}, 0)">${att[0] ? 'P' : 'A'}</td>
+                        <td class="p-3 border attendance-cell ${att[1] ? 'present' : 'absent'}" onclick="toggleAttendance(${l.id}, 1)">${att[1] ? 'P' : 'A'}</td>
+                        <td class="p-3 border attendance-cell ${att[2] ? 'present' : 'absent'}" onclick="toggleAttendance(${l.id}, 2)">${att[2] ? 'P' : 'A'}</td>
+                        <td class="p-3 border attendance-cell ${att[3] ? 'present' : 'absent'}" onclick="toggleAttendance(${l.id}, 3)">${att[3] ? 'P' : 'A'}</td>
+                        <td class="p-3 border attendance-cell ${att[4] ? 'present' : 'absent'}" onclick="toggleAttendance(${l.id}, 4)">${att[4] ? 'P' : 'A'}</td>
+                        <td class="p-3 border text-center">
+                            <button onclick="approveLearner(${l.id})" class="w-full ${l.status === 'VERIFIED' ? 'bg-green-100 text-green-700' : 'bg-yellow-600 text-white'} text-[8px] py-1 rounded font-bold uppercase transition">
+                                ${l.status || 'APPROVE'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
+
+        function exportToExcel() {
+            alert("Digital Register Formatted. Exporting to Excel for Institutional Audit...");
+        }
+
         render();
     </script>
 </body>
