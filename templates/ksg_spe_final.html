@@ -10,6 +10,7 @@
         .ksg-text-maroon { color: #800000; }
         .ksg-border-maroon { border-color: #800000; }
         .gold-accent { border-color: #D4AF37; }
+        .active-session { border-left: 6px solid #800000; background-color: #fff5f5; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 pb-20">
@@ -24,120 +25,146 @@
                 </div>
             </div>
             <div class="text-right border-l pl-4 border-red-900">
-                <p class="text-xs font-bold uppercase">Susan Chesang (HOC/Appraiser)</p>
+                <p class="text-xs font-bold uppercase">Program Management Portal</p>
                 <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto py-6 px-4">
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Competency (Sherry)</p>
-                <h3 id="ui-comp" class="text-xl font-black ksg-text-maroon">0 / 10</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-comp" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
-            </div>
-            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Consultancy (Dan)</p>
-                <h3 id="ui-cons" class="text-xl font-black ksg-text-maroon">0 / 3</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-cons" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
-            </div>
-            <div class="bg-white p-4 rounded shadow border-b-4 ksg-border-maroon">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Research (Jerry)</p>
-                <h3 id="ui-res" class="text-xl font-black ksg-text-maroon">0 / 1</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-res" class="ksg-maroon h-full transition-all duration-700" style="width: 0%"></div></div>
-            </div>
-            <div class="bg-white p-4 rounded shadow border-b-4 border-yellow-600">
-                <p class="text-[9px] text-slate-400 font-black uppercase">Sustainability (Susan)</p>
-                <h3 id="ui-rev" class="text-xl font-black text-yellow-700">0M / 50M</h3>
-                <div class="w-full bg-slate-100 h-1.5 mt-2 rounded-full overflow-hidden"><div id="bar-rev" class="bg-yellow-600 h-full transition-all duration-700" style="width: 0%"></div></div>
-            </div>
-        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-xl shadow-lg border-2 ksg-border-maroon p-5">
+                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon border-b pb-2 mb-4">1. Select Active CSE Program</h3>
+                    <select id="progSelect" onchange="loadTimetable()" class="w-full border p-2 text-xs rounded font-bold bg-slate-50 mb-4">
+                        <option value="exec">Executive Leaders (3 Days)</option>
+                        <option value="senior">Senior Managers (5 Days)</option>
+                        <option value="assessor">Quality Standard Assessors (10 Days)</option>
+                        <option value="frontline">Frontline Officers (5 Days)</option>
+                        <option value="tech_w1">Technical Officers - Week 1</option>
+                        <option value="tech_w2">Technical Officers - Week 2</option>
+                        <option value="tech_w3">Technical Officers - Week 3</option>
+                        <option value="tech_w4">Technical Officers - Week 4</option>
+                    </select>
+                    
+                    <h3 class="font-black text-[10px] uppercase ksg-text-maroon border-b pb-2 mb-4">2. School Scheduler: Facilitator Availability</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[10px] p-2 bg-slate-50 border rounded">
+                            <span>Dan Alwende</span>
+                            <input type="checkbox" id="fac_dan" checked>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] p-2 bg-slate-50 border rounded">
+                            <span>Sherry Bartuin</span>
+                            <input type="checkbox" id="fac_sherry" checked>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] p-2 bg-slate-50 border rounded">
+                            <span>Jerry Okumu</span>
+                            <input type="checkbox" id="fac_jerry" checked>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] p-2 bg-slate-50 border rounded">
+                            <span>Huduma Adjunct</span>
+                            <input type="checkbox" id="fac_huduma">
+                        </div>
+                    </div>
+                </div>
 
-        <div class="bg-white rounded shadow-xl border overflow-hidden mb-8">
-            <div class="p-4 ksg-maroon text-white flex justify-between items-center">
-                <h2 class="text-xs font-bold uppercase tracking-widest">Master Annual Work Plan FY 2025/2026 (Interactive)</h2>
-                <span class="text-[10px] bg-yellow-600 px-2 py-1 rounded">Digital Audit Mode</span>
+                <div class="bg-slate-800 rounded shadow-lg p-5 text-white">
+                    <h3 class="font-black text-[10px] uppercase border-b border-slate-700 pb-2 mb-4">Coordination Status</h3>
+                    <p class="text-[9px] text-slate-400">Coordinator: <span class="text-white">Susan Chesang</span></p>
+                    <p class="text-[9px] text-slate-400 mt-1">Status: <span class="text-green-400 font-bold uppercase">Ready for Implementation</span></p>
+                </div>
             </div>
-            <table class="w-full text-left text-xs border-collapse">
-                <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr>
-                        <th class="p-4">Owner</th>
-                        <th class="p-4">Strategic Activity (From AWP)</th>
-                        <th class="p-4">Performance Indicator</th>
-                        <th class="p-4 text-center">Status</th>
-                        <th class="p-4 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="awpRows" class="divide-y divide-slate-100">
-                    </tbody>
-            </table>
+
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded shadow-xl border overflow-hidden">
+                    <div class="p-4 ksg-maroon text-white flex justify-between items-center">
+                        <h2 id="timetableTitle" class="text-xs font-bold uppercase tracking-widest">CSE TIMETABLE</h2>
+                        <div class="flex gap-2">
+                            <select id="daySelect" onchange="loadTimetable()" class="bg-white text-maroon text-[9px] px-2 py-1 rounded font-bold uppercase">
+                                <option value="0">Day 1 / Monday</option>
+                                <option value="1">Day 2 / Tuesday</option>
+                                <option value="2">Day 3 / Wednesday</option>
+                                <option value="3">Day 4 / Thursday</option>
+                                <option value="4">Day 5 / Friday</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
+                            <tr>
+                                <th class="p-4 w-32">Time Block</th>
+                                <th class="p-4">Unit / Topic Details</th>
+                                <th class="p-4">Assigned Facilitator</th>
+                                <th class="p-4 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetableRows" class="divide-y divide-slate-100">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 
     <script>
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_final_v3')) || {
-            revenue: 0,
-            kra1: 0, // Sherry - Training
-            kra2: 0, // Dan - Consultancy
-            kra3: 0, // Jerry - Research
-            approved: {}
+        const schedules = {
+            exec: [
+                ["Briefing, Introductions, Program Objectives, Expectations and Official Opening", "Government Transformation Agenda", "Contemporary Knowledge Management for Exceptional Customer Experience"],
+                ["Service Excellence of the Future / Teams / Trends", "Sustaining Customer Focused Organizational Culture", "Connecting Service Excellence to Purpose / Purpose Gap"],
+                ["Going beyond to Transforming lives / Society / CSR", "Circumventing Changes in Business Environment", "Experience Sharing / Debriefing & Closure"]
+            ],
+            tech_w1: [
+                ["Registration & Official Opening", "CSE Definitions, Rationale, Types of Customers", "CSE Promptness Characteristics"],
+                ["Evolution of CSE & Emerging Issues", "Regulatory Framework for CSE in Kenya", "National Development Agenda (Vision 2030)"],
+                ["BETA and Customer Service Excellence", "CSE Policy and Strategy", "Link between Policy and Strategy / Resource Allocation"],
+                ["CSE Units in Organisational Structures", "Work Environment / Internal Environment", "External Work Environment"],
+                ["Indicators of customer-centric work environment", "Function of positive work environment", "Strategies for improving the work environment"]
+            ],
+            frontline: [
+                ["Briefing, Introductions and Official Opening", "Public Service and Huduma Kenya Program", "The Customer Service Professional"],
+                ["The Customer Service Professional (Cont.)", "Customer Insights", "Customer Insights (Cont.)"],
+                ["Life Skills for Customer Service Delivery", "Life Skills (Cont.)", "Quality Customer Service Environment"],
+                ["Quality Customer Service Environment (Cont.)", "Quality Standards", "Quality Standards (Cont.)"],
+                ["Practicum", "Practicum (Cont.)", "Program Debriefing, Evaluation and Closing"]
+            ]
         };
 
-        const awpData = [
-            { owner: "Sherry Bartuin", activity: "Roll out 10 CSE Training Programs", indicator: "Programs Delivered", target: 10, key: "kra1" },
-            { owner: "Dan Alwende", activity: "Pilot Standardized CSE Model in 3 Corps", indicator: "Pilot Reports", target: 3, key: "kra2" },
-            { owner: "Jerry Okumu", activity: "Develop 1 CSE Policy Brief", indicator: "Published Brief", target: 1, key: "kra3" },
-            { owner: "Susan Chesang", activity: "Mobilize KES 50,000,000 Revenue", indicator: "Revenue Raised", target: 50000000, key: "revenue" }
-        ];
+        const timeBlocks = ["08:30am - 10:30am", "11:00am - 01:00pm", "02:00pm - 04:00pm"];
 
-        function updatePerformance(key, amount) {
-            state[key] += amount;
-            saveAndRender();
+        function loadTimetable() {
+            const prog = document.getElementById('progSelect').value;
+            const day = parseInt(document.getElementById('daySelect').value);
+            const title = document.getElementById('progSelect').options[document.getElementById('progSelect').selectedIndex].text;
+            document.getElementById('timetableTitle').innerText = `${title} - Day ${day + 1}`;
+
+            const units = schedules[prog] ? (schedules[prog][day] || ["Self-Study", "TBC", "TBC"]) : ["Unit Data Pending", "Unit Data Pending", "Unit Data Pending"];
+
+            document.getElementById('timetableRows').innerHTML = timeBlocks.map((t, i) => `
+                <tr class="hover:bg-slate-50 transition ${i === 0 ? 'active-session' : ''}">
+                    <td class="p-4 font-black text-slate-900">${t}</td>
+                    <td class="p-4 text-slate-600">${units[i]}</td>
+                    <td class="p-4">
+                        <select class="border p-1 text-[10px] rounded w-full bg-white">
+                            <option>-- Select Facilitator --</option>
+                            <option>Dan Alwende</option>
+                            <option>Sherry Bartuin</option>
+                            <option>Jerry Okumu</option>
+                            <option>Huduma Adjunct</option>
+                        </select>
+                    </td>
+                    <td class="p-4 text-center">
+                        <button class="bg-maroon-600 text-[8px] ksg-maroon text-white px-2 py-1 rounded font-bold uppercase">Confirm</button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        function saveAndRender() {
-            localStorage.setItem('ksg_sovereign_final_v3', JSON.stringify(state));
-            render();
+        function updateTime() {
+            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
         }
-
-        function render() {
-            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
-            
-            // Scoreboard Update
-            document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
-            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
-            document.getElementById('ui-cons').innerText = state.kra2 + ' / 3';
-            document.getElementById('bar-cons').style.width = (state.kra2/3)*100 + '%';
-            document.getElementById('ui-res').innerText = state.kra3 + ' / 1';
-            document.getElementById('bar-res').style.width = (state.kra3/1)*100 + '%';
-            document.getElementById('ui-rev').innerText = (state.revenue/1000000).toFixed(2) + 'M / 50M';
-            document.getElementById('bar-rev').style.width = (state.revenue/50000000)*100 + '%';
-
-            // Table Update
-            document.getElementById('awpRows').innerHTML = awpData.map(d => {
-                const current = state[d.key];
-                const progress = d.key === 'revenue' ? (current/1000000).toFixed(2) + 'M' : current;
-                return `
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-4 font-black text-slate-900">${d.owner}</td>
-                        <td class="p-4 text-slate-600">${d.activity}</td>
-                        <td class="p-4 font-medium italic">${d.indicator}</td>
-                        <td class="p-4 text-center">
-                            <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-bold">${progress} / ${d.key === 'revenue' ? '50M' : d.target}</span>
-                        </td>
-                        <td class="p-4 text-center">
-                            <button onclick="updatePerformance('${d.key}', ${d.key === 'revenue' ? 127000 : 1})" 
-                                class="bg-slate-800 text-white text-[9px] px-3 py-1 rounded font-bold uppercase hover:bg-black">
-                                Log Unit
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-        render();
+        setInterval(updateTime, 1000);
+        loadTimetable();
     </script>
 </body>
 </html>
