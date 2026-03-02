@@ -16,7 +16,7 @@
         .btn-ksg:hover { background-color: #600000; transform: translateY(-1px); }
         .active-session { border-left: 6px solid var(--ksg-maroon); background-color: #fff5f5; }
         .present-cell { background-color: #dcfce7; color: #166534; font-weight: 900; text-align: center; }
-        .rating-star { cursor: pointer; font-size: 1.2rem; color: #cbd5e1; }
+        .rating-star { cursor: pointer; font-size: 1.5rem; color: #cbd5e1; transition: color 0.2s; }
         .rating-star.active { color: var(--ksg-gold); }
         @media print { .no-print { display: none !important; } #printableTimetable { visibility: visible; position: absolute; left: 0; top: 0; width: 100%; } }
     </style>
@@ -26,7 +26,9 @@
     <nav class="bg-ksg-maroon text-white p-4 shadow-2xl border-b-4 border-ksg-gold sticky top-0 z-50 no-print">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <div class="bg-white p-1 rounded-sm shadow-md"><span class="text-ksg-maroon font-black text-2xl px-2">KSG</span></div>
+                <div class="bg-white p-1 rounded-sm shadow-md flex items-center justify-center">
+                    <span class="text-ksg-maroon font-black text-2xl px-2">KSG</span>
+                </div>
                 <div>
                     <h1 class="text-lg font-bold uppercase leading-none tracking-tight">Kenya School of Government</h1>
                     <p class="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">Center for Customer Service Excellence | Partner: HUDUMA KENYA</p>
@@ -34,7 +36,7 @@
             </div>
             <div class="text-right border-l pl-4 border-red-900">
                 <p class="text-xs font-bold uppercase">Dan Alwende | Sovereign Command</p>
-                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase">TIME: LOADING...</p>
+                <p id="complianceTimer" class="text-[9px] font-mono text-yellow-400 font-bold uppercase tracking-widest">TIME: LOADING...</p>
             </div>
         </div>
     </nav>
@@ -45,20 +47,19 @@
             <div class="lg:col-span-8 bg-white p-6 rounded-xl shadow-xl border-t-4 border-slate-800">
                 <h2 class="text-xs font-bold uppercase tracking-widest italic mb-4 text-slate-500">Institutional Strategy & Impact Dashboard</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="h-56"><canvas id="ratingChart"></canvas></div>
-                    <div class="overflow-y-auto max-h-56 border rounded p-2">
+                    <div class="h-48"><canvas id="ratingChart"></canvas></div>
+                    <div class="space-y-1 overflow-y-auto max-h-48">
                         <table class="w-full text-left text-[9px] border-collapse">
-                            <thead class="bg-slate-50 border-b font-black uppercase">
-                                <tr><th class="p-2">Strategic Objective</th><th class="p-2 text-center">Target</th><th class="p-2 text-center">Action</th></tr>
+                            <thead class="bg-slate-50 border-b font-black uppercase text-slate-400">
+                                <tr><th class="p-2 border">Strategic Objective</th><th class="p-2 border text-center">Progress</th><th class="p-2 border text-center">Action</th></tr>
                             </thead>
-                            <tbody id="awpLedgerBody" class="divide-y text-slate-700"></tbody>
+                            <tbody id="awpLedgerBody" class="divide-y text-slate-700 font-medium"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
             <div class="lg:col-span-4 bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
-                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest italic">Evaluation Portal (Paperless)</div>
+                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest italic">Learner Feedback Portal</div>
                 <div id="evalGatewayContent" class="p-5"></div>
             </div>
         </div>
@@ -66,8 +67,8 @@
         <div id="printableTimetable" class="bg-white rounded-xl shadow-xl border overflow-hidden">
             <div class="p-4 bg-ksg-maroon text-white flex flex-wrap justify-between items-center gap-4 no-print">
                 <div class="flex items-center gap-4">
-                    <h2 class="text-xs font-bold uppercase tracking-widest border-l-4 border-ksg-gold pl-2">Master Digital Timetable</h2>
-                    <select id="progSelect" onchange="initTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase">
+                    <h2 class="text-xs font-bold uppercase tracking-widest italic border-l-4 border-ksg-gold pl-2">Master Digital Timetable</h2>
+                    <select id="progSelect" onchange="initTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase outline-none">
                         <option value="tech">Technical Officers</option>
                         <option value="assessor">Quality Assessors</option>
                         <option value="exec">Executive Leaders</option>
@@ -76,14 +77,13 @@
                     </select>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-[10px] font-bold uppercase">Select Day:</span>
-                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none"></select>
-                    <button onclick="window.print()" class="bg-ksg-gold text-white px-3 py-1 rounded text-[10px] font-bold uppercase shadow-lg">Print Schedule</button>
+                    <span class="text-[10px] font-bold">DAY:</span>
+                    <select id="daySelect" onchange="renderTimetable()" class="bg-white text-ksg-maroon text-[10px] px-2 py-1 rounded font-bold uppercase border-none outline-none"></select>
                 </div>
             </div>
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-100 text-[10px] uppercase text-slate-500 font-bold border-b">
-                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Selection</th><th class="p-4 border text-center no-print">Institutional Approval</th></tr>
+                    <tr><th class="p-4 border">Time Block</th><th class="p-4 border">Unit / Topic Details</th><th class="p-4 border">Facilitator Assignment</th><th class="p-4 border text-center no-print">Approval Status</th></tr>
                 </thead>
                 <tbody id="timetableRows" class="divide-y divide-slate-100"></tbody>
             </table>
@@ -91,19 +91,19 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 no-print">
             <div class="lg:col-span-4 bg-white rounded-xl shadow-2xl border-2 border-ksg-maroon overflow-hidden">
-                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Learner Identity Gateway</div>
+                <div class="bg-ksg-maroon p-3 text-white text-[10px] font-bold uppercase text-center tracking-widest">Day 1 Identity Capture</div>
                 <div id="gatewayContent" class="p-5"></div>
             </div>
 
             <div class="lg:col-span-8 bg-white rounded-xl shadow-xl border-t-4 border-ksg-maroon overflow-hidden">
                 <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
-                    <h2 class="text-xs font-black text-ksg-maroon uppercase tracking-tighter">PA Verified Attendance Register</h2>
-                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200">WiFi: SECURE</span>
+                    <h2 class="text-xs font-black text-ksg-maroon uppercase">PA Verified Attendance Register</h2>
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded border border-green-200 uppercase">WiFi: SECURE (KSG-NET)</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-[9px] border-collapse">
                         <thead class="bg-slate-100 uppercase border-b text-slate-500 font-bold">
-                            <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Fee Status</th></tr>
+                            <tr><th class="p-3 border">Learner Name (CAPS)</th><th class="p-3 border">Org</th><th class="p-3 border text-center">D1</th><th class="p-3 border text-center">D2</th><th class="p-3 border text-center">D3</th><th class="p-3 border text-center">D4</th><th class="p-3 border text-center">D5</th><th class="p-3 border text-center">Fee Status</th></tr>
                         </thead>
                         <tbody id="paRegisterRows" class="divide-y font-medium text-slate-700"></tbody>
                     </table>
@@ -138,7 +138,7 @@
             { kra: "SO 6", activity: "Mobilize 50,000,000 Revenue", owner: "Susan", target: 50000000, key: "rev", type: "money" }
         ];
 
-        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V26')) || { 
+        let state = JSON.parse(localStorage.getItem('ksg_sovereign_MASTER_V27')) || { 
             learners: [], approvals: {}, facilitatorAssignments: {}, ratings: [], kra1:0, kra2:0, kra3:0, rev:0, currentLearner: null
         };
 
@@ -148,7 +148,7 @@
             const container = document.getElementById('gatewayContent');
             if (!state.currentLearner) {
                 container.innerHTML = `
-                    <form id="enrollForm" class="space-y-2">
+                    <form id="enrollForm" class="space-y-3">
                         <select id="regCourse" class="w-full border p-2 text-[10px] font-bold bg-slate-50 rounded uppercase">
                             <option value="tech">Technical Officers</option>
                             <option value="assessor">Quality Assessors</option>
@@ -156,16 +156,17 @@
                             <option value="frontline">Frontline Officers</option>
                             <option value="senior">Senior Managers</option>
                         </select>
-                        <input id="regName" type="text" placeholder="FULL NAME (CAPS)" class="w-full border p-2 text-xs rounded uppercase">
-                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Org" class="border p-2 text-xs rounded"></div>
-                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded"><option>Male</option><option>Female</option></select><select id="regPWD" class="border p-2 text-[10px] rounded"><option>No PWD</option><option>Yes PWD</option></select></div>
-                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg font-black uppercase">Confirm & Enroll</button>
+                        <input id="regName" type="text" placeholder="FULL NAME (CAPS)" class="w-full border p-2 text-xs rounded uppercase border-slate-300">
+                        <div class="grid grid-cols-2 gap-2"><input id="regDesig" type="text" placeholder="Designation" class="border p-2 text-xs rounded"><input id="regOrg" type="text" placeholder="Organization" class="border p-2 text-xs rounded"></div>
+                        <div class="grid grid-cols-2 gap-2"><select id="regGender" class="border p-2 text-[10px] rounded bg-slate-50 font-bold"><option>MALE</option><option>FEMALE</option></select><select id="regPWD" class="border p-2 text-[10px] rounded bg-slate-50 font-bold"><option value="No">NO PWD</option><option value="Yes">YES PWD</option></select></div>
+                        <div class="grid grid-cols-2 gap-2"><input id="regPhone" type="tel" placeholder="Phone No" class="border p-2 text-xs rounded border-slate-300"><input id="regEmail" type="email" placeholder="Official Email" class="border p-2 text-xs rounded border-slate-300"></div>
+                        <button type="button" onclick="enroll()" class="w-full btn-ksg py-3 rounded text-xs shadow-lg font-black uppercase tracking-widest">Confirm & Start Training</button>
                     </form>`;
             } else {
                 container.innerHTML = `
                     <div class="text-center space-y-4 py-8">
-                        <h4 class="font-black text-ksg-maroon uppercase text-xs">MEMBER CONNECTED: ${state.currentLearner.name}</h4>
-                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase tracking-widest">Verify Presence (Today)</button>
+                        <h4 class="font-black text-ksg-maroon uppercase text-xs">MEMBER: ${state.currentLearner.name}</h4>
+                        <button onclick="markAttendance()" class="w-full btn-ksg py-4 rounded text-xs shadow-xl font-black uppercase tracking-widest">Mark Present (Today)</button>
                         <p class="text-[8px] text-slate-400 font-bold italic tracking-widest uppercase">WiFi Authenticated</p>
                     </div>`;
             }
@@ -175,15 +176,20 @@
             const name = document.getElementById('regName').value;
             if(!name) return alert("Required: Full CAPS Name");
             const newLearner = {
-                id: Date.now(), name: name.toUpperCase(), course: document.getElementById('regCourse').value,
-                att: [true, false, false, false, false], paid: false
+                id: Date.now(), 
+                name: name.toUpperCase(), 
+                course: document.getElementById('regCourse').value,
+                desig: document.getElementById('regDesig').value,
+                org: document.getElementById('regOrg').value || "KSG", 
+                att: [true, false, false, false, false], 
+                paid: false
             };
             state.learners.unshift(newLearner); state.currentLearner = newLearner; save();
         }
 
         function markAttendance() {
             const h = new Date().getHours();
-            if (h < 8 || h >= 17) return alert("Closed: Class Hours 08:00-17:00 only.");
+            if (h < 8 || h >= 17) return alert("PORTAL CLOSED: Sign-ins permitted 08:00 - 17:00.");
             const l = state.learners.find(x => x.id === state.currentLearner.id);
             const nextDay = l.att.indexOf(false);
             if(nextDay !== -1) l.att[nextDay] = true; save(); alert("Attendance Captured.");
@@ -195,32 +201,32 @@
             const container = document.getElementById('evalGatewayContent');
             const pk = document.getElementById('progSelect').value;
             const dIdx = document.getElementById('daySelect').value || 0;
-            const fac = state.facilitatorAssignments[pk + '-' + dIdx + '-0'];
+            const fac = state.facilitatorAssignments[pk + '-' + dIdx + '-0']; // Link to Morning Session
 
             if (!state.currentLearner) {
-                container.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs italic uppercase">Login to provide feedback.</div>';
+                container.innerHTML = '<div class="text-center py-10 text-slate-400 text-xs italic uppercase">Enroll to provide feedback.</div>';
                 return;
             }
             if (!fac) {
-                container.innerHTML = '<div class="text-center py-10 text-ksg-maroon font-bold text-[10px] uppercase">Awaiting session assignment...</div>';
+                container.innerHTML = '<div class="text-center py-10 text-ksg-maroon font-bold text-[10px] uppercase tracking-widest">Awaiting session assignment...</div>';
                 return;
             }
 
             container.innerHTML = `
                 <div class="space-y-4 text-center">
-                    <p class="text-[9px] font-bold uppercase text-slate-500">Rate Facilitator: <span class="text-ksg-maroon font-black">${fac}</span></p>
+                    <p class="text-[9px] font-bold uppercase tracking-widest text-slate-500">Rate Facilitator: <span class="text-ksg-maroon font-black">${fac}</span></p>
                     <div class="flex justify-center gap-2">
                         ${[1,2,3,4,5].map(i => `<span onclick="submitRating(${i})" class="rating-star ${window.tempRating >= i ? 'active' : ''}">★</span>`).join('')}
                     </div>
-                    <textarea id="evalComments" placeholder="How can we improve?" class="w-full border p-2 text-xs rounded border-slate-300"></textarea>
-                    <button onclick="confirmRating('${fac}')" class="w-full btn-ksg py-2 rounded text-[10px]">Submit Live Feedback</button>
+                    <textarea id="evalComments" placeholder="How can we improve?" class="w-full border p-2 text-xs rounded border-slate-300 h-20"></textarea>
+                    <button onclick="confirmRating('${fac}')" class="w-full btn-ksg py-2 rounded text-[10px] font-black uppercase">Submit Evaluation</button>
                 </div>`;
         }
 
         function submitRating(val) { window.tempRating = val; renderEvalPortal(); }
         function confirmRating(fac) {
             if(!window.tempRating) return alert("Select a score.");
-            state.ratings.push({ facilitator: fac, score: window.tempRating, timestamp: Date.now() });
+            state.ratings.push({ facilitator: fac, score: window.tempRating, comment: document.getElementById('evalComments').value, timestamp: Date.now() });
             window.tempRating = 0; save(); alert("Feedback captured!");
         }
 
@@ -235,8 +241,8 @@
             myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: facilitators.map(f => f.split(' ')[0]),
-                    datasets: [{ label: 'Avg Score', data: Object.values(dataMap), backgroundColor: '#800000', borderColor: '#D4AF37', borderWidth: 1 }]
+                    labels: facilitators.map(f => f.split(',')[0].split(' ')[0]),
+                    datasets: [{ label: 'Avg Rating', data: Object.values(dataMap), backgroundColor: '#800000', borderColor: '#D4AF37', borderWidth: 1 }]
                 },
                 options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 5 } } }
             });
@@ -245,9 +251,7 @@
         function initTimetable() {
             const pk = document.getElementById('progSelect').value;
             const daySel = document.getElementById('daySelect');
-            const curVal = daySel.value;
             daySel.innerHTML = Array.from({length: ttData[pk].days}, (_, i) => `<option value="${i}">Day ${i+1}</option>`).join('');
-            if (curVal < ttData[pk].days) daySel.value = curVal;
             renderTimetable();
         }
 
@@ -261,9 +265,9 @@
                 const assigned = state.facilitatorAssignments[sID] || "";
                 return `<tr>
                     <td class="p-4 border font-bold text-ksg-maroon font-mono text-[10px]">${b}</td>
-                    <td class="p-4 border font-bold uppercase text-[10px] font-black">${units[i]}</td>
+                    <td class="p-4 border font-bold uppercase text-[10px] font-black text-slate-600">${units[i]}</td>
                     <td class="p-4 border">
-                        <select onchange="assignFac('${sID}', this.value)" class="text-[9px] border p-1 rounded bg-white w-full uppercase font-bold text-slate-600">
+                        <select onchange="assignFac('${sID}', this.value)" class="text-[9px] border p-1 rounded bg-white w-full uppercase font-bold text-slate-500">
                             <option value="">-- Assign --</option>
                             ${facilitators.map(f => `<option value="${f}" ${assigned === f ? 'selected':''}>${f}</option>`).join('')}
                         </select>
@@ -284,43 +288,40 @@
             if (!fac) return alert("Select facilitator first.");
             if (!state.approvals[id]) {
                 const conflict = Object.keys(state.approvals).find(k => state.approvals[k] === true && state.facilitatorAssignments[k] === fac && k.endsWith(id.split('-').pop()));
-                if (conflict) return alert("CONFLICT: " + fac + " is approved for another program during " + timeBlock + ".");
+                if (conflict) return alert("CONFLICT: " + fac + " is already approved elsewhere during " + timeBlock + ".");
             }
             state.approvals[id] = !state.approvals[id]; save();
         }
 
         function renderAWP() {
-            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => `<tr>
-                <td class="p-2 border font-bold text-[9px] uppercase tracking-tighter text-slate-500">${a.kra}</td>
-                <td class="p-2 border text-center font-black text-blue-600">${a.type==='money'?(state[a.key]/1000000).toFixed(2)+'M / 50M':state[a.key]+' / '+a.target}</td>
-                <td class="p-2 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-2 py-1 rounded text-[8px] font-black">Update</button></td>
-            </tr>`).join('');
+            document.getElementById('awpLedgerBody').innerHTML = awpActivities.map(a => {
+                const progValue = state[a.key];
+                const display = a.type === 'money' ? (progValue/1000000).toFixed(2) + 'M / 50M' : progValue + ' / ' + a.target;
+                return `<tr>
+                    <td class="p-2 border font-bold text-[9px] uppercase tracking-tighter text-slate-500">${a.kra}</td>
+                    <td class="p-2 border text-center font-black text-blue-600">${display}</td>
+                    <td class="p-2 border text-center no-print"><button onclick="logWork('${a.key}', ${a.type==='money'?127000:1})" class="btn-ksg px-2 py-1 rounded text-[8px] font-black shadow-sm uppercase">Log</button></td>
+                </tr>`;
+            }).join('');
         }
 
         function logWork(k, v) { state[k] += v; save(); }
-        function save() { localStorage.setItem('ksg_sovereign_MASTER_V26', JSON.stringify(state)); render(); }
-        function resetSystem() { if(confirm("ARE YOU SURE?")){ localStorage.removeItem('ksg_sovereign_MASTER_V26'); location.reload(); } }
+        function save() { localStorage.setItem('ksg_sovereign_MASTER_V27', JSON.stringify(state)); render(); }
+        function resetSystem() { if(confirm("ARE YOU SURE? This will wipe the institutional data.")){ localStorage.removeItem('ksg_sovereign_MASTER_V27'); location.reload(); } }
 
         function render() {
-            document.getElementById('complianceTimer').innerText = "TIME: " + new Date().toLocaleTimeString();
-            document.getElementById('ui-comp').innerText = state.kra1 + ' / 10';
-            document.getElementById('ui-cons').innerText = state.kra2 + ' / 3';
-            document.getElementById('ui-res').innerText = state.kra3 + ' / 1';
-            document.getElementById('ui-rev').innerText = (state.rev/1000000).toFixed(2) + 'M / 50M';
-            document.getElementById('bar-comp').style.width = (state.kra1/10)*100 + '%';
-            document.getElementById('bar-rev').style.width = (state.rev/50000000)*100 + '%';
-            
+            document.getElementById('complianceTimer').innerText = "SYSTEM TIME: " + new Date().toLocaleTimeString();
             document.getElementById('paRegisterRows').innerHTML = state.learners.map(l => `
                 <tr class="${l.paid ? 'bg-green-50' : ''}">
                     <td class="p-3 border font-black uppercase text-ksg-maroon text-[10px]">${l.name}</td>
+                    <td class="p-3 border text-slate-500 uppercase text-[8px] font-black">${l.org}</td>
                     ${l.att.map(a => `<td class="p-3 border text-center ${a ? 'present-cell' : ''}">${a ? 'P' : 'A'}</td>`).join('')}
                     <td class="p-3 border text-center no-print">
                         <button onclick="togglePayment(${l.id})" class="text-[8px] font-black px-2 py-1 rounded ${l.paid ? 'bg-green-600 text-white' : 'bg-slate-200 text-slate-600'}">
                             ${l.paid ? 'VERIFIED' : 'PENDING'}
                         </button>
                     </td>
-                </tr>`).join('') || '<tr><td colspan="7" class="p-8 text-center italic text-slate-400 font-black">Waiting for enrollments...</td></tr>';
-            
+                </tr>`).join('') || '<tr><td colspan="8" class="p-8 text-center italic text-slate-400 font-black uppercase tracking-widest">Waiting for enrollments...</td></tr>';
             renderGateway(); updateCharts(); renderAWP();
         }
         initTimetable(); render();
